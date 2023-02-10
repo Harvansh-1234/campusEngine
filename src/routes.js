@@ -2,11 +2,10 @@ import React from "react";
 
 import { Icon } from "@chakra-ui/react";
 import {
-  MdBarChart,
+
   MdPerson,
   MdHome,
   MdLock,
-  MdOutlineShoppingCart,
 } from "react-icons/md";
 import SignInCentered from "views/auth/signIn";
 import MainDashboard from "views/admin/default";

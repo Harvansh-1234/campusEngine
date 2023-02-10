@@ -2,7 +2,7 @@
 .container {
   cursor: pointer;
   position: absolute;
-  top: 5%;
+  top: 2rem;
   right: 12%;
   width: 30px;
   height: 20px;
@@ -19,7 +19,7 @@
 }
 .auth{
   position: absolute;
-  top: 4%;
+  top: 1.5rem;
   right: 1%;
   margin: 0 5px;
 }
@@ -184,7 +184,7 @@ nav .close:hover div::after {
 
 .navlogo img {
   position: absolute;
-  top: 3%;
+  top: 1.5rem;
   left: 10%;
   height: 65px;
 }
