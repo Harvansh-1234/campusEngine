@@ -7,6 +7,7 @@ const {
 
 const userInfo = async (req, res) => {
   try {
+    console.log(req.userId);
     let [err, user] = await getUserById(req.userId);
     console.log(user);
     if (err) {
