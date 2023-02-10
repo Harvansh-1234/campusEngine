@@ -4,6 +4,7 @@ import "assets/css/App.css";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import AuthLayout from "layouts/auth";
 import AdminLayout from "layouts/admin";
+import Landing from "views/main/Landing";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
@@ -16,7 +17,7 @@ ReactDOM.render(
           <Switch>
             <Route path={`/auth`} component={AuthLayout} />
             <Route path={`/admin`} component={AdminLayout} />
-            <Redirect from='/' to='/admin' />
+            <Route from='/' component={Landing} />
           </Switch>
         </HashRouter>
       </ThemeEditorProvider>

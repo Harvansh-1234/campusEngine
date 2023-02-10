@@ -6,3 +6,16 @@ body {
 option {
   color: black;
 }
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #2a2b3600;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff00bfae;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0);
+}
