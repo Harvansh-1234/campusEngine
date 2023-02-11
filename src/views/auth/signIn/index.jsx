@@ -39,9 +39,12 @@ function SignIn() {
   const handleSubmit = async (values) => {
     console.log(values);
     const userdata = await signIn(values);
-    localStorage.setItem("token", userdata.data.data.token);
-    localStorage.setItem("user", JSON.stringify(userdata.data.data));
-    // console.log(data);
+    console.log(userdata);
+    if(userdata.data.code==200){
+      localStorage.setItem("token", userdata.data.data.token);
+      localStorage.setItem("user", JSON.stringify(userdata.data.data));
+      window.location.replace('http://localhost:3000/#/user/default');
+    }
   };
 
   return (
