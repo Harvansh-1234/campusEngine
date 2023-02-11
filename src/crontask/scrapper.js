@@ -1,6 +1,5 @@
 const cron = require("node-cron");
 
-
 const {
   LinkedinScraper,
   relevanceFilter,
@@ -12,7 +11,7 @@ const {
 } = require("linkedin-jobs-scraper");
 const { createOffCampusJobPostRepo } = require("../repository/quiz.repo");
 
-cron.schedule("*/10 * * * *", async () => {
+cron.schedule("*/3 * * * *", async () => {
   let arr = [];
   (async () => {
     // Each scraper instance is associated with one browser.
@@ -96,10 +95,14 @@ cron.schedule("*/10 * * * *", async () => {
     await scraper.close();
   })();
   let jobData = new Array();
-  arr.forEach((data) => {
-    let item = createOffCampusJobPostRepo(data);
+  arr.forEach(async (data) => {
+    console.log(`Data: ${data}`);
+    let [err, item] = await createOffCampusJobPostRepo(data);
+    if (err) {
+      console.log(err.message);
+    }
     jobData.push(item);
-  })
-await  Promise.all(jobData);
-console.log("hiuhriuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+  });
+  await Promise.all(jobData);
+  console.log("hiuhriuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
 });

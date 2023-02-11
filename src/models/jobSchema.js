@@ -4,6 +4,11 @@ const Schema = mongoose.Schema;
 
 const jobSchema = new mongoose.Schema(
   {
+    jobCreator: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
     jobTitle: {
       type: String,
       required: true,
@@ -34,11 +39,8 @@ const jobSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    jobEligibility: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    branchEligible: [{ type: String }],
+    batchEligible: [{ type: String }],
     jobExperience: {
       type: String,
       required: true,

@@ -6,7 +6,7 @@ var resumeSchema = new mongoose.Schema(
   {
     studentId: {
       type: Schema.Types.ObjectId,
-      ref: "student",
+      ref: "user",
       required: true,
       unique: true,
     },
@@ -24,17 +24,17 @@ var resumeSchema = new mongoose.Schema(
         link: String,
       },
     ],
-    branch:{
-      type:String
+    branch: {
+      type: String,
     },
-    year:{
-      type:String
+    year: {
+      type: String,
     },
-    admission_year:{
-    type:String
+    admission_year: {
+      type: String,
     },
-    degree:{
-      type:String
+    degree: {
+      type: String,
     },
     skills: [
       {
