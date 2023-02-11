@@ -56,11 +56,11 @@ const offcampusSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    insights: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    insights: [
+      {
+        type: String
+      }
+    ]
   },
   {
     timestamps: true,
