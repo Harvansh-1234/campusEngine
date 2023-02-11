@@ -87,7 +87,7 @@ const userSignin = async (req, res) => {
       token: token,
       ...user[0]._doc,
     };
-    return successResponse(res, "User logged in successfully", toReturn);
+    return successResponse(res, toReturn, "User logged in successfully");
   } catch (err) {
     console.log("error: ", err);
     handle304(err.message, res);
