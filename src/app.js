@@ -5,7 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const multer = require("multer");
-require("./crontask/scrapper");
+// require("./crontask/scrapper");
 const app = express();
 app.use(cors());
 // importing routes
@@ -16,10 +16,10 @@ const User = require("./models/user");
 
 var Storage = multer.diskStorage({
   destination: function (req, file, cb) {
-      cb(null, "./uploads");
+    cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
-      cb(null, file.originalname);
+    cb(null, file.originalname);
   },
 });
 
@@ -33,21 +33,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use("/uploads", express.static("uploads"));
 // importing routes
-var upload = multer({storage:Storage});
-app.post("/uploadImage",upload.single("uploads") ,(req,res)=>{
+var upload = multer({ storage: Storage });
+app.post("/uploadImage", upload.single("uploads"), (req, res) => {
   console.log(req.body);
-  uploadImage(req.body.image).then((url)=>{
-    
-  // find user by email and update the image url
-  User.findOne({email:req.body.email}).then((user)=>{
-    user.profileImg=url;
-    user.save();
-  })
+  uploadImage(req.body.image)
+    .then((url) => {
+      // find user by email and update the image url
+      User.findOne({ email: req.body.email }).then((user) => {
+        user.profileImg = url;
+        user.save();
+      });
 
-    res.send(url)})
-  .catch((err)=>{res.status(500).send(err)});
-})
-
+      res.send(url);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
 
 app.get("/", (req, res) => {
   console.log("server is fine!!!");
