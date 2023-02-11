@@ -1,4 +1,5 @@
 const Quiz = require("../models/quizSchema");
+const OffCampusJobPost = require("../models/offCampusJobPostSchema");
 
 const createQuizRepo = async (data) => {
   try {
@@ -27,7 +28,25 @@ const getQuizByQueryRepo = async (query) => {
   }
 };
 
+// create off campus job post
+const createOffCampusJobPostRepo = async (data) => {
+  try {
+    const offCampusJobPost = new OffCampusJobPost(data);
+    const result = await offCampusJobPost.save();
+    return [null, result];
+  } catch (err) {
+    let errObj = {
+      status: 500,
+      message:
+        err.message ||
+        "Some error occurred while creating the Off Campus Job Post.",
+    };
+    return [errObj, null];
+  }
+};
+
 module.exports = {
   createQuizRepo,
   getQuizByQueryRepo,
+  createOffCampusJobPostRepo,
 };
