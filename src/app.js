@@ -4,25 +4,24 @@ require("./db/mongoose");
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-
+const multer = require("multer");
 const app = express();
 app.use(cors());
 // importing routes
 const routes = require("./routes");
+const bodyParser = require("body-parser");
+const uploadImage = require("./controllers/uploadImage.js");
+const User = require("./models/user");
 
-//Google auth
-// app.get('/auth/google',
-//   passport.authenticate('google', { scope:
-//       [ 'email', 'profile' ] }
-// ));
+var Storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, "./uploads");
+  },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname);
+  },
+});
 
-// app.get( '/auth/google/callback',
-//     passport.authenticate( 'google', {
-//         successRedirect: '/auth/google/success',
-//         failureRedirect: '/auth/google/failure'
-// }));
-
-//
 app.use(morgan("dev"));
 
 // app.use(morgan("dev"));
@@ -30,8 +29,25 @@ app.use(morgan("dev"));
 // limit: '200mb',
 app.use(express.json({ limit: "200mb" }));
 app.use(express.urlencoded({ extended: true }));
-
+app.use(express.static(__dirname + "/public"));
+app.use("/uploads", express.static("uploads"));
 // importing routes
+var upload = multer({storage:Storage});
+app.post("/uploadImage",upload.single("uploads") ,(req,res)=>{
+  console.log(req.body);
+  uploadImage(req.body.image).then((url)=>{
+    
+  // find user by email and update the image url
+  User.findOne({email:req.body.email}).then((user)=>{
+    user.profileImg=url;
+    user.save();
+  })
+
+    res.send(url)})
+  .catch((err)=>{res.status(500).send(err)});
+})
+
+
 app.get("/", (req, res) => {
   console.log("server is fine!!!");
   res.status(200).send(" server up and running !!");
