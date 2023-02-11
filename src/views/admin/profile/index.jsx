@@ -9,6 +9,9 @@ import avatar from "assets/img/4.png";
 import React from "react";
 import UserProfile from "./components/UserProfile";
 import 'assets/css/userProfile.css';
+
+
+
 export default function Overview() {
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>

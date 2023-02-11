@@ -29,3 +29,13 @@ export const getUserInfo = async (data) => {
 console.log(error)
     }
 }
+
+export const Upload = async (data,email) => {
+    try {
+        console.log(data);
+      return await axios.post(`${url}/uploadImage`, {image:data,email:email});
+    } catch (error) {
+      console.log(error);
+      console.log("Error while calling signup API: ", error);
+    }
+  };
