@@ -5,15 +5,12 @@ import {
 
   MdPerson,
   MdHome,
-  MdLock,
 } from "react-icons/md";
-import SignInCentered from "views/auth/signIn";
-import SignUpCentered from "views/auth/signUp";
 import MainDashboard from "views/admin/default";
 import Quiz from "views/admin/quiz"
 import Instructions from "views/admin/quiz/instruction"
 import Profile from "views/admin/profile";
-
+import QuizMain from "views/admin/quiz/quizMain"
 
 const routes = [
   {
@@ -43,22 +40,14 @@ const routes = [
     path: "/instructions",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Instructions,
-  },
+  },  
   {
-    name: "Sign In",
-    layout: "/auth",
-    path: "/sign-in",
-    icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-    component: SignInCentered,
+    name: "Quizmain",
+    layout: "/user",
+    path: "/quizmain",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: QuizMain,
   },
-  {
-    name: "Sign Up",
-    layout: "/auth",
-    path: "/sign-up",
-    icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-    component: SignUpCentered,
-  },
-  
 ];
 
 export default routes;
