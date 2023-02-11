@@ -1,23 +1,21 @@
-// Chakra imports
+
 import { Portal, Box, useDisclosure } from "@chakra-ui/react";
 import Footer from "components/footer/FooterAdmin.js";
-// Layout components
+
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import { SidebarContext } from "contexts/SidebarContext";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import routes from "rtlRoutes.js";
+import routes from "companyRoutes.js";
 
-// Custom Chakra theme
 export default function Dashboard(props) {
   const { ...rest } = props;
-  // states and functions
+
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
-  // functions for changing the states from components
   const getRoute = () => {
-    return window.location.pathname !== "/rtl/full-screen-maps";
+    return window.location.pathname !== "/company/full-screen-maps";
   };
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
@@ -90,8 +88,7 @@ export default function Dashboard(props) {
   };
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/rtl") {
-        console.log(prop.layout);
+      if (prop.layout === "/company") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -110,7 +107,6 @@ export default function Dashboard(props) {
       }
     });
   };
-
   document.documentElement.dir = "ltr";
   const { onOpen } = useDisclosure();
   return (
@@ -156,7 +152,7 @@ export default function Dashboard(props) {
               pt='50px'>
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from='/' to='/rtl/default' />
+                <Redirect from='/' to='/company/default' />
               </Switch>
             </Box>
           ) : null}

@@ -5,7 +5,7 @@ export function SidebarBrand() {
 
   return (
     <Flex align='center' direction='column'>
-      <img src={logo} alt="" style={{height:"150px"}}/>
+      <img src={logo} alt="" style={{height:"100px"}}/>
       <div style={{marginBottom:"10px"}}></div>
     </Flex>
   );
