@@ -24,6 +24,18 @@ var resumeSchema = new mongoose.Schema(
         link: String,
       },
     ],
+    branch:{
+      type:String
+    },
+    year:{
+      type:String
+    },
+    admission_year:{
+    type:String
+    },
+    degree:{
+      type:String
+    },
     skills: [
       {
         name: String,
@@ -41,8 +53,8 @@ var resumeSchema = new mongoose.Schema(
       {
         company: String,
         position: String,
-        startDate: Date,
-        endDate: Date,
+        startDate: String,
+        endDate: String,
         description: String,
       },
     ],
@@ -51,8 +63,8 @@ var resumeSchema = new mongoose.Schema(
         school: String,
         degree: String,
         fieldOfStudy: String,
-        startDate: Date,
-        endDate: Date,
+        startDate: String,
+        endDate: String,
         grade: String,
       },
     ],
