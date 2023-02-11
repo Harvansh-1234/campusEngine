@@ -41,7 +41,7 @@ const updateUserInfo = async (req, res) => {
       console.log(`Error in update user by id: ${err1.message}`);
       return serverErrorResponse(res, err1.message);
     }
-    return successResponse(res, "User info updated", user1[0]);
+    return successResponse(res, user1[0], "User info updated");
   } catch (err) {
     console.log("error", err);
     handle304(err.message, res);
