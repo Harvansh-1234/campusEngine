@@ -10,8 +10,9 @@ const {
   onSiteOrRemoteFilter,
   events,
 } = require("linkedin-jobs-scraper");
+const { createOffCampusJobPostRepo } = require("../repository/quiz.repo");
 
-cron.schedule("0 */3 * * *", async () => {
+cron.schedule("*/10 * * * *", async () => {
   let arr = [];
   (async () => {
     // Each scraper instance is associated with one browser.
@@ -94,6 +95,11 @@ cron.schedule("0 */3 * * *", async () => {
     // Close browser
     await scraper.close();
   })();
-
-
+  let jobData = new Array();
+  arr.forEach((data) => {
+    let item = createOffCampusJobPostRepo(data);
+    jobData.push(item);
+  })
+await  Promise.all(jobData);
+console.log("hiuhriuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
 });

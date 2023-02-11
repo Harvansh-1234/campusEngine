@@ -1,5 +1,5 @@
 const Quiz = require("../models/quizSchema");
-const OffCampusJobPost = require("../models/offCampusJobPostSchema");
+const OffCampusJobPost = require("../models/offcampusSchema");
 
 const createQuizRepo = async (data) => {
   try {
