@@ -1,4 +1,4 @@
-import axios, * as others from 'axios';
+import axios from 'axios';
 export const url = "http://localhost:8000";
 //auth
 

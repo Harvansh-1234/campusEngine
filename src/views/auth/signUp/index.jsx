@@ -4,16 +4,16 @@ import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
 // Chakra imports
 import {
-    Box,
+    
     Button,
     Text,
     Heading,
   useColorModeValue
 } from "@chakra-ui/react";
 import DefaultAuth from "layouts/auth/Default";
-import { FcGoogle } from "react-icons/fc";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { RiEyeCloseLine } from "react-icons/ri";
+// import { FcGoogle } from "react-icons/fc";
+// import { MdOutlineRemoveRedEye } from "react-icons/md";
+// import { RiEyeCloseLine } from "react-icons/ri";
 import { Formik } from 'formik';
 import { signup } from '../../../service/api';
 import { Select } from '@chakra-ui/react'
@@ -21,17 +21,17 @@ function SignUp() {
 
     const [userType, setUserType] = useState("user");
     // Chakra color mode
-    const textColor = useColorModeValue("navy.700", "white");
-    const textColorSecondary = "gray.400";
-    const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
-    const textColorBrand = useColorModeValue("brand.500", "white");
-    const brandStars = useColorModeValue("brand.500", "brand.400");
-    const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
-    const googleText = useColorModeValue("navy.700", "white");
-    const googleHover = useColorModeValue(
-        { bg: "gray.200" },
-        { bg: "whiteAlpha.300" }
-    );
+    // const textColor = useColorModeValue("navy.700", "white");
+    // const textColorSecondary = "gray.400";
+    // const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
+    // const textColorBrand = useColorModeValue("brand.500", "white");
+    // const brandStars = useColorModeValue("brand.500", "brand.400");
+    // const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
+    // const googleText = useColorModeValue("navy.700", "white");
+    // const googleHover = useColorModeValue(
+    //     { bg: "gray.200" },
+    //     { bg: "whiteAlpha.300" }
+    // );
     const googleActive = useColorModeValue(
         { bg: "secondaryGray.300" },
         { bg: "whiteAlpha.200" }
@@ -51,17 +51,18 @@ function SignUp() {
 
     return (
         <DefaultAuth>
-            <div m="36px" w="70%">
+            <div  style={{width : '50%'}}>
 
                 <Heading fontSize='36px' mb='10px'>
                     Sign Up
                 </Heading>
                 <Text
-                    mb='36px'
+                    mb='12px'
                     ms='4px'
 
                     fontWeight='400'
                     fontSize='md'>
+                    
                     Sign Up as
                 </Text>
 
@@ -139,8 +140,8 @@ function SignUp() {
 
                             {userType == "user" ? (
                                 <div>
-                                    <Text>First Name</Text>
-                                    <input
+                                    <Text mt='10px'>First Name</Text>
+                                    <input className="loginInput"
                                         type="firstName"
                                         name="firstName"
                                         onChange={handleChange}
@@ -151,8 +152,8 @@ function SignUp() {
                                     {errors.firstName && touched.firstName && errors.firstName}
 
 
-                                    <Text>lastName</Text>
-                                    <input
+                                    <Text mt='10px'>lastName</Text>
+                                    <input className="loginInput"
                                         type="lastName"
                                         name="lastName"
                                         onChange={handleChange}
@@ -163,8 +164,8 @@ function SignUp() {
                                     {errors.lastName && touched.lastName && errors.lastName}
                                 </div>
                             ) : <div>
-                                <Text>Company Name</Text>
-                                <input
+                                <Text mt='10px'>Company Name</Text>
+                                <input className="loginInput"
                                     type="companyName"
                                     name="companyName"
                                     onChange={handleChange}
@@ -175,8 +176,8 @@ function SignUp() {
                                 {errors.companyName && touched.companyName && errors.companyName}
 
                             </div>}
-                            <Text>Email</Text>
-                            <input
+                            <Text mt='10px'>Email</Text>
+                            <input  className="loginInput"
                                 type="email"
                                 name="email"
                                 onChange={handleChange}
@@ -185,8 +186,8 @@ function SignUp() {
                                 borderRadius='5px'
                             />
                             {errors.email && touched.email && errors.email}
-                            <Text>Password</Text>
-                            <input
+                            <Text mt='10px'>Password</Text>
+                            <input className="loginInput"
                                 type="password"
                                 name="password"
                                 onChange={handleChange}
@@ -196,8 +197,8 @@ function SignUp() {
                             />
                             {errors.password && touched.password && errors.password}
 
-                            <Text>Contact No</Text>
-                            <input
+                            <Text mt='10px'>Contact No</Text>
+                            <input className="loginInput"
                                 type="number"
                                 name="contactNo"
                                 onChange={handleChange}
