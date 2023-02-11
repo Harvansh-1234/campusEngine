@@ -22,7 +22,7 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
- Text,
+    Text,
     useDisclosure
 
 
@@ -62,6 +62,8 @@ function UserProfile() {
             // console.log(userData);
             if (userData.status === 200);
             setResume(userData.data.data[0]);
+            setCollege(userData.data.data[0].college);
+            setBranch(userData.data.data[0].branch);
             setEdu(userData.data.data[0].education);
             console.log(userData);
 
@@ -79,13 +81,13 @@ function UserProfile() {
                     lastName: resume.name ? resume.name.last : '',
                     email: resume.contact ? resume.contact.email : '',
                     contactNo: resume.contact ? resume.contact.phone : '',
-                    skills: [],
-                    branch: "",
-                    year: "",
-                    college: "",
-                    degree: "",
-                    cgpa: "",
-                    admission_year: "",
+
+                    branch: resume.branch !== '' ? resume.branch : '',
+                    year: resume.year !== '' ? resume.year : '',
+                    college: resume.college !== '' ? resume.college : '',
+                    degree: resume.degree !== '' ? resume.degree : '',
+
+                    admission_year: resume.admission_year !== '' ? resume.admission_year : '',
 
                 }}
                 onSubmit={async (values) => {
@@ -163,7 +165,7 @@ function UserProfile() {
                     <div className='headField'>
                         <div className='field' >
                             <label htmlFor="degree">Degree</label>
-                            <Field id="degree" name="degree" placeholder="" value={user.firstName} />
+                            <Field id="degree" name="degree" placeholder={resume.degree ? resume.degree : ''} />
                         </div>
                         <div className='field'>
                             <label htmlFor="branch">Branch</label>
@@ -185,11 +187,11 @@ function UserProfile() {
                     <div className='headField'>
                         <div className='field' >
                             <label htmlFor="admission_year">Admission Year</label>
-                            <Field id="admission_year" name="admission_year" placeholder="" value={user.admission_year} />
+                            <Field id="admission_year" name="admission_year" placeholder={resume.admission_year ? resume.admission_year : ''} />
                         </div>
                         <div className='field'>
                             <label htmlFor="year">Current Year</label>
-                            <Field id="year" name="year" placeholder="" value={user.year} />
+                            <Field id="year" name="year" placeholder={resume.year ? resume.year : ''} />
                         </div>
                     </div>
                     {/* <div className='headField'>
@@ -214,13 +216,27 @@ function UserProfile() {
                                 return (
                                     <div>
                                         <div className="question">
-<Text fontSize="xl" fontWeight="bold" >{item.school}</Text>
+                                            <Text fontSize="xl" fontWeight="bold" >{item.school}</Text>
                                             <Text fontSize="md" fontWeight="bold" >{item.degree}</Text>
                                             <Text fontSize="md" fontWeight="bold" >{item.field_of_study}</Text>
                                             <Text fontSize="md" fontWeight="bold" >{item.start_date}</Text>
                                             <Text fontSize="md" fontWeight="bold" >{item.end_date}</Text>
                                             <Text fontSize="md" fontWeight="bold" >{item.grade}</Text>
                                         </div>
+                                        <AiOutlineDelete
+                                            className="text-red-600 cursor-pointer"
+                                            onClick={async () => {
+                                                setEdu(
+                                                    edu.filter((item, i) => i !== index)
+                                                );
+                                                let res = JSON.parse(await localStorage.getItem("resume"));
+                                                res.education = edu.filter(
+                                                    (item, i) => i !== index
+                                                );
+                                                setResume(res);
+                                                localStorage.setItem("resume", JSON.stringify(res));
+                                            }}
+                                        />
                                     </div>
 
                                 );
@@ -364,13 +380,9 @@ function UserProfile() {
                                 </ModalContent>
                             </Modal>
 
-                        )} <Button colorScheme='blue' mx='45%' borderRadius='5px' onClick={async () => {
-                           
-                            setPage(1);
-                           
-                        }}>Prev</Button>
+                        )}
                         <Button colorScheme='blue' mx='45%' borderRadius='5px' onClick={async () => {
-                                                
+
 
                             setPage(3);
 
@@ -383,8 +395,8 @@ function UserProfile() {
                 </div>
             }
             {
-                page === 3&&
-               <WorkExperience/>
+                page === 3 &&
+                <WorkExperience />
             }
         </div >
     )
