@@ -114,6 +114,7 @@ const getQuiz = async (req, res) => {
 
 const updateResumeByStudentId = async (req, res) => {
   try {
+    console.log(req.body);
     // update resume
     let [err1, resume1] = await updateResumeByQueryRepo(
       { studentId: req.userId },
