@@ -2,7 +2,7 @@ import React from "react";
 
 import { Icon } from "@chakra-ui/react";
 import {
-
+  MdLock,
   MdPerson,
   MdHome,
 } from "react-icons/md";
@@ -36,11 +36,7 @@ const routes = [
     component: Resume,
   },
   {
-    name: "Sign In",
-    layout: "/auth",
-    path: "/sign-in",
-    icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-    component: SignInCentered,
+   
     name: "Quiz",
     layout: "/user",
     path: "/quiz",
