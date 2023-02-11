@@ -40,9 +40,11 @@ function SignIn() {
     console.log(values);
     const userdata = await signIn(values);
     console.log(userdata);
-    localStorage.setItem("token", userdata.data.data.token);
-    localStorage.setItem("user", JSON.stringify(userdata.data.data));
-    // console.log(data);
+    if(userdata.data.code==200){
+      localStorage.setItem("token", userdata.data.data.token);
+      localStorage.setItem("user", JSON.stringify(userdata.data.data));
+      window.location.replace('http://localhost:3000/#/user/default');
+    }
   };
 
   return (
@@ -153,7 +155,7 @@ function SignIn() {
 
           <Text color={textColorDetails} fontWeight="400" fontSize="14px">
             Not registered yet?
-            <NavLink to="/auth/sign-up">
+            <NavLink to="/auth/sign-up/default" style={{zIndex: '5'}}>
               <Text color={textColorBrand} as="span" ms="5px" fontWeight="500">
                 Create an Account
               </Text>
