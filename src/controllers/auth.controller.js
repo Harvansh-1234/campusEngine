@@ -9,14 +9,11 @@ const {
   successResponse,
   notFoundResponse,
 } = require("../utils/response");
+const { createResumeRepo } = require("../repository/resume.repo");
 
 // signup user
 const userSignup = async (req, res) => {
   try {
-    // const joiValidation = Joi_Scehmas.userSignUp.validate(req.body);
-    // if (joiValidation.error) {
-    //   return badRequestResponse(res, joiValidation.error.details[0].message);
-    // }
     console.log(req.body);
     let [err, hash] = await _createHash(req.body.password);
     if (err) {
@@ -28,6 +25,24 @@ const userSignup = async (req, res) => {
     if (err1) {
       console.log(`Error in create user route: ${err1.message}`);
       return serverErrorResponse(res, err1.message);
+    }
+    if (newUser.userType === "user") {
+      // create resume
+      let resumeData = {
+        studentId: newUser._id,
+        name: req.body.firstName + " " + req.body.lastName,
+        contact: {
+          email: req.body.email,
+          phone: req.body.contactNo,
+        },
+      };
+
+      let [err2, resume] = await createResumeRepo(resumeData);
+      if (err2) {
+        console.log(`Error in create resume: ${err2.message}`);
+        return serverErrorResponse(res, err2.message);
+      }
+      newUser.resume = resume._id;
     }
     return successResponse(res, newUser, "User created successfully");
   } catch (err) {

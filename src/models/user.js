@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-
     address: {
       type: String,
       trim: true,
@@ -46,10 +45,19 @@ const userSchema = new mongoose.Schema(
     profileImg: {
       type: String,
     },
-    skills: {
-      type: Array,
-      default: [],
-    },
+    skills: [
+      {
+        name: String,
+        level: {
+          type: String,
+          enum: ["beginner", "intermediate", "advanced"],
+        },
+        approval: {
+          type: Boolean,
+          default: false,
+        },
+      },
+    ],
     college_name: {
       type: String,
 
