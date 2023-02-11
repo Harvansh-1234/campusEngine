@@ -8,6 +8,7 @@ import { FiInfo } from "react-icons/fi";
 import { BsCalendar, BsLinkedin } from "react-icons/bs";
 import { GrScorecard } from "react-icons/gr";
 import { Button } from '@chakra-ui/react'
+import 'assets/css/logIn.css'
 import {
 
     AiOutlineDelete,
@@ -262,7 +263,7 @@ function UserProfile() {
                         {showEduForm && (
                             <Modal isOpen={isOpen} onClose={onClose} >
                                 <ModalOverlay />
-                                <ModalContent w='100%' style={{ width: "100%" }}>
+                                <ModalContent w='100%' style={{ width: "200%" }}>
                                     <ModalHeader>Education Details</ModalHeader>
                                     <ModalCloseButton />
                                     <ModalBody mx='auto' >
@@ -316,31 +317,31 @@ function UserProfile() {
                                                         <div className='headField'>
                                                             <div className='field' >
                                                                 <label htmlFor="school">School</label>
-                                                                <Field id="school" name="school" placeholder="" />
+                                                                <Field id="school" name="school" placeholder="" className="loginInput1"/>
                                                             </div>
                                                             <div className='field'>
                                                                 <label htmlFor="degree">Degree</label>
-                                                                <Field id="degree" name="degree" placeholder="" value={user.lastName} />
+                                                                <Field id="degree" name="degree" placeholder="" value={user.lastName} className="loginInput1"/>
                                                             </div>
                                                         </div>
                                                         <div className='headField'>
                                                             <div className='field' >
                                                                 <label htmlFor="startDate">Start Date</label>
-                                                                <Field id="startDate" name="startDate" placeholder="" value={user.firstName} />
+                                                                <Field id="startDate" name="startDate" placeholder="" value={user.firstName} className="loginInput1"/>
                                                             </div>
                                                             <div className='field'>
                                                                 <label htmlFor="endDate">End Date</label>
-                                                                <Field id="endDate" name="endDate" placeholder="" value={user.lastName} />
+                                                                <Field id="endDate" name="endDate" placeholder="" value={user.lastName} className="loginInput1" />
                                                             </div>
                                                         </div>
                                                         <div className='headField'>
                                                             <div className='field' >
                                                                 <label htmlFor="grade">Grade</label>
-                                                                <Field id="grade" name="grade" placeholder="" value={user.firstName} />
+                                                                <Field id="grade" name="grade" placeholder="" value={user.firstName} className="loginInput1"/>
                                                             </div>
                                                             <div className='field'>
                                                                 <label htmlFor="fieldOfStudy">Field of Study</label>
-                                                                <Field id="fieldOfStudy" name="fieldOfStudy" placeholder="" value={user.lastName} />
+                                                                <Field id="fieldOfStudy" name="fieldOfStudy" placeholder="" value={user.lastName} className="loginInput1"/>
                                                             </div>
                                                         </div>
                                                         <Button colorScheme='blue' mr={3} type="submit">

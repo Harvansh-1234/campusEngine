@@ -152,7 +152,7 @@ function SignIn() {
 
           <Text color={textColorDetails} fontWeight="400" fontSize="14px">
             Not registered yet?
-            <NavLink to="/auth/sign-up">
+            <NavLink to="/auth/sign-up/default" style={{zIndex: '5'}}>
               <Text color={textColorBrand} as="span" ms="5px" fontWeight="500">
                 Create an Account
               </Text>
