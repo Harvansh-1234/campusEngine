@@ -40,11 +40,6 @@ const userSignup = async (req, res) => {
 // sign in user and verify password
 const userSignin = async (req, res) => {
   try {
-    // console.log(req.body);
-    const joiValidation = Joi_Scehmas.userSignIn.validate(req.body);
-    if (joiValidation.error) {
-      return badRequestResponse(res, joiValidation.error.details[0].message);
-    }
     let [err, user] = await getUserByEmail(req.body.email);
     if (err) {
       console.log(`Error in get user by email: ${err.message}`);

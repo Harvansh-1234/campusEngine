@@ -24,13 +24,25 @@ var resumeSchema = new mongoose.Schema(
         link: String,
       },
     ],
-    skills: [String],
+    skills: [
+      {
+        name: String,
+        level: {
+          type: String,
+          enum: ["beginner", "intermediate", "advanced"],
+        },
+        approval: {
+          type: Boolean,
+          default: false,
+        },
+      },
+    ],
     work_experience: [
       {
         company: String,
         position: String,
-        start_date: Date,
-        end_date: Date,
+        startDate: Date,
+        endDate: Date,
         description: String,
       },
     ],
@@ -38,9 +50,9 @@ var resumeSchema = new mongoose.Schema(
       {
         school: String,
         degree: String,
-        field_of_study: String,
-        start_date: Date,
-        end_date: Date,
+        fieldOfStudy: String,
+        startDate: Date,
+        endDate: Date,
         grade: String,
       },
     ],
@@ -49,8 +61,8 @@ var resumeSchema = new mongoose.Schema(
         name: String,
         description: String,
         link: String,
-        start_date: Date,
-        end_date: Date,
+        startDate: Date,
+        endDate: Date,
       },
     ],
   },
