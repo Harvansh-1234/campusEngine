@@ -184,9 +184,9 @@ nav .close:hover div::after {
 
 .navlogo img {
   position: absolute;
-  top: 1.5rem;
+  top: 1rem;
   left: 10%;
-  height: 65px;
+  height: 85px;
 }
 .navlogoBW {
   position: absolute;

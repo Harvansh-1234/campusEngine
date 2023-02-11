@@ -2,6 +2,7 @@ import React from 'react'
 import About from './About'
 import Navbar from './components/Navbar'
 import Home from './Home'
+import Services from './Services'
 
 function Landing() {
   return (
@@ -9,6 +10,7 @@ function Landing() {
     <Navbar/>
     <Home/>
     <About/>
+    <Services/>
     </div>
   )
 }

@@ -20,3 +20,10 @@
     font-size: 5rem;
     margin-left: -10px;
 }
+.homeContent p{
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: rgb(0, 0, 0);
+    line-height: 1.5;
+}
