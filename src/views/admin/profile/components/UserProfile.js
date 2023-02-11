@@ -33,6 +33,11 @@ function UserProfile() {
           firstName: '',
           lastName: '',
           email: '',
+          contact:'',
+          degree:'',
+          branch:'',
+          skills:'',
+          
         }}
         onSubmit={async (values) => {
           // await new Promise((r) => setTimeout(r, 500));
@@ -43,11 +48,11 @@ function UserProfile() {
           <div className='headField'>
             <div className='field'>
               <label htmlFor="firstName">First Name</label>
-              <Field id="firstName" name="firstName" placeholder="" value={user.firstName} />
+              <Field id="firstName" name="firstName" placeholder="" value={user.firstName} disabled />
             </div>
             <div className='field'>
               <label htmlFor="lastName">Last Name</label>
-              <Field id="lastName" name="lastName" placeholder="" value={user.lastName} />
+              <Field id="lastName" name="lastName" placeholder="" value={user.lastName}  disabled />
             </div>
           </div>
           <div className='headField'>
@@ -60,6 +65,7 @@ function UserProfile() {
                 placeholder=""
                 type="email"
                 value={user.email}
+                disabled 
               />
             </div>
             <div className='field'>
@@ -70,6 +76,7 @@ function UserProfile() {
                 name="contactNo"
                 placeholder=""
                 type="contactNo"
+                disabled 
                 value={user.contactNo}
               />
             </div>
@@ -77,14 +84,14 @@ function UserProfile() {
           <div className='headField'>
             <div className='field'>
               <label htmlFor="email">Skills</label>
-              {user.skills && user.skills.map((skill) => {
+              {/* {user.skills && user.skills.map((skill) => {
                 return (
                   <div className='skill'>
                     <p>{skill}</p>
                   </div>
                 )
               })
-              }
+              } */}
             </div>
           </div>
         </Form>

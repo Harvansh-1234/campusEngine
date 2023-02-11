@@ -29,6 +29,22 @@ export const getUserInfo = async (data) => {
 console.log(error)
     }
 }
+export const getResume = async (data) => {
+    try {
+        console.log(data);
+        return await axios.get(`${url}/api/user/getResume`, {headers: {authorization:data}});
+    } catch (error) {
+console.log(error)
+    }
+}
+export const updateResume = async (token,data) => {
+    try {
+        console.log(data);
+        return await axios.post(`${url}/api/user/updateResume`,data, {headers: {authorization:token}});
+    } catch (error) {
+console.log(error)
+    }
+}
 
 export const Upload = async (data,email) => {
     try {

@@ -13,7 +13,7 @@ import MainDashboard from "views/admin/default";
 import RtlDashboard from "views/rtl/default";
 import CompanyDashboard from "views/company/default";
 import Profile from "views/admin/profile";
-
+import Resume from "views/admin/resume"
 
 const routes = [
   {
@@ -36,6 +36,13 @@ const routes = [
     path: "/profile",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Profile,
+  },
+  {
+    name: "Resume",
+    layout: "/user",
+    path: "/resume",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: Resume,
   },
   {
     name: "Sign In",
