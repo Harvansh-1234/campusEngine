@@ -9,14 +9,16 @@ const {
   successResponse,
   notFoundResponse,
 } = require("../utils/response");
+const clg_name = require("../models/college_name");
 
 // signup user
 const userSignup = async (req, res) => {
   try {
-    const joiValidation = Joi_Scehmas.userSignUp.validate(req.body);
-    if (joiValidation.error) {
-      return badRequestResponse(res, joiValidation.error.details[0].message);
-    }
+    // const joiValidation = Joi_Scehmas.userSignUp.validate(req.body);
+    // if (joiValidation.error) {
+    //   return badRequestResponse(res, joiValidation.error.details[0].message);
+    // }
+    console.log(req.body);
     let [err, hash] = await _createHash(req.body.password);
     if (err) {
       console.log(`Error in create hash: ${err.message}`);
@@ -36,9 +38,11 @@ const userSignup = async (req, res) => {
   }
 };
 
+
 // sign in user and verify password
 const userSignin = async (req, res) => {
   try {
+    // console.log(req.body);
     const joiValidation = Joi_Scehmas.userSignIn.validate(req.body);
     if (joiValidation.error) {
       return badRequestResponse(res, joiValidation.error.details[0].message);
@@ -51,6 +55,7 @@ const userSignin = async (req, res) => {
     if (user.length === 0) {
       return notFoundResponse(res, "User not found");
     }
+
 
     // verify passWord
     let [err1, isMatch] = await _verifyPassword(

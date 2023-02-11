@@ -6,7 +6,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const app = express();
-
+app.use(cors());
 // importing routes
 const routes = require("./routes");
 
@@ -26,7 +26,7 @@ const routes = require("./routes");
 app.use(morgan("dev"));
 
 // app.use(morgan("dev"));
-app.use(cors());
+
 // limit: '200mb',
 app.use(express.json({ limit: "200mb" }));
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +42,7 @@ app.get("/env", (req, res) => {
 
 app.use("/api", routes);
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8000;
 
 const server = http.createServer(app);
 server.listen(PORT, async () => {
