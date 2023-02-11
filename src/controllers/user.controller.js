@@ -147,19 +147,6 @@ const getResume = async (req, res) => {
   }
 };
 
-const getAllEligibleJobs = async (req, res) => {
-  try {
-    let [err, jobs] = await getJobByQueryRepo({ studentId: req.userId });
-    if (err) {
-      console.log(`Error in get jobs: ${err.message}`);
-      return serverErrorResponse(res, err.message);
-    }
-    return successResponse(res, jobs, "Jobs fetched");
-  } catch (err) {
-    console.log(err);
-    return serverErrorResponse(res, err.message);
-  }
-};
 const getAppliedJobs = async (req, res) => {
   try {
     let [err, jobs] = await getJobByQueryRepo({ studentId: req.userId });
@@ -188,6 +175,32 @@ const getAllQuiz = async (req, res) => {
   }
 };
 
+const getAllEligibleJobs = async (req, res) => {
+  try {
+    let [err1, user] = await getUserById(req.userId);
+    if (err1) {
+      console.log(`Error in get user by id: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+    if (user.length === 0) return notFoundResponse(res, "User not found");
+    let batch = [user[0].year];
+    let branch = [user[0].branch];
+    let query = {
+      batchEligible: { $in: batch },
+      branchEligible: { $in: branch },
+    };
+    let [err, jobs] = await getJobByQueryRepo(query);
+    if (err) {
+      console.log(`Error in get jobs: ${err.message}`);
+      return serverErrorResponse(res, err.message);
+    }
+    return successResponse(res, jobs, "Jobs fetched");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
+
 module.exports = {
   userInfo,
   updateUserInfo,
@@ -198,4 +211,5 @@ module.exports = {
   getResume,
   getAppliedJobs,
   getAllQuiz,
+  getAllEligibleJobs,
 };

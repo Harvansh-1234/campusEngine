@@ -9,6 +9,7 @@ const {
   getQuiz,
   getAppliedJobs,
   getAllQuiz,
+  getAllEligibleJobs,
 } = require("../controllers/user.controller");
 const { userValidate } = require("../middlewares/authmiddleware");
 const router = express.Router();
@@ -22,4 +23,5 @@ router.post("/updateResume", userValidate, updateResumeByStudentId);
 router.post("/getQuiz", userValidate, getQuiz);
 router.get("/getAppliedJobs", userValidate, getAppliedJobs);
 router.get("/getAllQuiz", userValidate, getAllQuiz);
+router.get("/getAllEligibleJobs", userValidate, getAllEligibleJobs);
 module.exports = router;
