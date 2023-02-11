@@ -51,17 +51,18 @@ function SignUp() {
 
     return (
         <DefaultAuth>
-            <div m="36px" w="70%">
+            <div  style={{width : '50%'}}>
 
                 <Heading fontSize='36px' mb='10px'>
                     Sign Up
                 </Heading>
                 <Text
-                    mb='36px'
+                    mb='12px'
                     ms='4px'
 
                     fontWeight='400'
                     fontSize='md'>
+                    
                     Sign Up as
                 </Text>
 
@@ -139,8 +140,8 @@ function SignUp() {
 
                             {userType == "user" ? (
                                 <div>
-                                    <Text>First Name</Text>
-                                    <input
+                                    <Text mt='10px'>First Name</Text>
+                                    <input className="loginInput"
                                         type="firstName"
                                         name="firstName"
                                         onChange={handleChange}
@@ -151,8 +152,8 @@ function SignUp() {
                                     {errors.firstName && touched.firstName && errors.firstName}
 
 
-                                    <Text>lastName</Text>
-                                    <input
+                                    <Text mt='10px'>lastName</Text>
+                                    <input className="loginInput"
                                         type="lastName"
                                         name="lastName"
                                         onChange={handleChange}
@@ -163,8 +164,8 @@ function SignUp() {
                                     {errors.lastName && touched.lastName && errors.lastName}
                                 </div>
                             ) : <div>
-                                <Text>Company Name</Text>
-                                <input
+                                <Text mt='10px'>Company Name</Text>
+                                <input className="loginInput"
                                     type="companyName"
                                     name="companyName"
                                     onChange={handleChange}
@@ -175,8 +176,8 @@ function SignUp() {
                                 {errors.companyName && touched.companyName && errors.companyName}
 
                             </div>}
-                            <Text>Email</Text>
-                            <input
+                            <Text mt='10px'>Email</Text>
+                            <input  className="loginInput"
                                 type="email"
                                 name="email"
                                 onChange={handleChange}
@@ -185,8 +186,8 @@ function SignUp() {
                                 borderRadius='5px'
                             />
                             {errors.email && touched.email && errors.email}
-                            <Text>Password</Text>
-                            <input
+                            <Text mt='10px'>Password</Text>
+                            <input className="loginInput"
                                 type="password"
                                 name="password"
                                 onChange={handleChange}
@@ -196,8 +197,8 @@ function SignUp() {
                             />
                             {errors.password && touched.password && errors.password}
 
-                            <Text>Contact No</Text>
-                            <input
+                            <Text mt='10px'>Contact No</Text>
+                            <input className="loginInput"
                                 type="number"
                                 name="contactNo"
                                 onChange={handleChange}
