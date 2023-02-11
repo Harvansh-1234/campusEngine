@@ -5,15 +5,13 @@ import {
 
   MdPerson,
   MdHome,
-  MdLock,
 } from "react-icons/md";
-import SignInCentered from "views/auth/signIn";
-import SignUpCentered from "views/auth/signUp";
 import MainDashboard from "views/admin/default";
-import RtlDashboard from "views/rtl/default";
-import CompanyDashboard from "views/company/default";
+import Quiz from "views/admin/quiz"
+import Instructions from "views/admin/quiz/instruction"
 import Profile from "views/admin/profile";
 import Resume from "views/admin/resume"
+import QuizMain from "views/admin/quiz/quizMain"
 
 const routes = [
   {
@@ -22,13 +20,6 @@ const routes = [
     path: "/default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
-  },
-  {
-    name: "RTL Dashboard",
-    layout: "/rtl",
-    path: "/default",
-    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: RtlDashboard,
   },
   {
     name: "Profile",
@@ -50,20 +41,25 @@ const routes = [
     path: "/sign-in",
     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
     component: SignInCentered,
+    name: "Quiz",
+    layout: "/user",
+    path: "/quiz",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: Quiz,
   },
   {
-    name: "Sign Up",
-    layout: "/auth",
-    path: "/sign-up",
-    icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
-    component: SignUpCentered,
-  },
+    name: "Instructions",
+    layout: "/user",
+    path: "/instructions",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: Instructions,
+  },  
   {
-    name: "Company Dashboard",
-    layout: "/company",
-    path: "/default",
-    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: CompanyDashboard,
+    name: "Quizmain",
+    layout: "/user",
+    path: "/quizmain",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: QuizMain,
   },
 ];
 
