@@ -28,6 +28,7 @@ const userSignup = async (req, res) => {
     }
     if (newUser.userType === "user") {
       // create resume
+      console.log("user");
       let resumeData = {
         studentId: newUser._id,
         name: req.body.firstName + " " + req.body.lastName,
