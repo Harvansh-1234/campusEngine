@@ -17,7 +17,7 @@ const userInfo = async (req, res) => {
     if (user.length === 0) {
       return notFoundResponse(res, "User not found");
     }
-    return successResponse(res, "User info", user[0]);
+    return successResponse(res, user[0], "User info");
   } catch (err) {
     logFunction("error", err);
     handle304(err.message, res);
@@ -48,5 +48,7 @@ const updateUserInfo = async (req, res) => {
     serverErrorResponse(res, "Internal Server Error");
   }
 };
+
+const createResume = async (req, res) => {};
 
 module.exports = { userInfo, updateUserInfo };
