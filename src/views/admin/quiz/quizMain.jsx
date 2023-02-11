@@ -3,10 +3,26 @@ import "assets/css/quiz.css";
 import QuesCard from "./components/QuesCard";
 import {  Link, useLocation } from "react-router-dom";
 import Submit from "./components/Submit";
+import { getQuiz } from "service/api";
 function QuizMain() {
   const location = useLocation();
-  const [second, setSecond] = useState(5);
-  const [checkSubmit, setCheckSubmit] = useState(true);
+  const [second, setSecond] = useState(localStorage.getItem('sd')? localStorage.getItem('sd'):500);
+  const [checkSubmit, setCheckSubmit] = useState(false);
+  const [data, setData] = useState()
+  useEffect(() => {
+    const initial = async () => {
+      // var currenturl=window.location.search;
+      // var currenturlsearch = new URLSearchParams(currenturl);
+      // var title=currenturlsearch.get('title');
+      let token = localStorage.getItem('token');
+      let title = localStorage.getItem('quizName');
+      let quizData= await getQuiz(token,title);
+      console.log(quizData.data.data[0]);
+      setData(quizData.data.data[0].quizQuestions);
+
+    }
+    initial();
+}, [])
   useEffect(() => {
     if (second > 0) {
       setTimeout(() => setSecond(second - 1), 1000);
@@ -23,11 +39,14 @@ function QuizMain() {
       {
         !checkSubmit ? <div>
         <div style={{ height: "100px" }}></div>
-        <QuesCard />
-        <QuesCard />
-        <QuesCard />
-        <QuesCard />
-        <QuesCard />
+        {
+          data ? data.map((item,id)=>{
+            return(
+              <QuesCard item={item} id={id+1}/>
+            );
+          }):null
+        }
+        
         <div style={{ height: "100px" }}></div>
         <div className="quizBottom">
           <h1>

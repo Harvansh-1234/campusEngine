@@ -1,27 +1,27 @@
 import React from 'react'
 import 'assets/css/quiz.css'
-function QuesCard() {
+function QuesCard({item, id}) {
   return (
     <div>
         <div className="question">
         <div className="question__title">
-          <h1>Q1. What is your name?</h1>
+          <h1>Q.{id} {item.question}</h1>
           <div className="options">
             <div className="option">
-              <input type="radio" name="option" id={`option1`} />
-              <label for="option1">Option 1</label>
+              <input type="radio" name="option" id={`option1${id}`} />
+              <label for="option1">{item.options[0].option}</label>
             </div>
             <div className="option">
-              <input type="radio" name="option" id={`option2`} />
-              <label for="option2">Option 2</label>
+              <input type="radio" name="option" id={`option2${id}`} />
+              <label for="option2">{item.options[1].option}</label>
             </div>
             <div className="option">
-              <input type="radio" name="option" id={`option3`} />
-              <label for="option3">Option 3</label>
+              <input type="radio" name="option" id={`option3${id}`} />
+              <label for="option3">{item.options[2].option}</label>
             </div>
             <div className="option">
-              <input type="radio" name="option" id={`option4`} />
-              <label for="option4">Option 4</label>
+              <input type="radio" name="option" id={`option4${id}`} />
+              <label for="option4">{item.options[3].option}</label>
             </div>
           </div>
         </div>

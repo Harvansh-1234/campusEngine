@@ -55,3 +55,21 @@ export const Upload = async (data,email) => {
       console.log("Error while calling signup API: ", error);
     }
   };
+  export const getAllQuiz = async (data) => {
+    try {
+        console.log(data);
+        return await axios.get(`${url}/api/user/getAllQuiz`, {headers: {authorization:data}});
+    } catch (error) {
+console.log(error)
+    }
+}
+export const getQuiz = async (token,data) => {
+    try {
+        console.log(data);
+        return await axios.post(`${url}/api/user/getQuiz`,{quizName:data}, {headers: {authorization:token}});
+    } catch (error) {
+console.log(error)
+    }
+}
+
+
