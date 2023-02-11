@@ -9,7 +9,6 @@ const {
   successResponse,
   notFoundResponse,
 } = require("../utils/response");
-const clg_name = require("../models/college_name");
 
 // signup user
 const userSignup = async (req, res) => {
@@ -30,14 +29,13 @@ const userSignup = async (req, res) => {
       console.log(`Error in create user route: ${err1.message}`);
       return serverErrorResponse(res, err1.message);
     }
-    return successResponse(res, "User created successfully", newUser);
+    return successResponse(res, newUser, "User created successfully");
   } catch (err) {
     logFunction("error", err);
     handle304(err.message, res);
     serverErrorResponse(res, "Internal Server Error");
   }
 };
-
 
 // sign in user and verify password
 const userSignin = async (req, res) => {
@@ -55,7 +53,6 @@ const userSignin = async (req, res) => {
     if (user.length === 0) {
       return notFoundResponse(res, "User not found");
     }
-
 
     // verify passWord
     let [err1, isMatch] = await _verifyPassword(
