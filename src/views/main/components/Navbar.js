@@ -75,8 +75,8 @@ function Navbar() {
                 </div>
             </nav>
             <div className='auth'> 
-            <Link to={`/auth/sign-in`}><button className='auth-btn' href="/auth/sign-in"><p class="hover-underline-animation">Login</p></button></Link>
-            <Link to={`/auth/sign-up`}><button className='auth-btn'><p class="hover-underline-animation" style={{color:"#333"}}>Signup</p></button></Link>
+            <Link to={`/auth/sign-in/default`}><button className='auth-btn' href="/auth/sign-in"><p class="hover-underline-animation">Login</p></button></Link>
+            <Link to={`/auth/sign-up/default`}><button className='auth-btn'><p class="hover-underline-animation" style={{color:"#333"}}>Signup</p></button></Link>
              </div>
            
         </div>

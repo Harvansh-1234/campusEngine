@@ -10,8 +10,8 @@ import MainDashboard from "views/admin/default";
 import Quiz from "views/admin/quiz"
 import Instructions from "views/admin/quiz/instruction"
 import Profile from "views/admin/profile";
+import Question from "views/admin/quiz/quizMain"
 import Resume from "views/admin/resume"
-import QuizMain from "views/admin/quiz/quizMain"
 
 const routes = [
   {
@@ -53,9 +53,9 @@ const routes = [
   {
     name: "Quizmain",
     layout: "/user",
-    path: "/quizmain",
+    path: "/question",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
-    component: QuizMain,
+    component: Question,
   },
 ];
 
