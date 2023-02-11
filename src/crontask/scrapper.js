@@ -50,10 +50,19 @@ cron.schedule("*/3 * * * *", async () => {
       console.error(err);
     });
 
-    scraper.on(events.scraper.end, () => {
+    scraper.on(events.scraper.end, async () => {
       console.log("All done!");
-      console.log(arr);
-    });
+
+  let jobData = new Array();
+  arr.forEach(async (data) => {
+    console.log(`Data: ${data}`);
+    let [err, item] = await createOffCampusJobPostRepo(data);
+    if (err) {
+      console.log(err.message);
+    }
+    jobData.push(item);
+  });
+  await Promise.all(jobData);   });
 
     // Custom function executed on browser side to extract job description [optional]
     const descriptionFn = () => {
@@ -94,15 +103,6 @@ cron.schedule("*/3 * * * *", async () => {
     // Close browser
     await scraper.close();
   })();
-  let jobData = new Array();
-  arr.forEach(async (data) => {
-    console.log(`Data: ${data}`);
-    let [err, item] = await createOffCampusJobPostRepo(data);
-    if (err) {
-      console.log(err.message);
-    }
-    jobData.push(item);
-  });
-  await Promise.all(jobData);
+ 
   console.log("hiuhriuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
 });
