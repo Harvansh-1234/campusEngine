@@ -24,6 +24,18 @@ var resumeSchema = new mongoose.Schema(
         link: String,
       },
     ],
+    branch:{
+      type:String
+    },
+    year:{
+      type:String
+    },
+    admission_year:{
+    type:String
+    },
+    degree:{
+      type:String
+    },
     skills: [
       {
         name: String,
