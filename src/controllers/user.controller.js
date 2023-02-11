@@ -13,6 +13,7 @@ const {
   getQuizByQueryRepo,
   createQuizRepo,
 } = require("../repository/quiz.repo");
+const { getJobByQueryRepo } = require("../repository/jobs.repo");
 
 const userInfo = async (req, res) => {
   try {
@@ -146,6 +147,47 @@ const getResume = async (req, res) => {
   }
 };
 
+const getAllEligibleJobs = async (req, res) => {
+  try {
+    let [err, jobs] = await getJobByQueryRepo({ studentId: req.userId });
+    if (err) {
+      console.log(`Error in get jobs: ${err.message}`);
+      return serverErrorResponse(res, err.message);
+    }
+    return successResponse(res, jobs, "Jobs fetched");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
+const getAppliedJobs = async (req, res) => {
+  try {
+    let [err, jobs] = await getJobByQueryRepo({ studentId: req.userId });
+    if (err) {
+      console.log(`Error in get jobs: ${err.message}`);
+      return serverErrorResponse(res, err.message);
+    }
+    return successResponse(res, jobs, "Jobs fetched");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
+
+const getAllQuiz = async (req, res) => {
+  try {
+    let [err, quiz] = await getQuizByQueryRepo({});
+    if (err) {
+      console.log(`Error in get quiz: ${err.message}`);
+      return serverErrorResponse(res, err.message);
+    }
+    return successResponse(res, quiz, "Quiz fetched");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
+
 module.exports = {
   userInfo,
   updateUserInfo,
@@ -154,4 +196,6 @@ module.exports = {
   getQuiz,
   updateResumeByStudentId,
   getResume,
+  getAppliedJobs,
+  getAllQuiz,
 };
