@@ -73,7 +73,7 @@ function UserProfile() {
     return (
         <div className='userDetail' style={{ marginTop: "70px", width: "80%" }}>
 
-            {page === 1 && <Formik
+            {page === 1 && resume && <Formik
                 initialValues={{
                     firstName: resume.name ? resume.name.first : '',
                     lastName: resume.name ? resume.name.last : '',
@@ -90,6 +90,7 @@ function UserProfile() {
                 }}
                 onSubmit={async (values) => {
                     setPage(2);
+                    localStorage.setItem('pageNo', 2);
                     values.branch = branch;
                     values.college = college;
                     console.log(values);
@@ -363,9 +364,16 @@ function UserProfile() {
                                 </ModalContent>
                             </Modal>
 
-                        )}
+                        )} <Button colorScheme='blue' mx='45%' borderRadius='5px' onClick={async () => {
+                           
+                            setPage(1);
+                           
+                        }}>Prev</Button>
                         <Button colorScheme='blue' mx='45%' borderRadius='5px' onClick={async () => {
+                                                
+
                             setPage(3);
+
                             const updateresume = await updateResume(token, { education: edu });
                             console.log(updateresume);
                         }}>Save and Next</Button>
@@ -375,7 +383,7 @@ function UserProfile() {
                 </div>
             }
             {
-                page === 3 &&
+                page === 3&&
                <WorkExperience/>
             }
         </div >
