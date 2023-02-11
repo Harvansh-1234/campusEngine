@@ -13,6 +13,7 @@ import {
     AiOutlineDelete,
 
 } from "react-icons/ai";
+import 'assets/css/quiz.css'
 import {
     Modal,
     ModalOverlay,
@@ -21,12 +22,13 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
-
+ Text,
     useDisclosure
 
 
 } from '@chakra-ui/react'
 import { updateResume } from '../../../service/api';
+import WorkExperience from './workExp';
 // import Select from 'react-select'
 function UserProfile() {
     const [user, setUser] = useState({});
@@ -209,64 +211,17 @@ function UserProfile() {
                             resume !== undefined &&
                             edu.map((item, index) => {
                                 return (
-                                    <div
-                                        className=" rounded-md py-2 px-4 bg-white border border-gray-400 my-5 w-full "
-                                        key={index}
-                                    >
-                                        <div className="flex justify-end space-x-3 items-center">
-
-
-                                        </div>
-                                        <p className="font-semibold text-md md:w-2/5 ">{item.school}</p>
-                                        <div className="grid grid-cols-1 md:gap-2 gap-0 lg:grid-cols-4 align-items-right">
-                                            <div className="flex my-2 space-x-2 text-sm items-center">
-                                                <FiInfo />
-                                                <p>{item.degree}</p> <p>|</p> <p>{item.fieldOfStudy}</p>
-                                            </div>
-                                            {item.grade != "" ? (
-                                                <div className="space-x-2 my-2 flex items-center">
-                                                    <GrScorecard /> <p>{item.grade}</p>
-                                                </div>
-                                            ) : <div className="space-x-2 my-2 flex items-center">
-                                                <GrScorecard /> <p>0</p>
-                                            </div>}
-                                            <div className="flex items-center my-2 space-x-2">
-                                                <BsCalendar />
-                                                <p className="text-sm text-gray-600 mr-5">
-                                                    {item.start_date} - {item.end_date}
-                                                </p>
-                                            </div>
-                                            <div className="flex text-right mr-auto space-x-2 justify-end">
-                                                <button
-                                                    className=" hover:bg-blue-700 text-white font-bold py-3 px-8 text-xs rounded ml-auto content-end"
-                                                    style={{ backgroundColor: "#034488" }}
-                                                    onClick={() => {
-                                                        // setEdit(index);
-                                                        setEduInitialValues(item);
-
-                                                        setShowEduForm(true);
-                                                    }}
-                                                >
-                                                    Edit
-                                                </button>
-                                                <div className="text-xl mx-5 px-7 py-2">
-                                                    <AiOutlineDelete
-                                                        className="text-red-600 cursor-pointer"
-                                                        onClick={async () => {
-                                                            setEdu(
-                                                                edu.filter((item, i) => i !== index)
-                                                            );
-                                                            let res = JSON.parse(await localStorage.getItem("resume"));
-                                                            res.education = edu.filter(
-                                                                (item, i) => i !== index
-                                                            );
-                                                            setResume(res);
-                                                            localStorage.setItem("resume", JSON.stringify(res));
-                                                        }}
-                                                    /></div>
-                                            </div>
+                                    <div>
+                                        <div className="question">
+<Text fontSize="xl" fontWeight="bold" >{item.school}</Text>
+                                            <Text fontSize="md" fontWeight="bold" >{item.degree}</Text>
+                                            <Text fontSize="md" fontWeight="bold" >{item.field_of_study}</Text>
+                                            <Text fontSize="md" fontWeight="bold" >{item.start_date}</Text>
+                                            <Text fontSize="md" fontWeight="bold" >{item.end_date}</Text>
+                                            <Text fontSize="md" fontWeight="bold" >{item.grade}</Text>
                                         </div>
                                     </div>
+
                                 );
                             })}
                         <div style={{ display: "flex", margin: "auto" }}>
@@ -409,9 +364,9 @@ function UserProfile() {
                             </Modal>
 
                         )}
-                        <Button colorScheme='blue' mx='45%' borderRadius='5px' onClick={async() => {
+                        <Button colorScheme='blue' mx='45%' borderRadius='5px' onClick={async () => {
                             setPage(3);
-                            const updateresume = await updateResume(token, {  education: edu });
+                            const updateresume = await updateResume(token, { education: edu });
                             console.log(updateresume);
                         }}>Save and Next</Button>
 
@@ -421,211 +376,7 @@ function UserProfile() {
             }
             {
                 page === 3 &&
-                <div style={{ padding: "30px" }}><p>Work Experience</p>
-                    <div className="" style={{ padding: "30px" }}>
-                        {/* {resume !== null &&
-                         resume !== undefined &&
-                         edu.map((item, index) => {
-                             return (
-                                 <div
-                                     className=" rounded-md py-2 px-4 bg-white border border-gray-400 my-5 w-full "
-                                     key={index}
-                                 >
-                                     <div className="flex justify-end space-x-3 items-center">
-
-
-                                     </div>
-                                     <p className="font-semibold text-md md:w-2/5 ">{item.school}</p>
-                                     <div className="grid grid-cols-1 md:gap-2 gap-0 lg:grid-cols-4 align-items-right">
-                                         <div className="flex my-2 space-x-2 text-sm items-center">
-                                             <FiInfo />
-                                             <p>{item.degree}</p> <p>|</p> <p>{item.fieldOfStudy}</p>
-                                         </div>
-                                         {item.grade != "" ? (
-                                             <div className="space-x-2 my-2 flex items-center">
-                                                 <GrScorecard /> <p>{item.grade}</p>
-                                             </div>
-                                         ) : <div className="space-x-2 my-2 flex items-center">
-                                             <GrScorecard /> <p>0</p>
-                                         </div>}
-                                         <div className="flex items-center my-2 space-x-2">
-                                             <BsCalendar />
-                                             <p className="text-sm text-gray-600 mr-5">
-                                                 {item.start_date} - {item.end_date}
-                                             </p>
-                                         </div>
-                                         <div className="flex text-right mr-auto space-x-2 justify-end">
-                                             <button
-                                                 className=" hover:bg-blue-700 text-white font-bold py-3 px-8 text-xs rounded ml-auto content-end"
-                                                 style={{ backgroundColor: "#034488" }}
-                                                 onClick={() => {
-                                                     // setEdit(index);
-                                                     setEduInitialValues(item);
-
-                                                     setShowEduForm(true);
-                                                 }}
-                                             >
-                                                 Edit
-                                             </button>
-                                             <div className="text-xl mx-5 px-7 py-2">
-                                                 <AiOutlineDelete
-                                                     className="text-red-600 cursor-pointer"
-                                                     onClick={async () => {
-                                                         setEdu(
-                                                             edu.filter((item, i) => i !== index)
-                                                         );
-                                                         let res = JSON.parse(await localStorage.getItem("resume"));
-                                                         res.education = edu.filter(
-                                                             (item, i) => i !== index
-                                                         );
-                                                         setResume(res);
-                                                         localStorage.setItem("resume", JSON.stringify(res));
-                                                     }}
-                                                 /></div>
-                                         </div>
-                                     </div>
-                                 </div>
-                             );
-                         })} */}
-                        <div style={{ display: "flex", margin: "auto" }}>
-                            <Button
-                                colorScheme='blue'
-                                borderRadius='5px'
-                                mx="15px"
-                                onClick={async () => {
-                                    onOpen();
-
-                                    await setEduInitialValues({
-                                        school: null,
-                                        degree: null,
-                                        field_of_study: null,
-                                        start_date: null,
-                                        end_date: null,
-                                        grade: null,
-                                        description: null,
-                                    });
-                                    await setShowEduForm(true);
-                                }}
-                            >
-                                Add Education
-                            </Button>
-
-                            <Button colorScheme='blue' borderRadius='5px' mx="15px"
-                            >Submit</Button>
-
-
-
-
-                        </div>
-
-                    </div>
-                    <div>
-
-                        {showEduForm && (
-                            <Modal isOpen={isOpen} onClose={onClose} >
-                                <ModalOverlay />
-                                <ModalContent w='100%' style={{ width: "100%" }}>
-                                    <ModalHeader>Education Details</ModalHeader>
-                                    <ModalCloseButton />
-                                    <ModalBody mx='auto' >
-                                        {/* <Lorem count={2} /> */}
-
-                                        <Formik
-                                            initialValues={eduinitialValues}
-                                            validate={(values) => {
-                                                if (showEduForm === false) return {};
-                                                const errors = {};
-                                                if (!values.school || values.school === " ") {
-                                                    errors.school = "Required";
-                                                }
-                                                if (
-                                                    values.degree === null ||
-                                                    values.degree.trim() === ""
-                                                ) {
-                                                    errors.degree = "Required !";
-                                                }
-                                                if (
-                                                    values.fieldOfStudy === null ||
-                                                    values.fieldOfStudy.trim() === ""
-                                                ) {
-                                                    errors.fieldOfStudy = "Required !";
-                                                }
-                                                if (values.startDate === null) {
-                                                    errors.startDate = "Required !";
-                                                }
-                                                if (values.endDate === null) {
-                                                    errors.endDate = "Required !";
-                                                }
-
-                                                if (values.startDate > new Date()) {
-                                                    errors.startDate =
-                                                        "Start date cannot be greater than today's date";
-                                                }
-
-                                                if (values.grade === null) {
-                                                    errors.grade = "Required !";
-                                                }
-                                            }}>
-                                            {({ values }) => {
-                                                return (
-                                                    <Form className="">
-                                                        <div className='headField'>
-                                                            <div className='field' >
-                                                                <label htmlFor="school">School</label>
-                                                                <Field id="school" name="school" placeholder="" />
-                                                            </div>
-                                                            <div className='field'>
-                                                                <label htmlFor="degree">Degree</label>
-                                                                <Field id="degree" name="degree" placeholder="" value={user.lastName} />
-                                                            </div>
-                                                        </div>
-                                                        <div className='headField'>
-                                                            <div className='field' >
-                                                                <label htmlFor="startDate">Start Date</label>
-                                                                <Field id="startDate" name="startDate" placeholder="" value={user.firstName} />
-                                                            </div>
-                                                            <div className='field'>
-                                                                <label htmlFor="endDate">End Date</label>
-                                                                <Field id="endDate" name="endDate" placeholder="" value={user.lastName} />
-                                                            </div>
-                                                        </div>
-                                                        <div className='headField'>
-                                                            <div className='field' >
-                                                                <label htmlFor="grade">Grade</label>
-                                                                <Field id="grade" name="grade" placeholder="" value={user.firstName} />
-                                                            </div>
-                                                            <div className='field'>
-                                                                <label htmlFor="fieldOfStudy">Field of Study</label>
-                                                                <Field id="fieldOfStudy" name="fieldOfStudy" placeholder="" value={user.lastName} />
-                                                            </div>
-                                                        </div>
-
-
-                                                    </Form>)
-                                            }}
-                                        </Formik>
-
-
-
-                                    </ModalBody>
-
-                                    <ModalFooter>
-                                        <Button colorScheme='blue' mr={3} onClick={onClose}>
-                                            Close
-                                        </Button>
-                                        {/* <Button variant='ghost'>Secondary Action</Button> */}
-                                    </ModalFooter>
-                                </ModalContent>
-                            </Modal>
-
-                        )}
-                        <Button colorScheme='blue' mx='45%' borderRadius='5px' onClick={() => {
-                            setPage(3);
-                        }}>Save and Next</Button>
-
-                    </div>
-
-                </div>
+               <WorkExperience/>
             }
         </div >
     )
