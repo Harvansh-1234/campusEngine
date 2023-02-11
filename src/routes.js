@@ -10,8 +10,8 @@ import {
 import SignInCentered from "views/auth/signIn";
 import SignUpCentered from "views/auth/signUp";
 import MainDashboard from "views/admin/default";
-import RtlDashboard from "views/rtl/default";
-import CompanyDashboard from "views/company/default";
+import Quiz from "views/admin/quiz"
+import Instructions from "views/admin/quiz/instruction"
 import Profile from "views/admin/profile";
 
 
@@ -24,18 +24,25 @@ const routes = [
     component: MainDashboard,
   },
   {
-    name: "RTL Dashboard",
-    layout: "/rtl",
-    path: "/default",
-    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: RtlDashboard,
-  },
-  {
     name: "Profile",
     layout: "/user",
     path: "/profile",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Profile,
+  },
+  {
+    name: "Quiz",
+    layout: "/user",
+    path: "/quiz",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: Quiz,
+  },
+  {
+    name: "Instructions",
+    layout: "/user",
+    path: "/instructions",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: Instructions,
   },
   {
     name: "Sign In",
@@ -51,13 +58,7 @@ const routes = [
     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
     component: SignUpCentered,
   },
-  {
-    name: "Company Dashboard",
-    layout: "/company",
-    path: "/default",
-    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: CompanyDashboard,
-  },
+  
 ];
 
 export default routes;

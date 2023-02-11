@@ -1,0 +1,17 @@
+.cardMain{
+    display: flex;
+}
+@media (max-width: 770px) {
+    .cardMain{
+        display: block;
+        width: 300px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+.startButton{
+    color: white;
+    position: relative;
+    margin-left: 40px;
+}
