@@ -1,7 +1,7 @@
 const Resume = require("../models/resumeSchema");
 
 // Create and Save a new Resume
-const createRsumeRepo = async (data) => {
+const createResumeRepo = async (data) => {
   try {
     const resume = new Resume(data);
     const result = await resume.save();
@@ -33,6 +33,6 @@ const updateResumeRepo = async (id, data) => {
 };
 
 module.exports = {
-  createRsumeRepo,
+  createResumeRepo,
   updateResumeRepo,
 };

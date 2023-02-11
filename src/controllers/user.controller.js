@@ -1,4 +1,5 @@
 const { getUserById, updateUserById } = require("../repository/user.repo");
+const { createResumeRepo } = require("../repository/resume.repo");
 const {
   serverErrorResponse,
   notFoundResponse,
@@ -49,6 +50,19 @@ const updateUserInfo = async (req, res) => {
   }
 };
 
-const createResume = async (req, res) => {};
+const createResume = async (req, res) => {
+  try {
+    // create resume
+    let [err1, resume1] = await createResumeRepo(req.body);
+    if (err1) {
+      console.log(`Error in create resume: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+    return successResponse(res, resume1, "Resume created");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
 
-module.exports = { userInfo, updateUserInfo };
+module.exports = { userInfo, updateUserInfo, createResume };
