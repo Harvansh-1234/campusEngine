@@ -7,7 +7,7 @@ const { serverErrorResponse } = require("../utils/response");
 const createJobPost = async (req, res) => {
   try {
     // create job post
-    let [err1, jobPost1] = await createOffCampusJobPostRepo(req.body);
+    let [err1, jobPost1] = await createJobPost(req.body);
     if (err1) {
       console.log(`Error in create job post: ${err1.message}`);
       return serverErrorResponse(res, err1.message);
