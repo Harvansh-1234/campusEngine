@@ -1,7 +1,29 @@
 import React from 'react'
 import { Formik, Field, Form } from 'formik';
 import 'assets/css/userProfile.css';
+import { useEffect,useState } from 'react';
+import {getUserInfo} from '../../../../service/api'
+
+
+
+
 function UserProfile() {
+ const [user, setUser] = useState({});
+
+
+  useEffect(() => {
+    const initial = async()=>{
+      let token = localStorage.getItem('token');
+      console.log(token);
+      const userData = await getUserInfo(token);
+      console.log(userData);
+      if(userData.status === 200);
+      setUser(userData.data);
+       
+    }
+   
+  
+  }, [])
   return (
     <div className='userDetail'>
       <Formik

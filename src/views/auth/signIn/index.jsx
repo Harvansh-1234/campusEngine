@@ -13,6 +13,7 @@ import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { Formik } from 'formik';
+import { signIn } from '../../../service/api';
 
 function SignIn() {
   // Chakra color mode
@@ -33,6 +34,17 @@ function SignIn() {
   );
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+
+  const handleSubmit = async(values) => {
+    console.log(values);
+    const userdata = await signIn(values);
+    localStorage.setItem('token', userdata.data.data.token);
+    localStorage.setItem('user', JSON.stringify(userdata.data.data));
+    // console.log(data);
+  }
+
+
+
   return (
     <DefaultAuth>
       <div m="36px" w="70%">
@@ -63,13 +75,26 @@ function SignIn() {
             ) {
               errors.email = 'Invalid email address';
             }
+            if (!values.password) {
+              errors.password = 'Required';
+            }
+            // } else if (
+            //  values.password.length()<8
+            // ) {
+            //   errors.password = 'password must be 8 characters';
+            // }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+
+
+          onSubmit={async(values) => {
+
+                   
+           handleSubmit(values);
+            // setTimeout(() => {
+            //   alert(JSON.stringify(values, null, 2));
+            //   setSubmitting(false);
+            // }, 400);
           }}
         >
           {({
@@ -103,13 +128,14 @@ function SignIn() {
                 border='1px' borderColor='gray.200' borderRadius='5px'
               />
               {errors.password && touched.password && errors.password}
+              <br/>
               <Button fontSize='sm'
                 variant='brand'
                 fontWeight='500'
                 w='40%'
                 h='50'
                 ml="0px"
-                mb='24px' type="submit" disabled={isSubmitting}>
+                mb='24px' type="submit" disabled={!values.email || !values.password}>
                 Sign In
               </Button>
             </form>
