@@ -39,6 +39,7 @@ function SignIn() {
   const handleSubmit = async (values) => {
     console.log(values);
     const userdata = await signIn(values);
+    console.log(userdata);
     localStorage.setItem("token", userdata.data.data.token);
     localStorage.setItem("user", JSON.stringify(userdata.data.data));
     // console.log(data);

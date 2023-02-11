@@ -10,7 +10,7 @@ import MainDashboard from "views/admin/default";
 import Quiz from "views/admin/quiz"
 import Instructions from "views/admin/quiz/instruction"
 import Profile from "views/admin/profile";
-import Question from "views/admin/quiz/quizMain"
+import Question from "views/admin/quiz/QuizMain"
 import Resume from "views/admin/resume"
 
 const routes = [
