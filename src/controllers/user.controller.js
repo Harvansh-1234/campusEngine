@@ -1,10 +1,18 @@
 const { getUserById, updateUserById } = require("../repository/user.repo");
-const { createResumeRepo } = require("../repository/resume.repo");
+const {
+  createResumeRepo,
+  getResumeByQueryRepo,
+  updateResumeByQueryRepo,
+} = require("../repository/resume.repo");
 const {
   serverErrorResponse,
   notFoundResponse,
   successResponse,
 } = require("../utils/response");
+const {
+  getQuizByQueryRepo,
+  createQuizRepo,
+} = require("../repository/quiz.repo");
 
 const userInfo = async (req, res) => {
   try {
@@ -65,4 +73,84 @@ const createResume = async (req, res) => {
   }
 };
 
-module.exports = { userInfo, updateUserInfo, createResume };
+const createQuiz = async (req, res) => {
+  try {
+    // create quiz
+    let [err1, quiz1] = await createQuizRepo(req.body);
+    if (err1) {
+      console.log(`Error in create quiz: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+
+    return successResponse(res, quiz1, "Quiz created");
+  } catch (err) {
+    let errObj = {
+      message: err.message,
+      status: 500,
+    };
+    return serverErrorResponse(res, errObj);
+  }
+};
+// get quiz
+const getQuiz = async (req, res) => {
+  try {
+    // get quiz
+    let [err1, quiz1] = await getQuizByQueryRepo({ title: req.body.title });
+    if (err1) {
+      console.log(`Error in get quiz: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+    if (quiz1.length === 0) return notFoundResponse(res, "Quiz not found");
+
+    return successResponse(res, quiz1, "Quiz fetched");
+  } catch (err) {
+    let errObj = {
+      message: err.message,
+      status: 500,
+    };
+    return serverErrorResponse(res, errObj);
+  }
+};
+
+const updateResumeByStudentId = async (req, res) => {
+  try {
+    // update resume
+    let [err1, resume1] = await updateResumeByQueryRepo(
+      { studentId: req.userId },
+      req.body
+    );
+    if (err1) {
+      console.log(`Error in update resume: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+    return successResponse(res, resume1, "Resume updated");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
+
+const getResume = async (req, res) => {
+  try {
+    // get resume
+    let [err1, resume1] = await getResumeByQueryRepo({ studentId: req.userId });
+    if (err1) {
+      console.log(`Error in get resume: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+    return successResponse(res, resume1, "Resume fetched");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
+
+module.exports = {
+  userInfo,
+  updateUserInfo,
+  createResume,
+  createQuiz,
+  getQuiz,
+  updateResumeByStudentId,
+  getResume,
+};
