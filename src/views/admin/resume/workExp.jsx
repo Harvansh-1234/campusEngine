@@ -85,6 +85,20 @@ function WorkExperience() {
                                         <Text fontSize="20px" fontWeight="bold" >{item.startDate}</Text>
                                         <Text fontSize="20px" fontWeight="bold" >{item.endDate}</Text>
                                         <Text fontSize="20px" fontWeight="bold" >{item.description}</Text>
+                                        <AiOutlineDelete
+                                            className="text-red-600 cursor-pointer"
+                                            onClick={async () => {
+                                                setWork(
+                                                    work.filter((item, i) => i !== index)
+                                                );
+                                                let res = JSON.parse(await localStorage.getItem("resume"));
+                                                res.work_experience = work.filter(
+                                                    (item, i) => i !== index
+                                                );
+                                                setResume(res);
+                                                localStorage.setItem("resume", JSON.stringify(res));
+                                            }}
+                                        />
                                     </div>
                                 </div>
 
