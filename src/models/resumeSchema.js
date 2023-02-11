@@ -8,6 +8,7 @@ var resumeSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "student",
       required: true,
+      unique: true,
     },
     name: {
       first: String,
