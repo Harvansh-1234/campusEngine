@@ -2,7 +2,7 @@ import React from "react";
 
 import { Icon } from "@chakra-ui/react";
 import {
-
+  MdLock,
   MdPerson,
   MdHome,
 } from "react-icons/md";
@@ -11,6 +11,7 @@ import Quiz from "views/admin/quiz"
 import Instructions from "views/admin/quiz/instruction"
 import Profile from "views/admin/profile";
 import Question from "views/admin/quiz/quizMain"
+import Resume from "views/admin/resume"
 
 const routes = [
   {
@@ -28,6 +29,14 @@ const routes = [
     component: Profile,
   },
   {
+    name: "Resume",
+    layout: "/user",
+    path: "/resume",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: Resume,
+  },
+  {
+   
     name: "Quiz",
     layout: "/user",
     path: "/quiz",
