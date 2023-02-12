@@ -64,6 +64,24 @@ export const Upload = async (data, email) => {
     }
 };
 
+export const getAllEligibleJobs = async(token) => {
+    try {
+        // console.log(token);
+        return await axios.get(`${url}/api/user/getAllEligibleJobs`, { headers: { authorization: token } });
+    } catch (error) {
+        console.log(error)
+    }
+}
+// update user
+export const updateUser = async (token, data) => {
+    try {
+        console.log(data);
+        return await axios.post(`${url}/api/user/updateUserInfo`, data, { headers: { authorization: token } });
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 // Company Routes
 
 // create job 

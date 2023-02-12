@@ -28,7 +28,7 @@ import {
 
 
 } from '@chakra-ui/react'
-import { updateResume } from '../../../service/api';
+import { updateResume,updateUser } from '../../../service/api';
 import WorkExperience from './workExp';
 // import Select from 'react-select'
 function UserProfile() {
@@ -97,7 +97,11 @@ function UserProfile() {
                     values.branch = branch;
                     values.college = college;
                     console.log(values);
-                    const updateresume = await updateResume(token, { degree: values.degree, year: values.year, admissionYear: values.admission_year, education: edu, branch: branch, college: college });
+                  const updateuser = await updateUser(token, { branch: branch, year:values.year ? values.year : resume.year });
+
+
+
+                    const updateresume = await updateResume(token, { degree: values.degree ? values.degree : resume.degree, year: values.year ? values.year : resume.year, admissionYear: values.admission_year? values.admission_year : resume.admission_year, education: edu, branch: branch, college: college });
                     console.log(updateresume);
                     // await new Promise((r) => setTimeout(r, 500));
                     // alert(JSON.stringify(values, null, 2));
@@ -191,7 +195,7 @@ function UserProfile() {
                             <Field id="admission_year" name="admission_year" placeholder={resume.admission_year ? resume.admission_year : ''} />
                         </div>
                         <div className='field'>
-                            <label htmlFor="year">Current Year</label>
+                            <label htmlFor="year">Passing Year</label>
                             <Field id="year" name="year" placeholder={resume.year ? resume.year : ''} />
                         </div>
                     </div>
