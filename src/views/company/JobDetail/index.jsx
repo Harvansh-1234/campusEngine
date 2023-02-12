@@ -122,7 +122,7 @@ const [data, setData] = useState();
                     zIndex: "1",
                     position: "absolute",
                     left: "87%",
-                    top: "50%",
+                    top: "49%",
                     color: "black",
                   }}
                 >
@@ -134,7 +134,7 @@ const [data, setData] = useState();
                   style={{
                     zIndex: "1",
                     position: "absolute",
-                    top: "48%",
+                    top: "50%",
                     color: "black",
                   }}
                 >
