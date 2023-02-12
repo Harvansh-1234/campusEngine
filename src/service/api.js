@@ -7,7 +7,7 @@ export const signIn = async (data) => {
         console.log(data);
         return await axios.post(`${url}/api/auth/signin`, data);
     } catch (error) {
-console.log(error)
+        console.log(error)
     }
 }
 export const signup = async (data) => {
@@ -15,71 +15,94 @@ export const signup = async (data) => {
         console.log(data);
         return await axios.post(`${url}/api/auth/signup`, data);
     } catch (error) {
-console.log(error)
+        console.log(error)
     }
 }
 
 //user
+export const getAllQuiz = async (data) => {
+    try {
+        console.log(data);
+        return await axios.get(`${url}/api/user/getAllQuiz`, {headers: {authorization:data}});
+    } catch (error) {
+console.log(error)
+    }
+}
 
 export const getUserInfo = async (data) => {
     try {
         console.log(data);
-        return await axios.get(`${url}/api/user/getUserInfo`, {headers: {authorization:data}});
+        return await axios.get(`${url}/api/user/getUserInfo`, { headers: { authorization: data } });
     } catch (error) {
-console.log(error)
+        console.log(error)
     }
 }
 export const getResume = async (data) => {
     try {
         console.log(data);
-        return await axios.get(`${url}/api/user/getResume`, {headers: {authorization:data}});
+        return await axios.get(`${url}/api/user/getResume`, { headers: { authorization: data } });
     } catch (error) {
-console.log(error)
+        console.log(error)
     }
 }
-export const updateResume = async (token,data) => {
+export const updateResume = async (token, data) => {
     try {
         console.log(data);
-        return await axios.post(`${url}/api/user/updateResume`,data, {headers: {authorization:token}});
+        return await axios.post(`${url}/api/user/updateResume`, data, { headers: { authorization: token } });
     } catch (error) {
-console.log(error)
+        console.log(error)
     }
 }
 
-export const Upload = async (data,email) => {
+export const Upload = async (data, email) => {
     try {
         console.log(data);
-      return await axios.post(`${url}/uploadImage`, {image:data,email:email});
+        return await axios.post(`${url}/uploadImage`, { image: data, email: email });
     } catch (error) {
-      console.log(error);
-      console.log("Error while calling signup API: ", error);
+        console.log(error);
+        console.log("Error while calling signup API: ", error);
     }
-  };
+};
 
-  // Company Routes
+// Company Routes
 
-  // create job 
-    export const createJob = async (token,data) => {
+// create job 
+export const createJob = async (token, data) => {
     try {
         console.log(data);
-        return await axios.post(`${url}/api/company/createJob`,data, {headers: {authorization:token}});
+        return await axios.post(`${url}/api/company/createJob`, data, { headers: { authorization: token } });
+
+
+
     } catch (error) {
-console.log(error)
+        console.log(error)
     }
 }
-    export const listCompanyJob = async (token) => {
+export const listCompanyJob = async (token) => {
     try {
         // console.log(data);
-        return await axios.get(`${url}/api/company/listCompanyJob`, {headers: {authorization:token}});
+        return await axios.get(`${url}/api/company/listCompanyJob`, { headers: { authorization: token } });
     } catch (error) {
-console.log(error)
+        console.log(error)
     }
 }
-    export const getJobDetail = async (token,id) => {
+export const getJobDetail = async (token, id) => {
     try {
         // console.log(data);
-        return await axios.post(`${url}/api/company/getJobInfo`,{jobId:id}, {headers: {authorization:token}});
+        return await axios.post(`${url}/api/company/getJobInfo`, { jobId: id }, { headers: { authorization: token } });
     } catch (error) {
-console.log(error)
+        console.log(error)
+
     }
 }
+
+    export const getQuiz = async (token, data) => {
+        try {
+            console.log(data);
+            return await axios.post(`${url}/api/user/getQuiz`, { title: data }, { headers: { authorization: token } });
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+

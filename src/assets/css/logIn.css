@@ -3,11 +3,24 @@ position: absolute;
 left: 50%;
 top: 50%;
 transform: translate(-50%,-50%);
+/* border: 2px solid black; */
+padding: 20px 100px;
+border-radius: 5px;
+z-index: 5;
+background-color: white;
 }
 .loginInput  {
     background: #ffffff;
     border: 1px solid black;
     padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+   font-size: 1em;
+}
+.loginInput1  {
+    background: #ffffff;
+    border: 1px solid black;
+    padding: 8px 10px;
     margin: 8px 0;
     width: 100%;
    font-size: 1em;

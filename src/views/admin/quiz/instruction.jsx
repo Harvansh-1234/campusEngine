@@ -1,11 +1,30 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 
 import { Flex, Box, Icon, Text, Spacer, Button } from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import { MdList, MdLockClock, MdTimer } from "react-icons/md";
 import bgMastercard from "assets/img/dashboards/Debit.png";
 import "assets/css/quiz.css";
-function instruction() {
+import { getQuiz } from "service/api";
+import { Link } from "react-router-dom";
+function Instruction() {
+  const [data, setData] = useState();
+  useEffect(() => {
+    const initial = async () => {
+      // var currenturl=window.location.search;
+      // var currenturlsearch = new URLSearchParams(currenturl);
+      // var title=currenturlsearch.get('title');
+      let token = localStorage.getItem('token');
+      let title = localStorage.getItem('quizName');
+      let quizData= await getQuiz(token,title);
+      console.log(quizData.data.data[0]);
+      setData(quizData.data.data[0]);
+      localStorage.setItem('sd',quizData.data.data[0].quizDuration*60);
+    }
+    initial();
+
+
+}, [])
   return (
     <div>
       <div style={{ height: "100px" }}></div>
@@ -25,21 +44,18 @@ function instruction() {
           <Flex direction="column" color="white" h="100%" w="100%">
             <Flex justify="space-between" align="center" mb="2px">
               <Text fontSize="3xl" fontWeight="bold">
-                Javascript
+                {data ?data.quizName:null}
               </Text>
               <Text fontSize="md" style={{ display: "flex" }}>
                 <Icon as={MdTimer} width="20px" height="20px" color="inherit" />
-                30min
+                {data ?data.quizDuration: '--'}min
               </Text>
             </Flex>
             <Text fontSize="xl" mb="10px">
-              (Advance)
+              (Beginner)
             </Text>
             <Text fontSize="md" mb="10px">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur
-              dolores, itaque aliquid voluptatum ad voluptatibus praesentium
-              explicabo inventore dolorem magni asperiores accusamus. Optio
-              minima culpa nobis. Dignissimos nemo exercitationem deserunt.
+              {data ?data.quizDescription:null}
             </Text>
 
             <Spacer />
@@ -55,7 +71,7 @@ function instruction() {
               <Flex mt="14px" justify="space-between">
                 <Flex direction="column" me="34px" justify="center">
                   <Text fontSize="xl" mb="10px">
-                    No. of Questions : 5
+                    No. of Questions : {data? data.minScoreRequired : '--'}
                   </Text>
                 </Flex>
                 <Flex direction="column">
@@ -85,25 +101,26 @@ function instruction() {
             </Flex>
             <Text fontSize="md"  style={{ display: "flex" }}>
               <Icon as={MdList} width="20px" height="20px" color="inherit"mt='4px' mr='5px'  />{" "}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              No negative marking for wrong answers.
             </Text>
             <Text fontSize="md"  style={{ display: "flex" }}>
               <Icon as={MdList} width="20px" height="20px" color="inherit"mt='4px' mr='5px'  />{" "}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Read each question carefully and choose the best answer to each one.
             </Text>
             <Text fontSize="md" style={{ display: "flex" }}>
               <Icon as={MdList} width="20px" height="20px" color="inherit" mt='4px' mr='5px' />{" "}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            </Text>
+              You can attempt the quiz only once.           </Text>
             <Text fontSize="md" style={{ display: "flex" }}>
               <Icon as={MdList} width="20px" height="20px" color="inherit" mt='4px' mr='5px' />{" "}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Once finished, you can check your response.
             </Text>
             <Spacer />
           </Flex>
         </Card>
       </div>
       <div className="startButton">
+      <Link
+      to="/user/question">
         <Button
             style={{ backgroundColor: "#695aff" }}
             variant="solid"
@@ -114,10 +131,10 @@ function instruction() {
             fontSize="xl"
             fontWeight="bold"
             mt="20px"
-            >Attempt</Button>
+            >Attempt</Button></Link>
       </div>
     </div>
   );
 }
 
-export default instruction;
+export default Instruction;

@@ -39,9 +39,18 @@ function SignIn() {
   const handleSubmit = async (values) => {
     console.log(values);
     const userdata = await signIn(values);
-    localStorage.setItem("token", userdata.data.data.token);
-    localStorage.setItem("user", JSON.stringify(userdata.data.data));
-    // console.log(data);
+    console.log(userdata);
+    if(userdata.data.code==200){
+      localStorage.setItem("token", userdata.data.data.token);
+      localStorage.setItem("user", JSON.stringify(userdata.data.data));
+      if(userdata.data.data.userType=='company')
+      window.location.replace('http://localhost:3000/#/company/default');
+      else if(userdata.data.data.userType=='user')
+      window.location.replace('http://localhost:3000/#/user/default');
+      else
+      window.location.replace('http://localhost:3000/#/rtl/rtl-default');
+
+    }
   };
 
   return (
@@ -152,7 +161,7 @@ function SignIn() {
 
           <Text color={textColorDetails} fontWeight="400" fontSize="14px">
             Not registered yet?
-            <NavLink to="/auth/sign-up">
+            <NavLink to="/auth/sign-up/default" style={{zIndex: '5'}}>
               <Text color={textColorBrand} as="span" ms="5px" fontWeight="500">
                 Create an Account
               </Text>

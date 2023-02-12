@@ -1,28 +1,25 @@
 import React from 'react'
 import 'assets/css/quiz.css'
-function QuesCard() {
+function QuesCard({item, id,answered,setAnswered}) {
   return (
     <div>
         <div className="question">
         <div className="question__title">
-          <h1>Q1. What is your name?</h1>
+          <h1>Q.{id} {item.question}</h1>
           <div className="options">
-            <div className="option">
-              <input type="radio" name="option" id={`option1`} />
-              <label for="option1">Option 1</label>
+          {item.options.map((x,ID)=>{
+            return(
+              <div className="option">
+              <input type="radio" name={`option${id}`} id={`option${id}`} onClick={()=>{
+                if(answered.indexOf(id) === -1) {
+               answered.push(id);
+               console.log(answered);
+  }
+              }}/>
+              <label for={`option${id}`}>{x.option}</label>
             </div>
-            <div className="option">
-              <input type="radio" name="option" id={`option2`} />
-              <label for="option2">Option 2</label>
-            </div>
-            <div className="option">
-              <input type="radio" name="option" id={`option3`} />
-              <label for="option3">Option 3</label>
-            </div>
-            <div className="option">
-              <input type="radio" name="option" id={`option4`} />
-              <label for="option4">Option 4</label>
-            </div>
+            );
+          })}
           </div>
         </div>
       </div>

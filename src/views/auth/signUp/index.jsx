@@ -42,6 +42,9 @@ function SignUp() {
     const handleSubmit = async (values) => {
         console.log(values);
         const data = await signup({ ...values, userType: userType });
+        if(data.data.code==200){
+            window.location.replace('http://localhost:3000/#/auth/sign-in/default');
+          }
         // localStorage.setItem('token', data.data.token);
         // localStorage.setItem('user', JSON.stringify(data.data.user));
         console.log(data);
@@ -51,7 +54,7 @@ function SignUp() {
 
     return (
         <DefaultAuth>
-            <div  style={{width : '50%'}}>
+            <div  style={{width : '50%'  , padding: '0px 60px' ,marginTop:'20px',marginBottom: '20px' , position: 'relative' , left:'50%' ,transform:'translate(-50%)' , borderRadius: '10px' , backgroundColor: 'white'}}>
 
                 <Heading fontSize='36px' mb='10px'>
                     Sign Up
@@ -215,7 +218,7 @@ function SignUp() {
                                 h='50'
                                 ml="0px"
                                 mb='24px' type="submit" disabled={!values.email || !values.password}>
-                                Sign In
+                                Sign Up
                             </Button>
                         </form>
                     )}
@@ -233,13 +236,13 @@ function SignUp() {
 
                 <Text fontWeight='400' fontSize='14px'>
                     Already have an account?
-                    <NavLink to='/auth/sign-in'>
+                    <NavLink to='/auth/sign-in/default'>
                         <Text
 
                             as='span'
                             ms='5px'
                             fontWeight='500'>
-                            Create an Account
+                           Sign In
                         </Text>
                     </NavLink>
                 </Text>
