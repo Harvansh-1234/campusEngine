@@ -43,9 +43,11 @@ export default function OnCampus() {
               <Text fontSize="15px" fontWeight="bold" style={{zIndex:"1"}} >{job.place}</Text>
               <Text fontSize="1.5rem" fontWeight="bold" style={{zIndex:"1",position:"absolute",right:"5%",top:"10%",color:"white"}} >{job.Location}</Text>
               
-              <Text fontSize="1.5rem" fontWeight="bold" style={{zIndex:"1",position:"absolute",left:"87%",top:"50%",color:"white"}} >{job.Date}</Text>
+              <Text fontSize="1rem" fontWeight="bold" style={{zIndex:"1",position:"absolute",left:"3%",top:"60%",color:"#333"}} >{job.Date}</Text>
               
-             <Link to={job.Link} ><Button  mr="0" borderRadius='5px' style={{position:"relative",float:"right"}} >Apply</Button></Link>
+             <Link href={job.Link} ><Button  mr="0" borderRadius='5px' style={{position:"relative",float:"right"}}  onClick={()=>{
+                window.location.href = job.Link;
+             }}>Apply</Button></Link>
 
               </div>)
       })}
