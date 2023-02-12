@@ -63,9 +63,9 @@ function UserProfile() {
             // console.log(userData);
             if (userData.status === 200);
             setResume(userData.data.data[0]);
-            setCollege(userData.data.data[0].college);
-            setBranch(userData.data.data[0].branch);
-            setEdu(userData.data.data[0].education);
+             setCollege(userData.data.data[0].college !== undefined ? userData.data.data[0].college :"");
+            setBranch(userData.data.data[0].branch !==undefined ? userData.data.data[0].branch:"");
+            setEdu(userData.data.data[0] ? userData.data.data[0].education:"");
             console.log(userData);
 
         }
