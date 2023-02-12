@@ -189,7 +189,9 @@ const getAllEligibleJobs = async (req, res) => {
       batchEligible: { $in: batch },
       branchEligible: { $in: branch },
     };
+    console.log(query);
     let [err, jobs] = await getJobByQueryRepo(query);
+    console.log(jobs);
     if (err) {
       console.log(`Error in get jobs: ${err.message}`);
       return serverErrorResponse(res, err.message);
@@ -235,3 +237,5 @@ module.exports = {
   getAllQuiz,
   getAllEligibleJobs,
 };
+
+
