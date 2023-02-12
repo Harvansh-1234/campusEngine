@@ -23,7 +23,7 @@ ReactDOM.render(
             <Route path={`/user`} component={AdminLayout} />
             <Route path={`/auth/sign-in/default`} component={SignIn} />
             <Route path={`/auth/sign-up/default`} component={SignUp} />
-            <Route path={`/rtl`} component={RtlLayout} />
+            <Route path={`/tnp`} component={RtlLayout} />
             <Route path={`/company`} component={CompanyLayout} />
             {/* <Route path={`/company/jobDetails/:id`} component={CompanyLayout} /> */}
             <Route from='/' component={Landing} />

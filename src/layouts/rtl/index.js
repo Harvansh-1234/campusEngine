@@ -29,7 +29,7 @@ export default function Dashboard(props) {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // functions for changing the states from components
   const getRoute = () => {
-    return window.location.pathname !== "/rtl/full-screen-maps";
+    return window.location.pathname !== "/tnp/full-screen-maps";
   };
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
@@ -102,7 +102,8 @@ export default function Dashboard(props) {
   };
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/rtl") {
+      console.log("rtl")
+      if (prop.layout === "/tnp") {
         console.log(prop.layout);
         return (
           <Route
@@ -169,7 +170,7 @@ export default function Dashboard(props) {
               pt='50px'>
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from='/' to='/rtl/default' />
+                <Redirect from='/' to='/tnp/default' />
               </Switch>
             </Box>
           ) : null}
