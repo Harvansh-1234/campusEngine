@@ -53,7 +53,7 @@ export function SidebarLinks(props) {
         route.layout === "/company"
       ) {
         return (
-          <NavLink key={index} to={route.layout + route.path}>
+          <NavLink key={index} to={route.layout + route.path} className={route.hide ? 'hideClass':'navClass'}>
             {route.icon ? (
               <Box>
                 <HStack

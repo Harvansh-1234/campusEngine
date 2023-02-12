@@ -94,6 +94,7 @@ export default function Dashboard(props) {
         console.log(prop.layout);
         return (
           <Route
+          hide={prop.hide}
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}

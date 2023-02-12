@@ -20,6 +20,7 @@ const routes = [
     path: "/default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
+    hide:false,
   },
   {
     name: "Profile",
@@ -27,6 +28,7 @@ const routes = [
     path: "/profile",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Profile,
+    hide:false,
   },
   {
     name: "Resume",
@@ -34,6 +36,7 @@ const routes = [
     path: "/resume",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Resume,
+    hide:false,
   },
   {
    
@@ -42,6 +45,7 @@ const routes = [
     path: "/quiz",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Quiz,
+    hide:false,
   },
   {
     name: "Instructions",
@@ -49,6 +53,7 @@ const routes = [
     path: "/instructions",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Instructions,
+    hide:true,
   },  
   {
     name: "Quizmain",
@@ -56,6 +61,7 @@ const routes = [
     path: "/question",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Question,
+    hide:true,
   },
 ];
 

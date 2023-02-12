@@ -46,7 +46,7 @@ const companyRoutes = [
         path: "/createjobs",
         icon: <Icon as={MdList} width='20px' height='20px' color='inherit' />,
         component: CreateJob,
-        hide:false,
+        hide:true,
     },
     {
         name: "Posted Jobs",
@@ -57,7 +57,7 @@ const companyRoutes = [
         hide:false,
     },
     {
-        // name: "Job Details",
+        name: "Job Details",
         layout: "/company",
         path: "/jobDetails",
         icon: <Icon as={MdList} width='20px' height='20px' color='inherit' />,

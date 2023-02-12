@@ -89,9 +89,10 @@ export default function Dashboard(props) {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       // console.log(prop);
-      if (prop.layout === "/company" && prop.hide == false) {
+      if (prop.layout === "/company") {
         return (
           <Route
+          hide={prop.hide}
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}

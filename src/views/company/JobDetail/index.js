@@ -11,7 +11,6 @@ export default function JobDetail() {
             let token = localStorage.getItem('token');
             let Id = localStorage.getItem('jobId');
             console.log(token);
-
              const jobDetail = await getJobDetail(token, Id);
              console.log(jobDetail);
         }
