@@ -16,7 +16,7 @@ export default function Dashboard(props) {
       let token = localStorage.getItem('token');
       let data= await getUserInfo(token);
       console.log(data.data.data.userType);
-      if(data.data.data.userType != 'admin'){
+      if(data.data.data.userType !== 'admin'){
         window.location.href = '/';
       }
 

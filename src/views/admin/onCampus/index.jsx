@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { getAllEligibleJobs ,applyJob} from '../../../service/api'
 
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
-import { Button, Image, Text, Heading, Stack, Divider, ButtonGroup, Flex } from '@chakra-ui/react';
+// import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
+import { Button,  Text  } from '@chakra-ui/react';
 import 'assets/css/quiz.css'
 import cardImg from 'assets/img/dashboards/Debit.png';
 

@@ -3,9 +3,9 @@ import React from "react";
 import { Icon } from "@chakra-ui/react";
 import {
 
-  MdPerson,
+  
   MdHome,
-  MdLock,
+  
 } from "react-icons/md";
 
 import RtlDashboard from "views/rtl/default";
