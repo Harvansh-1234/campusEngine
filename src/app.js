@@ -72,8 +72,8 @@ server.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-
 //
 // unverified jobs aat tnp
 // verfy pe verify kardo
 // verified jobs listing for user
+// list off camous jobs

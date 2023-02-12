@@ -16,4 +16,5 @@ router.get("/listCompanyJob", companyValidate, listCompanyJobs);
 router.post("/getJobInfo", companyValidate, getJobPost);
 router.post("/listJobApplicants", companyValidate, listJobApplications);
 
+
 module.exports = router;
