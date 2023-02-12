@@ -72,10 +72,10 @@ const jobSchema = new mongoose.Schema(
     studentsShortListed: [
       {
         type: Schema.Types.ObjectId,
-        ref: "student",
+        ref: "user",
       },
     ],
-    
+
     approvalStatus: {
       type: String,
       enum: ["pending", "approved", "rejected"],

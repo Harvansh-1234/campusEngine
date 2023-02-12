@@ -38,13 +38,19 @@ app.post("/uploadImage", upload.single("uploads"), (req, res) => {
   console.log(req.body);
   uploadImage(req.body.image)
     .then((url) => {
-      // find user by email and update the image url
-      User.findOne({ email: req.body.email }).then((user) => {
-        user.profileImg = url;
-        user.save();
-      });
+      if(url){
+        User.findOne({ email: req.body.email }).then((user) => {
 
-      res.send(url);
+          user.profileImg = url;
+          user.save();
+        });
+  
+        res.send(url);
+      }else{
+        res.send("error in uploading image")
+      }
+      // find user by email and update the image url
+     
     })
     .catch((err) => {
       res.status(500).send(err);

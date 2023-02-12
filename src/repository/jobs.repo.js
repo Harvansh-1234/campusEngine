@@ -18,14 +18,9 @@ const createJobPostRepo = async (data) => {
 // get job post by query
 const getJobByQueryRepo = async (query) => {
   try {
-    let applications = await Application.find(query);
-    let appArr = new Array();
-    applications.forEach((app) => {
-        appArr.push(app.jobId);
-    });
-    let job = await Job.find({ _id: { $nin: appArr } });
-
-    return [null, job];
+    let applications = await Job.find(query);
+    console.log(`here is the list of jobs i am ${applications}`);
+    return [null, applications];
   } catch (err) {
     let errObj = {
       status: 500,
