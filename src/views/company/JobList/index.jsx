@@ -4,6 +4,7 @@ import { Button,Image,Text,Heading,Stack,Divider,ButtonGroup ,Flex } from '@chak
 import 'assets/css/quiz.css'
 import { listCompanyJob } from '../../../service/api';
 import { Link } from 'react-router-dom';
+import cardImg from 'assets/img/dashboards/Debit.png';
 export default function PostedJobs() {
     const [user, setUser] = useState({});
     const [token, settoken] = useState("");
@@ -26,22 +27,24 @@ export default function PostedJobs() {
         initial();
     }, []);
     return (
-        <div>{jobs.length > 0 ?
+        <div>
+        <div style={{ height: "100px" }}></div>{jobs.length > 0 ?
             jobs.map((job) => {
                 return (
                     <div>
-                        <div className="question">
-                            <Text fontSize="20px" fontWeight="bold" >{job.jobTitle}</Text>
-                            <Text fontSize="15px" fontWeight="bold" >{job.jobDescription}</Text>
-                            <Text fontSize="15px" fontWeight="bold" >{job.jobLocation}</Text>
-                            <Flex justify="space-between">
-                            <Text fontSize="15px" fontWeight="bold" mx="10px">{job.jobSalary}</Text>
-                            <Text fontSize="15px" fontWeight="bold" mx="10px">{job.branchEligible.map((item)=>{return <Text>{item}</Text>})}</Text>
-                            <Text fontSize="15px" fontWeight="bold" >{job.jobExperience}</Text>
-                            </Flex>
-                            <Divider />
-                            <Link to="/company/jobDetails">
-                            <Button colorScheme='blue' mr="0" borderRadius='5px' onClick={()=>{localStorage.setItem("jobId",job._id)}}>View Details</Button></Link>
+
+                        <div className="question" style={{overflow:'hidden',position:"relative"}}>
+                        <div style={{clipPath:"circle(60%)",position:"absolute",right:"-30%",top:"-5%",zIndex:"0"}}>
+                        <img src={cardImg} alt="" />
+                    </div>
+                            <Text fontSize="2rem" fontWeight="bold" style={{zIndex:"1"}} >{job.jobTitle}</Text>
+                            <Text fontSize="1rem" fontWeight="bold" style={{zIndex:"1"}} >Experience required : {job.jobExperience}</Text>
+                            <Text fontSize="15px" fontWeight="bold" style={{zIndex:"1"}} >{job.jobDescription}</Text>
+                            <Text fontSize="1.5rem" fontWeight="bold" style={{zIndex:"1",position:"absolute",right:"5%",top:"10%",color:"white"}} >{job.jobLocation}</Text>
+                            <Text fontSize="1.1rem" fontWeight="bold" mt="10px"  style={{zIndex:"1"}} >Eligible Branch {job.branchEligible.map((item)=>{return <Text>-{item}</Text>})}</Text>
+                            <Text fontSize="1.5rem" fontWeight="bold" style={{zIndex:"1",position:"absolute",left:"87%",top:"50%",color:"white"}} >{job.jobSalary}LPA</Text>
+                            <Link to="/company/jobDetails" style={{position:"relative",float:"right"}}>
+                            <Button  mr="0" borderRadius='5px' onClick={()=>{localStorage.setItem("jobId",job._id)}} >View Details</Button></Link>
 
                             </div>
                     </div>
