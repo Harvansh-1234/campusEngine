@@ -75,7 +75,6 @@ const jobSchema = new mongoose.Schema(
         ref: "user",
       },
     ],
-
     approvalStatus: {
       type: String,
       enum: ["pending", "approved", "rejected"],

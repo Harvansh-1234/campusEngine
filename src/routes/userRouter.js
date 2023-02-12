@@ -33,4 +33,6 @@ router.get("/getAllEligibleJobs", userValidate, getAllEligibleJobs);
 router.get("/getstudents", getstudents);
 router.post("/applyJob", userValidate, applyJob);
 router.get("/getAllOffCampusJobs", userValidate, OffCampusJobPost);
+
+
 module.exports = router;
