@@ -96,7 +96,7 @@ const createQuiz = async (req, res) => {
 const getQuiz = async (req, res) => {
   try {
     // get quiz
-    let [err1, quiz1] = await getQuizByQueryRepo({ title: req.body.title });
+    let [err1, quiz1] = await getQuizByQueryRepo({ quizName: req.body.title });
     if (err1) {
       console.log(`Error in get quiz: ${err1.message}`);
       return serverErrorResponse(res, err1.message);
