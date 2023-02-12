@@ -143,5 +143,13 @@ export const getJobDetail = async (token, id) => {
             console.log(error)
         }
     }
+    export const listJobApplicants = async (data) => {
+        try {
+            console.log(data);
+            return await axios.post(`${url}/api/company/listJobApplicants`,data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
