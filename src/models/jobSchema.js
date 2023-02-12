@@ -36,7 +36,7 @@ const jobSchema = new mongoose.Schema(
     },
     jobSkillsArray: {
       type: Array,
-      required: true,
+      // required: true,
       trim: true,
     },
     branchEligible: [{ type: String }],
@@ -60,12 +60,14 @@ const jobSchema = new mongoose.Schema(
       type: Date,
       required: true,
       trim: true,
+      default: Date.now,
     },
     jobStatus: {
       type: String,
       enum: ["open", "closed"],
-      required: true,
+      // required: true,
       trim: true,
+      default:"open"
     },
     studentsShortListed: [
       {
@@ -73,11 +75,13 @@ const jobSchema = new mongoose.Schema(
         ref: "student",
       },
     ],
+    
     approvalStatus: {
       type: String,
       enum: ["pending", "approved", "rejected"],
       required: true,
       trim: true,
+      default: "pending",
     },
   },
   {
