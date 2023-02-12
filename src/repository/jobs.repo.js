@@ -43,6 +43,7 @@ const getJobInfo = async (query) => {
     return [errObj, null];
   }
 };
+
 module.exports = {
   createJobPostRepo,
   getJobByQueryRepo,

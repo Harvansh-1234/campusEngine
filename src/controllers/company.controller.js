@@ -25,7 +25,7 @@ const getJobPost = async (req, res) => {
   try {
     // get job post
     let [err1, jobPost1] = await getJobInfo({
- _id: req.body.jobId,
+      _id: req.body.jobId,
     });
     if (err1) {
       console.log(`Error in get job post: ${err1.message}`);
