@@ -55,3 +55,31 @@ export const Upload = async (data,email) => {
       console.log("Error while calling signup API: ", error);
     }
   };
+
+  // Company Routes
+
+  // create job 
+    export const createJob = async (token,data) => {
+    try {
+        console.log(data);
+        return await axios.post(`${url}/api/company/createJob`,data, {headers: {authorization:token}});
+    } catch (error) {
+console.log(error)
+    }
+}
+    export const listCompanyJob = async (token) => {
+    try {
+        // console.log(data);
+        return await axios.get(`${url}/api/company/listCompanyJob`, {headers: {authorization:token}});
+    } catch (error) {
+console.log(error)
+    }
+}
+    export const getJobDetail = async (token,id) => {
+    try {
+        // console.log(data);
+        return await axios.post(`${url}/api/company/getJobInfo`,{jobId:id}, {headers: {authorization:token}});
+    } catch (error) {
+console.log(error)
+    }
+}
