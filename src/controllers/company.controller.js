@@ -3,7 +3,7 @@
 const { getJobByQueryRepo, getJobInfo } = require("../repository/jobs.repo");
 const { createOffCampusJobPostRepo } = require("../repository/quiz.repo");
 const { serverErrorResponse, successResponse } = require("../utils/response");
-const { createJobPostRepo } = require("../repository/jobs.repo");
+const {  createJobPostRepo} = require("../repository/jobs.repo");
 
 const createJobPost = async (req, res) => {
   try {
