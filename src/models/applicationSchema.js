@@ -6,7 +6,7 @@ var applicationSchema = new mongoose.Schema(
   {
     studentId: {
       type: Schema.Types.ObjectId,
-      ref: "student",
+      ref: "user",
       required: true,
     },
     jobId: {

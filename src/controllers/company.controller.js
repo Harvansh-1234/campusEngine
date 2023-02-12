@@ -1,14 +1,9 @@
 // create Job post
 
-<<<<<<< HEAD
 const { getJobByQueryRepo, getJobInfo } = require("../repository/jobs.repo");
 const { createOffCampusJobPostRepo } = require("../repository/quiz.repo");
 const { serverErrorResponse, successResponse } = require("../utils/response");
-=======
-const { getJobByQueryRepo ,createJobPostRepo} = require("../repository/jobs.repo");
-const { createOffCampusJobPostRepo } = require("../repository/quiz.repo");
-const { serverErrorResponse,successResponse } = require("../utils/response");
->>>>>>> 81c9321fe6482a3fdbd19ea4ef5fbe21b638e971
+const {  createJobPostRepo} = require("../repository/jobs.repo");
 
 const createJobPost = async (req, res) => {
   try {
