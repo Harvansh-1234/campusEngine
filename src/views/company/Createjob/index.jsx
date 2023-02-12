@@ -39,6 +39,7 @@ function CreateJob() {
     const animatedComponents = makeAnimated();
     const [branch, setBranch] = useState([]);
     const [batch, setBatch] = useState([]);
+    const [skills, setSkills] = useState([]);
 
     const options = [
         { value: 'CSE', label: 'CSE' },
@@ -49,6 +50,11 @@ function CreateJob() {
         { value: '2022', label: '2022' },
         { value: '2023', label: '2023' },
         { value: '2024', label: '2024' }
+    ]
+    const skillsOption = [
+        { value: 'MERN', label: 'MERN' },
+        { value: 'React', label: 'React' },
+        { value: 'C++', label: 'C++' }
     ]
 
     useEffect(() => {
@@ -92,10 +98,12 @@ function CreateJob() {
                     batch.map((item) => tempBatch.push(item.value));
                     const tempBranch = [];
                     branch.map((item) => tempBranch.push(item.value));
+                    const tempSkills = [];
+                    skills.map((item) => tempSkills.push(item.value));
 
 
                     const token = localStorage.getItem("token");
-                    const data = await createJob(token, { ...values,jobStatus:"open", branchEligible: tempBranch, batchEligible: tempBatch, jobCreator: user._id });
+                    const data = await createJob(token, { ...values,jobStatus:"open", branchEligible: tempBranch, batchEligible: tempBatch, jobCreator: user._id ,jobSkillsArray:tempSkills});
                     console.log(data);
                     if (data.data.status === 200) {
                         // alert("Job Created Successfully");
@@ -186,6 +194,23 @@ function CreateJob() {
                                 // defaultValue={[colourOptions[4], colourOptions[5]]}
                                 isMulti
                                 options={Batchoptions}
+                            />
+                        </div>
+
+
+                    </div>
+                    <div className='headField'>
+                        <div className='field' >
+                            <label htmlFor="batchEligible">Skills Required</label>
+                            <Select
+                                onChange={(e) => {
+                                    setSkills(e);
+                                }}
+                                closeMenuOnSelect={false}
+                                components={animatedComponents}
+                                // defaultValue={[colourOptions[4], colourOptions[5]]}
+                                isMulti
+                                options={skillsOption}
                             />
                         </div>
 
