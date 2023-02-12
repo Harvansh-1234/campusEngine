@@ -43,7 +43,13 @@ function SignIn() {
     if(userdata.data.code==200){
       localStorage.setItem("token", userdata.data.data.token);
       localStorage.setItem("user", JSON.stringify(userdata.data.data));
+      if(userdata.data.data.userType=='company')
+      window.location.replace('http://localhost:3000/#/company/default');
+      else if(userdata.data.data.userType=='user')
       window.location.replace('http://localhost:3000/#/user/default');
+      else
+      window.location.replace('http://localhost:3000/#/rtl/rtl-default');
+
     }
   };
 
