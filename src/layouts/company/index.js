@@ -92,6 +92,7 @@ export default function Dashboard(props) {
       if (prop.layout === "/company") {
         return (
           <Route
+          hide={prop.hide}
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
