@@ -25,6 +25,7 @@ ReactDOM.render(
             <Route path={`/auth/sign-up/default`} component={SignUp} />
             <Route path={`/rtl`} component={RtlLayout} />
             <Route path={`/company`} component={CompanyLayout} />
+            {/* <Route path={`/company/jobDetails/:id`} component={CompanyLayout} /> */}
             <Route from='/' component={Landing} />
           </Switch>
         </HashRouter>
