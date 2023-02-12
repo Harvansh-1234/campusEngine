@@ -11,10 +11,13 @@ const {
   getAllQuiz,
   getAllEligibleJobs,
 } = require("../controllers/user.controller");
-const { userValidate } = require("../middlewares/authmiddleware");
+const {
+  userValidate,
+  commonValidate,
+} = require("../middlewares/authmiddleware");
 const router = express.Router();
 
-router.get("/getUserInfo", userValidate, userInfo);
+router.get("/getUserInfo", commonValidate, userInfo);
 router.post("/updateUserInfo", userValidate, updateUserInfo);
 router.post("/createResume", userValidate, createResume);
 router.post("/createQuiz", userValidate, createQuiz);
