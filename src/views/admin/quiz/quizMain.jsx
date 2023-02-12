@@ -8,7 +8,8 @@ function QuizMain() {
   const location = useLocation();
   const [second, setSecond] = useState(localStorage.getItem('sd')? localStorage.getItem('sd'):500);
   const [checkSubmit, setCheckSubmit] = useState(false);
-  const [data, setData] = useState()
+  const [data, setData] = useState();
+  const [answered, setAnswered] = useState([]);
   useEffect(() => {
     const initial = async () => {
       // var currenturl=window.location.search;
@@ -17,7 +18,7 @@ function QuizMain() {
       let token = localStorage.getItem('token');
       let title = localStorage.getItem('quizName');
       let quizData= await getQuiz(token,title);
-      console.log(quizData.data.data[0]);
+      console.log(quizData.data.data);
       setData(quizData.data.data[0].quizQuestions);
 
     }
@@ -42,7 +43,7 @@ function QuizMain() {
         {
           data ? data.map((item,id)=>{
             return(
-              <QuesCard item={item} id={id+1}/>
+              <QuesCard item={item} id={id+1} setAnswered={setAnswered} answered={answered}/>
             );
           }):null
         }
@@ -59,7 +60,7 @@ function QuizMain() {
           }}>Submit</button>
         </div>
       </div>:
-      <Submit/>
+      <Submit answered={answered}/>
       }
       
     </div>

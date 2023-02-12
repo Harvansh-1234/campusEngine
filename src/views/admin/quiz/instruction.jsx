@@ -8,7 +8,7 @@ import "assets/css/quiz.css";
 import { getQuiz } from "service/api";
 import { Link } from "react-router-dom";
 function Instruction() {
-  const [data, setData] = useState()
+  const [data, setData] = useState();
   useEffect(() => {
     const initial = async () => {
       // var currenturl=window.location.search;
