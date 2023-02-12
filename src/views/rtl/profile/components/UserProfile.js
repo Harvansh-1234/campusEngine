@@ -19,11 +19,13 @@ function UserProfile() {
       // console.log(userData);
       if (userData.status === 200);
       setUser(userData.data.data);
-      // console.log(user);
+      
 
     }
     initial();
-}, [])
+
+
+  }, [])
   return (
     <div className='userDetail'>
       <Formik
@@ -43,7 +45,7 @@ function UserProfile() {
         <Form>
           <div className='headField'>
             <div className='field'>
-              <label htmlFor="companyName">Company Name</label>
+              <label htmlFor="companyName">Name</label>
               <Field id="companyName" name="companyName" placeholder="" value={user.companyName} disabled />
             </div>
             

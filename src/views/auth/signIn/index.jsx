@@ -48,7 +48,7 @@ function SignIn() {
       else if(userdata.data.data.userType=='user')
       window.location.replace('http://localhost:3000/#/user/default');
       else
-      window.location.replace('http://localhost:3000/#/rtl/rtl-default');
+      window.location.replace('http://localhost:3000/#/tnp/default');
 
     }
   };

@@ -32,21 +32,14 @@ const companyRoutes = [
         component: Profile,
         hide:false,
     },
-    {
-        name: "Students",
-        layout: "/company",
-        path: "/students",
-        icon: <Icon as={MdList} width='20px' height='20px' color='inherit' />,
-        component: Students,
-        hide:false,
-    },
+   
     {
         name: "Create Jobs",
         layout: "/company",
         path: "/createjobs",
         icon: <Icon as={MdList} width='20px' height='20px' color='inherit' />,
         component: CreateJob,
-        hide:true,
+        hide:false,
     },
     {
         name: "Posted Jobs",

@@ -123,4 +123,25 @@ export const getJobDetail = async (token, id) => {
         }
     }
 
+    // TNP
+
+    // get Students
+    export const getStudents = async () => {
+        try {
+            // console.log(data);
+            return await axios.get(`${url}/api/user/getstudents`);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    export const applyJob = async (token,data) => {
+        try {
+            console.log(data);
+            return await axios.post(`${url}/api/user/applyJob`,data,{ headers: { authorization: token } });
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 

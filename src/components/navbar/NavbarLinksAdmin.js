@@ -1,4 +1,5 @@
 // Chakra Imports
+
 import {
 	Avatar,
 	Flex,
@@ -8,16 +9,18 @@ import {
 	MenuItem,
 	MenuList,
 	Text,
-	useColorModeValue
+	useColorModeValue,
+	Button
 } from '@chakra-ui/react';
 import { SearchBar } from 'components/navbar/searchBar/SearchBar';
 import { SidebarResponsive } from 'components/sidebar/Sidebar';
 import PropTypes from 'prop-types';
-import React from 'react';
-import { MdNotificationsNone} from 'react-icons/md';
+import React, { useEffect, useState } from 'react';
+import { MdNotificationsNone } from 'react-icons/md';
 import { FaEthereum } from 'react-icons/fa';
 import routes from 'routes.js';
 export default function HeaderLinks(props) {
+	const [user, setUser] = useState({});
 	const { secondary } = props;
 	// Chakra Color Mode
 	const navbarIcon = useColorModeValue('gray.400', 'white');
@@ -32,6 +35,12 @@ export default function HeaderLinks(props) {
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.18)',
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.06)'
 	);
+	useEffect(() => {
+
+
+	const userData = JSON.parse(localStorage.getItem('user'));
+	setUser(userData);
+	}, []);
 	return (
 		<Flex
 			w={{ sm: '100%', md: 'auto' }}
@@ -54,13 +63,13 @@ export default function HeaderLinks(props) {
 				<Flex align="center" justify="center" bg={ethBox} h="29px" w="29px" borderRadius="30px" me="7px">
 					<Icon color={ethColor} w="9px" h="14px" as={FaEthereum} />
 				</Flex>
-				<Text w="max-content" color={ethColor} fontSize="sm" fontWeight="700" me="6px">
+				{/* <Text w="max-content" color={ethColor} fontSize="sm" fontWeight="700" me="6px">
 					1,924
 					<Text as="span" display={{ base: 'none', md: 'unset' }}>
 						{' '}
 						ETH
 					</Text>
-				</Text>
+				</Text> */}
 			</Flex>
 			<SidebarResponsive routes={routes} />
 			<Menu>
@@ -95,7 +104,7 @@ export default function HeaderLinks(props) {
 					<Avatar
 						_hover={{ cursor: 'pointer' }}
 						color="white"
-						name="Adela Parkson"
+						name=""
 						bg="#11047A"
 						size="sm"
 						w="40px"
@@ -114,12 +123,12 @@ export default function HeaderLinks(props) {
 							fontSize="sm"
 							fontWeight="700"
 							color={textColor}>
-							👋&nbsp; Hey, Adela
+							👋&nbsp; Hey,{user.userType==='user' ? user.firstName : user.companyName};
 						</Text>
 					</Flex>
 					<Flex flexDirection="column" p="10px">
 						<MenuItem _hover={{ bg: 'none' }} _focus={{ bg: 'none' }} borderRadius="8px" px="14px">
-							<Text fontSize="sm">Profile Settings</Text>
+							<Text fontSize="sm">Profile</Text>
 						</MenuItem>
 						<MenuItem
 							_hover={{ bg: 'none' }}
@@ -127,7 +136,10 @@ export default function HeaderLinks(props) {
 							color="red.400"
 							borderRadius="8px"
 							px="14px">
-							<Text fontSize="sm">Log out</Text>
+							<Button fontSize="sm" onClick={() => {
+								localStorage.removeItem("user")
+								localStorage.removeItem("token");
+							}}>Log out</Button>
 						</MenuItem>
 					</Flex>
 				</MenuList>
