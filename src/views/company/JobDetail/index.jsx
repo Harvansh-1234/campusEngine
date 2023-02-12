@@ -35,7 +35,7 @@ const [data, setData] = useState();
            setStudents(getStudents.data.data);
         }
         initial();
-    },[]);
+    },[data]);
   return (
     <div>
   

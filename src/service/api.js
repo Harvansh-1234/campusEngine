@@ -122,6 +122,14 @@ export const getJobDetail = async (token, id) => {
             console.log(error)
         }
     }
+    export const getCompany = async (token, data) => {
+        try {
+            console.log(data);
+            return await axios.get(`${url}/api/company/getCompany`);
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     // TNP
 
@@ -155,6 +163,24 @@ export const getJobDetail = async (token, id) => {
         try {
             console.log(data);
             return await axios.get(`${url}/api/user/getAllOffCampusJobs`,{headers: { authorization: data }});
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    //get all jobs
+    export const getAllJobs = async (token,data) => {
+        try {
+            console.log(data);
+            return await axios.post(`${url}/api/company/getAllJobs`,data,{headers: { authorization: token }});
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    export const updateJob = async (token,data) => {
+        try {
+            console.log(data);
+            return await axios.post(`${url}/api/company/updateJobStatus`,data,{headers: { authorization: token }});
         } catch (error) {
             console.log(error)
         }

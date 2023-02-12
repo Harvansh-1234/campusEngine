@@ -3,16 +3,16 @@ import { NavLink } from "react-router-dom";
 import "assets/css/logIn.css";
 // Chakra imports
 import {
-  Box,
+  
   Button,
   Text,
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
 import DefaultAuth from "layouts/auth/Default";
-import { FcGoogle } from "react-icons/fc";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { RiEyeCloseLine } from "react-icons/ri";
+// import { FcGoogle } from "react-icons/fc";
+// import { MdOutlineRemoveRedEye } from "react-icons/md";
+// import { RiEyeCloseLine } from "react-icons/ri";
 import { Formik } from "formik";
 import { signIn } from "../../../service/api";
 
@@ -22,30 +22,30 @@ function SignIn() {
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
-  const brandStars = useColorModeValue("brand.500", "brand.400");
-  const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
-  const googleText = useColorModeValue("navy.700", "white");
-  const googleHover = useColorModeValue(
-    { bg: "gray.200" },
-    { bg: "whiteAlpha.300" }
-  );
-  const googleActive = useColorModeValue(
-    { bg: "secondaryGray.300" },
-    { bg: "whiteAlpha.200" }
-  );
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
+  // const brandStars = useColorModeValue("brand.500", "brand.400");
+  // const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
+  // const googleText = useColorModeValue("navy.700", "white");
+  // const googleHover = useColorModeValue(
+  //   { bg: "gray.200" },
+  //   { bg: "whiteAlpha.300" }
+  // );
+  // const googleActive = useColorModeValue(
+  //   { bg: "secondaryGray.300" },
+  //   { bg: "whiteAlpha.200" }
+  // );
+  // const [show, setShow] = React.useState(false);
+  // const handleClick = () => setShow(!show);
 
   const handleSubmit = async (values) => {
     console.log(values);
     const userdata = await signIn(values);
     console.log(userdata);
-    if(userdata.data.code==200){
+    if(userdata.data.code===200){
       localStorage.setItem("token", userdata.data.data.token);
       localStorage.setItem("user", JSON.stringify(userdata.data.data));
-      if(userdata.data.data.userType=='company')
+      if(userdata.data.data.userType==='company')
       window.location.replace('http://localhost:3000/#/company/default');
-      else if(userdata.data.data.userType=='user')
+      else if(userdata.data.data.userType==='user')
       window.location.replace('http://localhost:3000/#/user/default');
       else
       window.location.replace('http://localhost:3000/#/tnp/default');
