@@ -22,6 +22,7 @@ var applicationSchema = new mongoose.Schema(
         "tnprejected",
         "companyapproved",
         "companyrejected",
+        "applied",
         "selected",
       ],
       required: true,
