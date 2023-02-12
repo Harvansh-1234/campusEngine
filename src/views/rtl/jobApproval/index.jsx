@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
-import { Button,Image,Text,Heading,Stack,Divider,ButtonGroup ,Flex } from '@chakra-ui/react';
+// import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
+import { Button,Text } from '@chakra-ui/react';
 import 'assets/css/quiz.css'
 import { listCompanyJob } from '../../../service/api';
 import { Link } from 'react-router-dom';

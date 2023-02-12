@@ -4,7 +4,7 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
+  
   Tr,
   Th,
   Td,
@@ -34,7 +34,7 @@ const [data, setData] = useState();
            setStudents(getStudents.data.data);
         }
         initial();
-    },[]);
+    },[data]);
   return (
     <div>
   
