@@ -73,7 +73,7 @@ server.listen(PORT, async () => {
 });
 
 //
-// unverified jobs aat tnp
-// verfy pe verify kardo
+// unverified jobs aat tnp ''''''' done
+// verfy pe verify kardo   '''''''
 // verified jobs listing for user  ''''''
 // list off camous jobs '''''' done

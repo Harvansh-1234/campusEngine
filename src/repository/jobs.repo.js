@@ -1,6 +1,6 @@
 const Application = require("../models/applicationSchema");
 const Job = require("../models/jobSchema");
-const OffCampus = require("../models/applicationSchema");
+const OffCampus = require("../models/offcampusSchema");
 
 const createJobPostRepo = async (data) => {
   try {
@@ -94,7 +94,8 @@ const updateJobPostRepo = async (query, data) => {
 
 const getAllOffCampusJobs = async (query) => {
   try {
-    let offCampusJobs = await OffCampus.find(query);
+    let offCampusJobs = await OffCampus.find(query).limit(10);
+    console.log(`here is the list of jobs i am ${offCampusJobs}`);
     return [null, offCampusJobs];
   } catch (err) {
     let errObj = {
