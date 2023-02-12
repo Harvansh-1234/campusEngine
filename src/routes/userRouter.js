@@ -28,5 +28,5 @@ router.post("/getQuiz", userValidate, getQuiz);
 router.get("/getAppliedJobs", userValidate, getAppliedJobs);
 router.get("/getAllQuiz", userValidate, getAllQuiz);
 router.get("/getAllEligibleJobs", userValidate, getAllEligibleJobs);
-router.get("/getAppliedJobs", userValidate, applyJob);
+router.get("/applyJob", userValidate, applyJob);
 module.exports = router;
