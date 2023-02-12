@@ -48,7 +48,7 @@ const getstudents = async (req, res) => {
       }
       if (users.length === 0) {
         return notFoundResponse(res, "User not found");
-      } 
+      }
       return successResponse(res, users, "User info");
     });
   } catch (err) {
@@ -211,6 +211,7 @@ const getAllEligibleJobs = async (req, res) => {
     let query = {
       batchEligible: { $in: batch },
       branchEligible: { $in: branch },
+      approvalStatus: "approved",
     };
     console.log(query);
     let [err, jobs] = await getJobByQueryRepo(query);
