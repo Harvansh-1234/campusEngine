@@ -19,6 +19,7 @@ import React, { useEffect, useState } from 'react';
 import { MdNotificationsNone } from 'react-icons/md';
 import { FaEthereum } from 'react-icons/fa';
 import routes from 'routes.js';
+import { Link } from 'react-router-dom';
 export default function HeaderLinks(props) {
 	const [user, setUser] = useState({});
 	const { secondary } = props;
@@ -136,10 +137,11 @@ export default function HeaderLinks(props) {
 							color="red.400"
 							borderRadius="8px"
 							px="14px">
+								<Link to="/" >
 							<Button fontSize="sm" onClick={() => {
 								localStorage.removeItem("user")
 								localStorage.removeItem("token");
-							}}>Log out</Button>
+							}}>Log out</Button></Link>
 						</MenuItem>
 					</Flex>
 				</MenuList>
