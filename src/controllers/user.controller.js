@@ -13,7 +13,10 @@ const {
   getQuizByQueryRepo,
   createQuizRepo,
 } = require("../repository/quiz.repo");
-const { getJobByQueryRepo } = require("../repository/jobs.repo");
+const {
+  getJobByQueryRepo,
+  createApplicationRepo,
+} = require("../repository/jobs.repo");
 
 const userInfo = async (req, res) => {
   try {
@@ -205,25 +208,17 @@ const getAllEligibleJobs = async (req, res) => {
 
 const applyJob = async (req, res) => {
   try {
-
-    let [err, user] = await createJobApplicationRepo(req.body);
+    let [err, application] = await createApplicationRepo(req.body);
     if (err) {
       console.log(`Error in apply job: ${err.message}`);
       return serverErrorResponse(res, err.message);
     }
-    return successResponse(res, user, "Job applied");
+    return successResponse(res, application, "Job applied");
   } catch (err) {
     console.log(err);
     return serverErrorResponse(res, err.message);
   }
 };
-
-
-
-
-
-
-    
 
 module.exports = {
   userInfo,
@@ -236,6 +231,5 @@ module.exports = {
   getAppliedJobs,
   getAllQuiz,
   getAllEligibleJobs,
+  applyJob,
 };
-
-
