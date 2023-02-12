@@ -151,5 +151,13 @@ export const getJobDetail = async (token, id) => {
             console.log(error)
         }
     }
+    export const getAllOffCampusJobs = async (data) => {
+        try {
+            console.log(data);
+            return await axios.get(`${url}/api/user/getAllOffCampusJobs`,{headers: { authorization: data }});
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
