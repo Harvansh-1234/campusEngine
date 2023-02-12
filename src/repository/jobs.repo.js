@@ -21,7 +21,7 @@ const getJobByQueryRepo = async (query) => {
     let applications = await Application.find(query);
     let appArr = new Array();
     applications.forEach((app) => {
-        appArr.push(app.jobId);
+      appArr.push(app.jobId);
     });
     let job = await Job.find({ _id: { $nin: appArr } });
 
@@ -35,7 +35,21 @@ const getJobByQueryRepo = async (query) => {
   }
 };
 
+// getJob info
+const getJobInfo = async (query) => {
+  try {
+    let job = await Job.find(query);
+    return [null, job];
+  } catch (err) {
+    let errObj = {
+      status: 500,
+      message: err.message || "Some error occurred while getting the Job.",
+    };
+    return [errObj, null];
+  }
+};
 module.exports = {
   createJobPostRepo,
   getJobByQueryRepo,
+  getJobInfo,
 };

@@ -1,8 +1,8 @@
 // create Job post
 
-const { getJobByQueryRepo } = require("../repository/jobs.repo");
+const { getJobByQueryRepo, getJobInfo } = require("../repository/jobs.repo");
 const { createOffCampusJobPostRepo } = require("../repository/quiz.repo");
-const { serverErrorResponse } = require("../utils/response");
+const { serverErrorResponse, successResponse } = require("../utils/response");
 
 const createJobPost = async (req, res) => {
   try {
@@ -23,7 +23,7 @@ const createJobPost = async (req, res) => {
 const getJobPost = async (req, res) => {
   try {
     // get job post
-    let [err1, jobPost1] = await getJobByQueryRepo({
+    let [err1, jobPost1] = await getJobInfo({
       _id: req.body.jobId,
     });
     if (err1) {
