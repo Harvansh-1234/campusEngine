@@ -1,9 +1,9 @@
 import React from 'react'
 import { Formik, Field, Form } from 'formik';
 import 'assets/css/resume.css';
-                                                                                                                                                                                                                                                                                                                                    import { useEffect, useState } from 'react';
-import {  getResume } from '../../../service/api'
-import { Select } from '@chakra-ui/react'
+import { useEffect, useState, useRef } from 'react';
+import { getResume } from '../../../service/api'
+import { Select, Flex } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
 import 'assets/css/logIn.css'
 import {
@@ -27,6 +27,8 @@ import {
 } from '@chakra-ui/react'
 import { updateResume } from '../../../service/api';
 import WorkExperience from './workExp';
+import { useReactToPrint } from "react-to-print";
+import Printui from '../printui';
 // import Select from 'react-select'
 function UserProfile() {
     const [user, setUser] = useState({});
@@ -39,6 +41,12 @@ function UserProfile() {
     //     { value: 'java', label: 'Java' },
     //     { value: 'python', label: 'Python' }
     // ]
+    const [print, setprint] = useState(false);
+    const componentRef = useRef();
+    const openPdf = useReactToPrint({
+        content: () => componentRef.current,
+        documentTitle: "Evaluation Report"
+    })
     const [page, setPage] = useState(1);
     const [edu, setEdu] = useState([]);
     const [eduinitialValues, setEduInitialValues] = useState({
@@ -60,9 +68,9 @@ function UserProfile() {
             // console.log(userData);
             if (userData.status === 200);
             setResume(userData.data.data[0]);
-             setCollege(userData.data.data[0].college !== undefined ? userData.data.data[0].college :"");
-            setBranch(userData.data.data[0].branch !==undefined ? userData.data.data[0].branch:"");
-            setEdu(userData.data.data[0] ? userData.data.data[0].education:"");
+            setCollege(userData.data.data[0].college !== undefined ? userData.data.data[0].college : "");
+            setBranch(userData.data.data[0].branch !== undefined ? userData.data.data[0].branch : "");
+            setEdu(userData.data.data[0] ? userData.data.data[0].education : "");
             console.log(userData);
 
         }
@@ -71,8 +79,13 @@ function UserProfile() {
 
     }, [])
     return (
-        <div className='userDetail' style={{ marginTop: "70px", width: "80%" }}>
-
+        <div className='userDetail' style={{ marginTop: "70px", width: "80%" }} >
+            <Button colorScheme='blue' mx='35%' borderRadius='5px' onClick={() => {
+                setprint(true);
+                openPdf()
+            }}>Print</Button>{print && <div ref={componentRef}>
+                <Printui />
+            </div>}
             {page === 1 && resume && <Formik
                 initialValues={{
                     firstName: resume.name ? resume.name.first : '',
@@ -94,17 +107,17 @@ function UserProfile() {
                     values.branch = branch;
                     values.college = college;
                     console.log(values);
-                //   const updateuser = await updateUser(token, { branch: branch, year:values.year ? values.year : resume.year });
+                    //   const updateuser = await updateUser(token, { branch: branch, year:values.year ? values.year : resume.year });
 
 
 
-                    const updateresume = await updateResume(token, { degree: values.degree ? values.degree : resume.degree, year: values.year ? values.year : resume.year, admissionYear: values.admission_year? values.admission_year : resume.admission_year, education: edu, branch: branch, college: college });
+                    const updateresume = await updateResume(token, { degree: values.degree ? values.degree : resume.degree, year: values.year ? values.year : resume.year, admissionYear: values.admission_year ? values.admission_year : resume.admission_year, education: edu, branch: branch, college: college });
                     console.log(updateresume);
                     // await new Promise((r) => setTimeout(r, 500));
                     // alert(JSON.stringify(values, null, 2));
                 }}
             >
-                <Form style={{ margin: "25px", padding: "25px" }}>
+                <Form style={{ margin: "25px", padding: "25px" }} >
                     <div className='headField'>
                         <div className='field' >
                             <label htmlFor="firstName">First Name</label>
@@ -205,6 +218,8 @@ function UserProfile() {
           </div> */}
 
                     <Button colorScheme='blue' mx='45%' borderRadius='5px' type="submit">Save and Next</Button>
+
+
                 </Form>
             </Formik>
             }
@@ -216,7 +231,7 @@ function UserProfile() {
                             resume !== undefined &&
                             edu.map((item, index) => {
                                 return (
-                                    <div style={{position:"relative"}}>
+                                    <div style={{ position: "relative" }}>
                                         <div className="question">
                                             <Text fontSize="xl" fontWeight="bold" >{item.school}</Text>
                                             <Text fontSize="md" fontWeight="bold" >{item.degree}</Text>
@@ -238,13 +253,13 @@ function UserProfile() {
                                                 setResume(res);
                                                 localStorage.setItem("resume", JSON.stringify(res));
                                             }}
-                                        style={{position:"absolute",top:"3%",left:"76%"}} />
+                                            style={{ position: "absolute", top: "3%", left: "76%" }} />
                                     </div>
 
                                 );
                             })}
                         <div style={{ display: "flex", margin: "auto" }}>
-                            <Button style={{position:'relative' , left:'40%',marginTop:'10px'}}
+                            <Button style={{ position: 'relative', left: '40%', marginTop: '10px' }}
                                 colorScheme='blue'
                                 borderRadius='5px'
                                 mx="15px"
@@ -334,17 +349,17 @@ function UserProfile() {
                                                         <div className='headField'>
                                                             <div className='field' >
                                                                 <label htmlFor="school">School</label>
-                                                                <Field id="school" name="school" placeholder="" className="loginInput1"/>
+                                                                <Field id="school" name="school" placeholder="" className="loginInput1" />
                                                             </div>
                                                             <div className='field'>
                                                                 <label htmlFor="degree">Degree</label>
-                                                                <Field id="degree" name="degree" placeholder="" value={user.lastName} className="loginInput1"/>
+                                                                <Field id="degree" name="degree" placeholder="" value={user.lastName} className="loginInput1" />
                                                             </div>
                                                         </div>
                                                         <div className='headField'>
                                                             <div className='field' >
                                                                 <label htmlFor="startDate">Start Date</label>
-                                                                <Field id="startDate" name="startDate" placeholder="" value={user.firstName} className="loginInput1"/>
+                                                                <Field id="startDate" name="startDate" placeholder="" value={user.firstName} className="loginInput1" />
                                                             </div>
                                                             <div className='field'>
                                                                 <label htmlFor="endDate">End Date</label>
@@ -354,11 +369,11 @@ function UserProfile() {
                                                         <div className='headField'>
                                                             <div className='field' >
                                                                 <label htmlFor="grade">Grade</label>
-                                                                <Field id="grade" name="grade" placeholder="" value={user.firstName} className="loginInput1"/>
+                                                                <Field id="grade" name="grade" placeholder="" value={user.firstName} className="loginInput1" />
                                                             </div>
                                                             <div className='field'>
                                                                 <label htmlFor="fieldOfStudy">Field of Study</label>
-                                                                <Field id="fieldOfStudy" name="fieldOfStudy" placeholder="" value={user.lastName} className="loginInput1"/>
+                                                                <Field id="fieldOfStudy" name="fieldOfStudy" placeholder="" value={user.lastName} className="loginInput1" />
                                                             </div>
                                                         </div>
                                                         <Button colorScheme='blue' mr={3} type="submit">

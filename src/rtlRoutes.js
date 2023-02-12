@@ -12,7 +12,9 @@ import RtlDashboard from "views/rtl/default";
 
 import Profile from "views/rtl/profile";
 import StudentList from "views/rtl/studentList";
+import Company from "views/rtl/company";
 import JobApproval from "views/rtl/jobApproval";
+import Approvedjobs from "views/rtl/approvedJobs";
 const rtlRoutes = [
 
   {
@@ -40,11 +42,27 @@ const rtlRoutes = [
     hide: false,
   },
   {
+    name: "Companies",
+    layout: "/tnp",
+    path: "/companies",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component: Company,
+    hide: false,
+  },
+  {
     name: "Job Approval",
     layout: "/tnp",
     path: "/jobapproval",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: JobApproval,
+    hide: false,
+  },
+  {
+    name: "Approved Jobs",
+    layout: "/tnp",
+    path: "/approvedjobs",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component: Approvedjobs,
     hide: false,
   },
 ];

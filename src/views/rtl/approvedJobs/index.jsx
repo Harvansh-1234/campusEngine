@@ -19,7 +19,7 @@ export default function PostedJobs() {
 
 
 
-            const jobs = await getAllJobs(token,{approvalStatus:"pending"});
+            const jobs = await getAllJobs(token,{approvalStatus:"approved"});
              setJobs(jobs.data.data);
             console.log(jobs);
 
@@ -44,7 +44,7 @@ export default function PostedJobs() {
                             <Text fontSize="1.1rem" fontWeight="bold" mt="10px"  style={{zIndex:"1"}} >Eligible Branch {job.branchEligible.map((item)=>{return <Text>-{item}</Text>})}</Text>
                             <Text fontSize="1.5rem" fontWeight="bold" style={{zIndex:"1",position:"absolute",left:"87%",top:"50%",color:"white"}} >{job.jobSalary}LPA</Text>
 
-                            <div style={{position:"absolute",right:"2%",bottom:"5%",zIndex:"1"}}>
+                            {/* <div style={{position:"absolute",right:"2%",bottom:"5%",zIndex:"1"}}>
                             <Button  mr="0" borderRadius='5px' mx="5px" onClick={async()=>{
                                 const approve = await updateJob(token,{approvalStatus:"approved",jobId:job._id});
                                 if(approve.status === 200){
@@ -58,7 +58,7 @@ export default function PostedJobs() {
                                     window.location.reload();
                                 }
                             } }>Reject</Button>
-                            </div>
+                            </div> */}
 
                             </div>
                     </div>
