@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, Field, Form } from 'formik';
 import 'assets/css/resume.css';
-import { useEffect, useState } from 'react';
+                                                                                                                                                                                                                                                                                                                                    import { useEffect, useState } from 'react';
 import { getUserInfo, getResume } from '../../../service/api'
 import { Select } from '@chakra-ui/react'
 import { FiInfo } from "react-icons/fi";
@@ -215,7 +215,7 @@ function UserProfile() {
                             resume !== undefined &&
                             edu.map((item, index) => {
                                 return (
-                                    <div>
+                                    <div style={{position:"relative"}}>
                                         <div className="question">
                                             <Text fontSize="xl" fontWeight="bold" >{item.school}</Text>
                                             <Text fontSize="md" fontWeight="bold" >{item.degree}</Text>
@@ -237,13 +237,13 @@ function UserProfile() {
                                                 setResume(res);
                                                 localStorage.setItem("resume", JSON.stringify(res));
                                             }}
-                                        />
+                                        style={{position:"absolute",top:"3%",left:"76%"}} />
                                     </div>
 
                                 );
                             })}
                         <div style={{ display: "flex", margin: "auto" }}>
-                            <Button
+                            <Button style={{position:'relative' , left:'40%',marginTop:'10px'}}
                                 colorScheme='blue'
                                 borderRadius='5px'
                                 mx="15px"
@@ -382,14 +382,14 @@ function UserProfile() {
                             </Modal>
 
                         )}
-                        <Button colorScheme='blue' mx='45%' borderRadius='5px' onClick={async () => {
+                        <Button colorScheme='blue' mx='43%' borderRadius='5px' onClick={async () => {
 
 
                             setPage(3);
 
                             const updateresume = await updateResume(token, { education: edu });
                             console.log(updateresume);
-                        }}>Save and Next</Button>
+                        }} >Save and Next</Button>
 
                     </div>
 
