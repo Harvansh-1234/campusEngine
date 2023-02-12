@@ -17,6 +17,7 @@ const User = require("../models/user");
 const {
   getJobByQueryRepo,
   createApplicationRepo,
+  getAllOffCampusJobs,
 } = require("../repository/jobs.repo");
 
 const userInfo = async (req, res) => {
@@ -239,6 +240,20 @@ const applyJob = async (req, res) => {
   }
 };
 
+const OffCampusJobPost = async (req, res) => {
+  try {
+    let [err, job] = await getAllOffCampusJobs({});
+    if (err) {
+      console.log(`Error in create job: ${err.message}`);
+      return serverErrorResponse(res, err.message);
+    }
+    return successResponse(res, job, "Job created");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
+
 module.exports = {
   userInfo,
   updateUserInfo,
@@ -252,4 +267,5 @@ module.exports = {
   getAllEligibleJobs,
   getstudents,
   applyJob,
+  OffCampusJobPost,
 };

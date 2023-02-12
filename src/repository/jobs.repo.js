@@ -1,5 +1,6 @@
 const Application = require("../models/applicationSchema");
 const Job = require("../models/jobSchema");
+const OffCampus = require("../models/applicationSchema");
 
 const createJobPostRepo = async (data) => {
   try {
@@ -75,10 +76,40 @@ const getApplicationByQueryRepo = async (query) => {
   }
 };
 
+// update job post
+const updateJobPostRepo = async (query, data) => {
+  try {
+    let job = await Job.findOneAndUpdate(query, data, {
+      new: true,
+    });
+    return [null, job];
+  } catch (err) {
+    let errObj = {
+      status: 500,
+      message: err.message || "Some error occurred while updating the Job.",
+    };
+    return [errObj, null];
+  }
+};
+
+const getAllOffCampusJobs = async (query) => {
+  try {
+    let offCampusJobs = await OffCampus.find(query);
+    return [null, offCampusJobs];
+  } catch (err) {
+    let errObj = {
+      status: 500,
+      message: err.message || "Some error occurred while getting the Job.",
+    };
+  }
+};
+
 module.exports = {
   createJobPostRepo,
   getJobByQueryRepo,
   getJobInfo,
   createApplicationRepo,
   getApplicationByQueryRepo,
+  updateJobPostRepo,
+  getAllOffCampusJobs,
 };
