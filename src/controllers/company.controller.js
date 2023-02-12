@@ -1,9 +1,14 @@
 // create Job post
 
-const { getJobByQueryRepo, getJobInfo } = require("../repository/jobs.repo");
+const {
+  getJobByQueryRepo,
+  getJobInfo,
+  getApplicationByQueryRepo,
+} = require("../repository/jobs.repo");
 const { createOffCampusJobPostRepo } = require("../repository/quiz.repo");
 const { serverErrorResponse, successResponse } = require("../utils/response");
-const {  createJobPostRepo} = require("../repository/jobs.repo");
+const { createJobPostRepo } = require("../repository/jobs.repo");
+const { getUserById } = require("../repository/user.repo");
 
 const createJobPost = async (req, res) => {
   try {
@@ -69,8 +74,35 @@ const listCompanyJobs = async (req, res) => {
   }
 };
 
+// get all applications for a job post
+const listJobApplications = async (req, res) => {
+  try {
+    // get all applications for a job post
+    let [err1, jobPost1] = await getApplicationByQueryRepo({
+      jobId: req.body.jobId,
+    });
+    if (err1) {
+      console.log(`Error in get job post: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+    let userArr = new Array();
+    for (let i = 0; i < jobPost1.length; i++) {
+      let [err2, user] = await getUserById(jobPost1[i].userId);
+      if (err2) {
+        console.log(`Error in get user by id: ${err2.message}`);
+        return serverErrorResponse(res, err2.message);
+      }
+      userArr.push(user);
+    }
+    return successResponse(res, userArr, "Job post fetched");
+  } catch (err) {
+    return serverErrorResponse(res, err.message);
+  }
+};
+
 module.exports = {
   createJobPost,
   getJobPost,
   listCompanyJobs,
+  listJobApplications,
 };

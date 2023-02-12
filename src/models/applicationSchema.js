@@ -29,13 +29,7 @@ var applicationSchema = new mongoose.Schema(
     },
     applicationDate: {
       type: Date,
-      required: true,
-      trim: true,
-    },
-    applicationDeadline: {
-      type: Date,
-      required: true,
-      trim: true,
+      default: Date.now,
     },
   },
   {

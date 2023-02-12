@@ -38,19 +38,17 @@ app.post("/uploadImage", upload.single("uploads"), (req, res) => {
   console.log(req.body);
   uploadImage(req.body.image)
     .then((url) => {
-      if(url){
+      if (url) {
         User.findOne({ email: req.body.email }).then((user) => {
-
           user.profileImg = url;
           user.save();
         });
-  
+
         res.send(url);
-      }else{
-        res.send("error in uploading image")
+      } else {
+        res.send("error in uploading image");
       }
       // find user by email and update the image url
-     
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -73,3 +71,9 @@ const server = http.createServer(app);
 server.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+//
+// unverified jobs aat tnp
+// verfy pe verify kardo
+// verified jobs listing for user

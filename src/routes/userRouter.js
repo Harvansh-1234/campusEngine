@@ -10,7 +10,8 @@ const {
   getAppliedJobs,
   getAllQuiz,
   getAllEligibleJobs,
-  getstudents
+  getstudents,
+  applyJob,
 } = require("../controllers/user.controller");
 const {
   userValidate,
@@ -29,4 +30,5 @@ router.get("/getAppliedJobs", userValidate, getAppliedJobs);
 router.get("/getAllQuiz", userValidate, getAllQuiz);
 router.get("/getAllEligibleJobs", userValidate, getAllEligibleJobs);
 router.get("/getstudents", getstudents);
+router.get("/applyJob", userValidate, applyJob);
 module.exports = router;
