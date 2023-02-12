@@ -56,7 +56,7 @@ function Navbar() {
                 </div>
             </div>
 
-            <nav style={{ overflow: "hidden" }}>
+            <nav className='nav' style={{ overflow: "hidden" }}>
                 <img style={{height:"100vh",marginTop:"5%",position:"relative",opacity:"0"}} className="navImgs" src={Slogo1} alt="" />
                 <div className='navlogoBW'>
                     <img src={logo} alt="" />
