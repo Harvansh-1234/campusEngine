@@ -49,7 +49,7 @@ export function SidebarLinks(props) {
       } else if (
         route.layout === "/user" ||
         route.layout === "/auth" ||
-        route.layout === "/rtl"||
+        route.layout === "/tnp"||
         route.layout === "/company"
       ) {
         return (

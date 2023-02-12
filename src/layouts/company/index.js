@@ -8,10 +8,21 @@ import { SidebarContext } from "contexts/SidebarContext";
 import React, {useState, useEffect } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "companyRoutes.js";
-
+import { getUserInfo } from "service/api";
 export default function Dashboard(props) {
   const { ...rest } = props;
+  useEffect(() => {
+    const initial = async () => {
+      let token = localStorage.getItem('token');
+      let data= await getUserInfo(token);
+      console.log(data.data.data.userType);
+      if(data.data.data.userType != 'company'){
+        window.location.href = '/';
+      }
 
+    }
+    initial();
+}, [])
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const getRoute = () => {

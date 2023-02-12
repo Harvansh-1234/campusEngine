@@ -5,19 +5,31 @@ import Footer from "components/footer/FooterAdmin.js";
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
 import { SidebarContext } from "contexts/SidebarContext";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "rtlRoutes.js";
+import { getUserInfo } from "service/api";
 
-// Custom Chakra theme
 export default function Dashboard(props) {
+  useEffect(() => {
+    const initial = async () => {
+      let token = localStorage.getItem('token');
+      let data= await getUserInfo(token);
+      console.log(data.data.data.userType);
+      if(data.data.data.userType != 'admin'){
+        window.location.href = '/';
+      }
+
+    }
+    initial();
+}, [])
   const { ...rest } = props;
   // states and functions
   const [fixed] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // functions for changing the states from components
   const getRoute = () => {
-    return window.location.pathname !== "/rtl/full-screen-maps";
+    return window.location.pathname !== "/tnp/full-screen-maps";
   };
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text";
@@ -90,7 +102,8 @@ export default function Dashboard(props) {
   };
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/rtl") {
+      console.log("rtl")
+      if (prop.layout === "/tnp") {
         console.log(prop.layout);
         return (
           <Route
@@ -157,7 +170,7 @@ export default function Dashboard(props) {
               pt='50px'>
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from='/' to='/rtl/default' />
+                <Redirect from='/' to='/tnp/default' />
               </Switch>
             </Box>
           ) : null}
