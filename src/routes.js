@@ -13,6 +13,7 @@ import Profile from "views/admin/profile";
 import Question from "views/admin/quiz/QuizMain"
 import Resume from "views/admin/resume"
 import OnCampus from "views/admin/onCampus";
+import OffCampus from "views/admin/offCampus";
 
 const routes = [
   {
@@ -70,6 +71,14 @@ const routes = [
     path: "/oncampusjobs",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: OnCampus,
+    hide:false,
+  },
+  {
+    name: "Off Campus Jobs",
+    layout: "/user",
+    path: "/offcampusjobs",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: OffCampus,
     hide:false,
   },
 ];
