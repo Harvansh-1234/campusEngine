@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const url = "http://localhost:8000";
+export const url = "https://campus-engine.onrender.com";
 //auth
 
 export const signIn = async (data) => {
