@@ -5,7 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const multer = require("multer");
-require("./crontask/scrapper");
+// require("./crontask/scrapper");
 const app = express();
 app.use(cors());
 // importing routes
