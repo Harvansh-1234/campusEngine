@@ -1,3 +1,4 @@
+const Application = require("../models/applicationSchema");
 const Job = require("../models/jobSchema");
 
 const createJobPostRepo = async (data) => {
@@ -17,7 +18,13 @@ const createJobPostRepo = async (data) => {
 // get job post by query
 const getJobByQueryRepo = async (query) => {
   try {
-    let job = await Job.find(query);
+    let applications = await Application.find(query);
+    let appArr = new Array();
+    applications.forEach((app) => {
+        appArr.push(app.jobId);
+    });
+    let job = await Job.find({ _id: { $nin: appArr } });
+
     return [null, job];
   } catch (err) {
     let errObj = {

@@ -13,6 +13,7 @@ const {
   getQuizByQueryRepo,
   createQuizRepo,
 } = require("../repository/quiz.repo");
+const { getJobByQueryRepo } = require("../repository/jobs.repo");
 
 const userInfo = async (req, res) => {
   try {
@@ -95,7 +96,7 @@ const createQuiz = async (req, res) => {
 const getQuiz = async (req, res) => {
   try {
     // get quiz
-    let [err1, quiz1] = await getQuizByQueryRepo({ title: req.body.title });
+    let [err1, quiz1] = await getQuizByQueryRepo({ quizName: req.body.title });
     if (err1) {
       console.log(`Error in get quiz: ${err1.message}`);
       return serverErrorResponse(res, err1.message);
@@ -146,6 +147,60 @@ const getResume = async (req, res) => {
   }
 };
 
+const getAppliedJobs = async (req, res) => {
+  try {
+    let [err, jobs] = await getJobByQueryRepo({ studentId: req.userId });
+    if (err) {
+      console.log(`Error in get jobs: ${err.message}`);
+      return serverErrorResponse(res, err.message);
+    }
+    return successResponse(res, jobs, "Jobs fetched");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
+
+const getAllQuiz = async (req, res) => {
+  try {
+    let [err, quiz] = await getQuizByQueryRepo({});
+    if (err) {
+      console.log(`Error in get quiz: ${err.message}`);
+      return serverErrorResponse(res, err.message);
+    }
+    return successResponse(res, quiz, "Quiz fetched");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
+
+const getAllEligibleJobs = async (req, res) => {
+  try {
+    let [err1, user] = await getUserById(req.userId);
+    if (err1) {
+      console.log(`Error in get user by id: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+    if (user.length === 0) return notFoundResponse(res, "User not found");
+    let batch = [user[0].year];
+    let branch = [user[0].branch];
+    let query = {
+      batchEligible: { $in: batch },
+      branchEligible: { $in: branch },
+    };
+    let [err, jobs] = await getJobByQueryRepo(query);
+    if (err) {
+      console.log(`Error in get jobs: ${err.message}`);
+      return serverErrorResponse(res, err.message);
+    }
+    return successResponse(res, jobs, "Jobs fetched");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
+
 module.exports = {
   userInfo,
   updateUserInfo,
@@ -154,4 +209,7 @@ module.exports = {
   getQuiz,
   updateResumeByStudentId,
   getResume,
+  getAppliedJobs,
+  getAllQuiz,
+  getAllEligibleJobs,
 };

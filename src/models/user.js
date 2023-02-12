@@ -70,6 +70,7 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     year: {
+      // passing year
       type: Number,
     },
     admission_year: {
