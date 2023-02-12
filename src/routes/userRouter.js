@@ -10,6 +10,7 @@ const {
   getAppliedJobs,
   getAllQuiz,
   getAllEligibleJobs,
+  getstudents,
   applyJob,
   OffCampusJobPost,
 } = require("../controllers/user.controller");
@@ -29,6 +30,7 @@ router.post("/getQuiz", userValidate, getQuiz);
 router.get("/getAppliedJobs", userValidate, getAppliedJobs);
 router.get("/getAllQuiz", userValidate, getAllQuiz);
 router.get("/getAllEligibleJobs", userValidate, getAllEligibleJobs);
+router.get("/getstudents", getstudents);
 router.post("/applyJob", userValidate, applyJob);
 router.get("/getAllOffCampusJobs", userValidate, OffCampusJobPost);
 module.exports = router;

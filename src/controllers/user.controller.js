@@ -13,6 +13,7 @@ const {
   getQuizByQueryRepo,
   createQuizRepo,
 } = require("../repository/quiz.repo");
+const User = require("../models/user");
 const {
   getJobByQueryRepo,
   createApplicationRepo,
@@ -32,6 +33,24 @@ const userInfo = async (req, res) => {
       return notFoundResponse(res, "User not found");
     }
     return successResponse(res, user[0], "User info");
+  } catch (err) {
+    logFunction("error", err);
+    handle304(err.message, res);
+    serverErrorResponse(res, "Internal Server Error");
+  }
+};
+const getstudents = async (req, res) => {
+  try {
+    User.find({ userType: "user" }, (err, users) => {
+      if (err) {
+        console.log(`Error in get user by id: ${err.message}`);
+        return serverErrorResponse(res, err.message);
+      }
+      if (users.length === 0) {
+        return notFoundResponse(res, "User not found");
+      } 
+      return successResponse(res, users, "User info");
+    });
   } catch (err) {
     logFunction("error", err);
     handle304(err.message, res);
@@ -246,6 +265,7 @@ module.exports = {
   getAppliedJobs,
   getAllQuiz,
   getAllEligibleJobs,
+  getstudents,
   applyJob,
   OffCampusJobPost,
 };
