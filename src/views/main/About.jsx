@@ -3,7 +3,7 @@ import about from 'assets/img/about.png'
 import './CSS/about.css'
 function About() {
   return (
-    <div style={{position:"relative"}}>
+    <div style={{position:"relative"}} id='about'>
         <div className='about'>
         <img src={about} alt="" />
       </div> 

@@ -43,7 +43,7 @@ function SignUp() {
         console.log(values);
         const data = await signup({ ...values, userType: userType });
         if(data.data.code==200){
-            window.location.replace('http://localhost:3000/#/auth/sign-in/default');
+            window.location.replace('http://campusengine.netlify.app/#/auth/sign-in/default');
           }
         // localStorage.setItem('token', data.data.token);
         // localStorage.setItem('user', JSON.stringify(data.data.user));
