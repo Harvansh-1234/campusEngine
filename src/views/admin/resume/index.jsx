@@ -2,11 +2,8 @@ import React from 'react'
 import { Formik, Field, Form } from 'formik';
 import 'assets/css/resume.css';
                                                                                                                                                                                                                                                                                                                                     import { useEffect, useState } from 'react';
-import { getUserInfo, getResume } from '../../../service/api'
+import {  getResume } from '../../../service/api'
 import { Select } from '@chakra-ui/react'
-import { FiInfo } from "react-icons/fi";
-import { BsCalendar, BsLinkedin } from "react-icons/bs";
-import { GrScorecard } from "react-icons/gr";
 import { Button } from '@chakra-ui/react'
 import 'assets/css/logIn.css'
 import {
@@ -28,7 +25,7 @@ import {
 
 
 } from '@chakra-ui/react'
-import { updateResume,updateUser } from '../../../service/api';
+import { updateResume } from '../../../service/api';
 import WorkExperience from './workExp';
 // import Select from 'react-select'
 function UserProfile() {
@@ -37,11 +34,11 @@ function UserProfile() {
     const [resume, setResume] = useState({});
     const [college, setCollege] = useState("");
     const [branch, setBranch] = useState("");
-    const options = [
-        { value: 'cpp', label: 'C++' },
-        { value: 'java', label: 'Java' },
-        { value: 'python', label: 'Python' }
-    ]
+    // const options = [
+    //     { value: 'cpp', label: 'C++' },
+    //     { value: 'java', label: 'Java' },
+    //     { value: 'python', label: 'Python' }
+    // ]
     const [page, setPage] = useState(1);
     const [edu, setEdu] = useState([]);
     const [eduinitialValues, setEduInitialValues] = useState({
@@ -97,7 +94,7 @@ function UserProfile() {
                     values.branch = branch;
                     values.college = college;
                     console.log(values);
-                  const updateuser = await updateUser(token, { branch: branch, year:values.year ? values.year : resume.year });
+                //   const updateuser = await updateUser(token, { branch: branch, year:values.year ? values.year : resume.year });
 
 
 
