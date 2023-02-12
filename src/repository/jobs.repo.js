@@ -60,9 +60,25 @@ const createApplicationRepo = async (data) => {
   }
 };
 
+// get application by query
+const getApplicationByQueryRepo = async (query) => {
+  try {
+    let applications = await Application.find(query);
+    // console.log(`here is the list of jobs i am ${applications}`);
+    return [null, applications];
+  } catch (err) {
+    let errObj = {
+      status: 500,
+      message: err.message || "Some error occurred while getting the Job.",
+    };
+    return [errObj, null];
+  }
+};
+
 module.exports = {
   createJobPostRepo,
   getJobByQueryRepo,
   getJobInfo,
   createApplicationRepo,
+  getApplicationByQueryRepo,
 };
