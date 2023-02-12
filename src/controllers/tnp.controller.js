@@ -1,4 +1,7 @@
-const { getJobByQueryRepo } = require("../repository/jobs.repo");
+const {
+  getJobByQueryRepo,
+  updateJobPostRepo,
+} = require("../repository/jobs.repo");
 const { serverErrorResponse, successResponse } = require("../utils/response");
 
 // get all jobs
@@ -17,7 +20,7 @@ const getAllJobs = async (req, res) => {
 
 const updateJobPost = async (req, res) => {
   try {
-    let [err, jobPost] = await getJobByQueryRepo(
+    let [err, jobPost] = await updateJobPostRepo(
       {
         _id: req.body.jobId,
       },
@@ -27,8 +30,7 @@ const updateJobPost = async (req, res) => {
       console.log(`Error in get job post: ${err.message}`);
       return serverErrorResponse(res, err.message);
     }
-    if (jobPost.length === 0)
-      return notFoundResponse(res, "Job post not found");
+    return successResponse(res, jobPost, "Job post updated");
   } catch (err) {
     console.log(`Error in get job post: ${err.message}`);
     return serverErrorResponse(res, err.message);

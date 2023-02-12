@@ -77,3 +77,10 @@ server.listen(PORT, async () => {
 // verfy pe verify kardo   '''''''
 // verified jobs listing for user  ''''''
 // list off camous jobs '''''' done
+
+// ui changes need to be made
+// off campus jobs
+
+// 
+
+
