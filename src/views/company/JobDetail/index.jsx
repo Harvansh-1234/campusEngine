@@ -4,7 +4,7 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
+  Text,
   Tr,
   Th,
   Td,
@@ -12,6 +12,7 @@ import {
   TableContainer,
 } from '@chakra-ui/react';
 import {listJobApplicants} from "../../../service/api";
+import cardImg from 'assets/img/dashboards/Debit.png'
 export default function JobDetail() {
     // const url = window.location.href;
     // const id = url.substring(url.lastIndexOf('/') + 1);
@@ -38,28 +39,109 @@ const [data, setData] = useState();
   return (
     <div>
   
-    {data ?<div>
-      <h1>{data.jobDescription}</h1>
-      <h1>{data.jobExperience}</h1>
-      <h1>{data.jobLocation}</h1>
-      <h1>{data.jobPostedOn}</h1>
-      <h1>{data.jobSalary}</h1>
-      
-     {data.jobSkillsArray.map((item) => {
-                return (
-                    <div>
-                        <h1>{item}</h1>
-                    </div>
-                )
-            }) }
+  <div style={{ height: "100px" }}></div>
 
-      <h1>{data.jobStatus}</h1>
-      <h1>{data.jobTitle}</h1>
-      <h1>{data.jobType}</h1>
-      <h1>{data.jobVacancies}</h1>
-    </div>:null}
-
-    <TableContainer>
+    {data ?
+    <div
+                className="question"
+                style={{ overflow: "hidden", position: "relative" }}
+              >
+                <div
+                  style={{
+                    clipPath: "circle(60%)",
+                    position: "absolute",
+                    right: "-42%",
+                    top: "-45%",
+                    zIndex: "0",
+                  }}
+                >
+                  <img src={cardImg} alt="" />
+                </div>
+                <Text fontSize="2rem" fontWeight="bold" style={{ zIndex: "1" }}>
+                  {data.jobTitle} ({data.jobStatus})
+                </Text>
+                <Text fontSize="1rem" fontWeight="bold" style={{ zIndex: "1" }}>
+                  Experience required : {data.jobExperience}
+                </Text>
+                <Text fontSize="15px" fontWeight="bold" style={{ zIndex: "1" }}>
+                  {data.jobDescription}
+                </Text>
+                <Text
+                  fontSize="1.5rem"
+                  fontWeight="bold"
+                  style={{
+                    zIndex: "1",
+                    position: "absolute",
+                    right: "5%",
+                    top: "10%",
+                    color: "white",
+                  }}
+                >
+                  {data.jobLocation}
+                </Text>
+                <div style={{display:"flex",justifyContent:"space-between"}}>
+                <Text
+                  fontSize="1.1rem"
+                  fontWeight="bold"
+                  mt="10px"
+                  style={{ zIndex: "1" }}
+                >
+                  Eligible Branch{" "}
+                  {data.branchEligible.map((item) => {
+                    return <Text>-{item}</Text>;
+                  })}
+                </Text>
+                <Text
+                  fontSize="1.1rem"
+                  fontWeight="bold"
+                  mt="10px"
+                  style={{ zIndex: "1" }}
+                >
+                  Batch Branch{" "}
+                  {data.batchEligible.map((item) => {
+                    return <Text>-{item}</Text>;
+                  })}
+                </Text>
+                <Text
+                  fontSize="1.1rem"
+                  fontWeight="bold"
+                  mt="10px"
+                  style={{ zIndex: "1" }}
+                >
+                  Skills Required{" "}
+                  {data.jobSkillsArray.map((item) => {
+                    return <Text>-{item}</Text>;
+                  })}
+                </Text>
+                </div>
+                
+                <Text
+                  fontSize="1.5rem"
+                  fontWeight="bold"
+                  style={{
+                    zIndex: "1",
+                    position: "absolute",
+                    left: "87%",
+                    top: "50%",
+                    color: "black",
+                  }}
+                >
+                  {data.jobSalary}LPA
+                </Text>          
+                <Text
+                  fontSize="1.2rem"
+                  fontWeight="bold"
+                  style={{
+                    zIndex: "1",
+                    position: "absolute",
+                    top: "48%",
+                    color: "black",
+                  }}
+                >
+                  {data.jobType}
+                </Text>
+                <div style={{marginTop:"70px"}}>
+                <TableContainer>
                 <Table variant='simple'>
                     <TableCaption>Students</TableCaption>
                     <Thead>
@@ -85,6 +167,13 @@ const [data, setData] = useState();
 
                 </Table>
             </TableContainer>
+                </div>
+              </div>
+    :
+    null}
+    
+
+    
     </div>
   )
 }
