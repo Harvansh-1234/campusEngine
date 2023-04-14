@@ -5,14 +5,34 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const multer = require("multer");
+const passport = require('passport');
+require('./utils/passport.js');
+const session = require('express-session');
+
 // require("./crontask/scrapper");
 const app = express();
+app.use(
+  session({
+    secret: "Our little secret.",
+    resave: false,
+    
+    saveUninitialized: false,
+  })
+);
 app.use(cors());
+app.use(passport.initialize());
+ app.use(passport.session());
+
+
+
 // importing routes
 const routes = require("./routes");
 const bodyParser = require("body-parser");
 const uploadImage = require("./controllers/uploadImage.js");
 const User = require("./models/user");
+
+
+
 
 var Storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -54,6 +74,19 @@ app.post("/uploadImage", upload.single("uploads"), (req, res) => {
       res.status(500).send(err);
     });
 });
+
+
+// Google auth
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile','email'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    console.log("google auth successfull");
+    // Successful authentication, redirect home.
+    res.redirect('http://localhost:3000/');
+  });
 
 app.get("/", (req, res) => {
   console.log("server is fine!!!");
