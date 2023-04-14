@@ -4,6 +4,7 @@ const {
   listCompanyJobs,
   getJobPost,
   listJobApplications,
+  getAllCompanies,
 } = require("../controllers/company.controller");
 const { getAllJobs, updateJobPost } = require("../controllers/tnp.controller");
 const { userInfo, updateUserInfo } = require("../controllers/user.controller");
@@ -24,5 +25,6 @@ router.post("/listJobApplicants", companyValidate, listJobApplications);
 
 router.post("/getAllJobs", commonValidate, getAllJobs);
 router.post("/updateJobStatus", commonValidate, updateJobPost);
+router.get("/getCompany", commonValidate, getAllCompanies);
 
 module.exports = router;

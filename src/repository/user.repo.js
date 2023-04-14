@@ -54,4 +54,25 @@ const updateUserById = async (id, data) => {
   }
 };
 
-module.exports = { createUser, getUserByEmail, getUserById, updateUserById };
+// get user by query
+const getUserByQuery = async (query) => {
+  try {
+    let companies = await User.find(query);
+    return [null, companies];
+  } catch (err) {
+    let errObj = {
+      code: 500,
+
+      message: `Internal Server Error: ${err.message}`,
+    };
+    return [errObj, null];
+  }
+};
+
+module.exports = {
+  createUser,
+  getUserByEmail,
+  getUserById,
+  updateUserById,
+  getUserByQuery,
+};

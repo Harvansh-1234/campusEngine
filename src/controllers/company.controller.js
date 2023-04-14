@@ -8,7 +8,7 @@ const {
 const { createOffCampusJobPostRepo } = require("../repository/quiz.repo");
 const { serverErrorResponse, successResponse } = require("../utils/response");
 const { createJobPostRepo } = require("../repository/jobs.repo");
-const { getUserById } = require("../repository/user.repo");
+const { getUserById, getUserByQuery } = require("../repository/user.repo");
 
 const createJobPost = async (req, res) => {
   try {
@@ -100,9 +100,28 @@ const listJobApplications = async (req, res) => {
   }
 };
 
+// get all comapnies
+const getAllCompanies = async (req, res) => {
+  try {
+    // get all companies
+    let query = {
+      userType: "company",
+    };
+    let [err1, companies] = await getUserByQuery(query);
+    if (err1) {
+      console.log(`Error in get job post: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+    return successResponse(res, companies, "Job post fetched");
+  } catch (err) {
+    return serverErrorResponse(res, err.message);
+  }
+};
+
 module.exports = {
   createJobPost,
   getJobPost,
   listCompanyJobs,
   listJobApplications,
+  getAllCompanies,
 };
