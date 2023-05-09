@@ -3,7 +3,7 @@ import service from 'assets/img/service.png'
 import './CSS/services.css'
 function Services() {
   return (
-<div style={{position:"relative"}}>
+<div style={{position:"relative"}} id='services'>
         <div className='service'>
         <img src={service} alt="" />
       </div> 

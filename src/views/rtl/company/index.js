@@ -34,7 +34,7 @@ export default function() {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {students.map((student) => {
+                        {students && students.map((student) => {
                             return (
                                 <Tr>
                                     <Td>{student.companyName}</Td>
