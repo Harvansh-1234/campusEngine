@@ -5,13 +5,14 @@ import { useEffect, useState, useRef } from 'react';
 import { getResume } from '../../../service/api'
 import { Select, Flex } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/react'
-import 'assets/css/logIn.css'
+
 import {
 
     AiOutlineDelete,
 
 } from "react-icons/ai";
-import 'assets/css/quiz.css'
+import { compareAsc, format } from 'date-fns'
+
 import {
     Modal,
     ModalOverlay,
@@ -40,11 +41,11 @@ function UserProfile() {
     //     { value: 'java', label: 'Java' },
     //     { value: 'python', label: 'Python' }
     // ]
-    const componentRef = useRef();
-    const openPdf = useReactToPrint({
-        content: () => componentRef.current,
-        documentTitle: "Evaluation Report"
-    })
+    // const componentRef = useRef();
+    // const openPdf = useReactToPrint({
+    //     content: () => componentRef.current,
+    //     documentTitle: "Evaluation Report"
+    // })
     const [page, setPage] = useState(1);
     const [edu, setEdu] = useState([]);
     const [eduinitialValues, setEduInitialValues] = useState({
@@ -80,9 +81,9 @@ function UserProfile() {
 
     }, [])
     return (
-        <div className='userDetail' style={{ marginTop: "70px", width: "80%" }} >
+        <div className='userDetail' style={{marginTop:"10px", width: "100%" }} >
 
-             <Formik
+            <Formik
                 initialValues={{
                     firstName: resume.name ? resume.name.first : '',
                     lastName: resume.name ? resume.name.last : '',
@@ -98,107 +99,100 @@ function UserProfile() {
 
                 }}
                 onSubmit={async (values) => {
-                   
+
                     // await new Promise((r) => setTimeout(r, 500));
                     // alert(JSON.stringify(values, null, 2));
                 }}
             >
-                <Form style={{ margin: "25px", padding: "25px" }} ref={componentRef}>
-                    <div className='headField'>
-                        <div className='field' >
-                            <label htmlFor="firstName">First Name</label>
-                            <Field id="firstName" name="firstName" placeholder="" value={resume.name ? resume.name.first : ""} disabled />
+                <Form style={{ margin: "0 25px", padding: "25px" }}>
+                    <div style={{margin:'auto' }}>
+                        <div className='headField'>
+                            <div className='field' >
+                                <label htmlFor="firstName">First Name</label>
+                                <Field id="firstName" name="firstName" placeholder="" value={resume.name ? resume.name.first : ""} disabled />
+                            </div>
+                            <div className='field'>
+                                <label htmlFor="lastName">Last Name</label>
+                                <Field id="lastName" name="lastName" placeholder="" value={resume.name ? resume.name.last : ""} disabled />
+                            </div>
                         </div>
-                        <div className='field'>
-                            <label htmlFor="lastName">Last Name</label>
-                            <Field id="lastName" name="lastName" placeholder="" value={resume.name ? resume.name.last : ""} disabled />
+                        <div className='headField'>
+                            <div className='fieldFull'>
+                                <label htmlFor="email">Email</label>
+
+                                <Field
+                                    id="email"
+                                    name="email"
+                                    placeholder=""
+                                    type="email"
+                                    value={resume.contact ? resume.contact.email : ''}
+                                    disabled
+                                />
+                            </div>
+
                         </div>
-                    </div>
-                    <div className='headField'>
-                        <div className='fieldFull'>
-                            <label htmlFor="email">Email</label>
+                        <div className='headField'>
 
-                            <Field
-                                id="email"
-                                name="email"
-                                placeholder=""
-                                type="email"
-                                value={resume.contact ? resume.contact.email : ''}
-                                disabled
-                            />
+                            <div className='fieldFull'>
+                                <label htmlFor="contact_no">Contact No</label>
+                                <Field
+                                    id="contact"
+                                    name="contactNo"
+                                    placeholder=""
+                                    type="contactNo"
+                                    value={resume.contact ? resume.contact.phone : ''}
+                                    disabled
+                                />
+
+                            </div>
                         </div>
+                        <div className='headField'>
 
-                    </div>
-                    <div className='headField'>
+                            <div className='fieldFull'>
+                                <label htmlFor="contact_no">College</label>
 
-                        <div className='fieldFull'>
-                            <label htmlFor="contact_no">Contact No</label>
-
-                            <Field
-                                id="contact"
-                                name="contactNo"
-                                placeholder=""
-                                type="contactNo"
-                                value={resume.contact ? resume.contact.phone : ''}
-                                disabled
-                            />
+                                <Field
+                                    id="contact"
+                                    name="contactNo"
+                                    placeholder=""
+                                    type="contactNo"
+                                    value={college}
+                                    disabled
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className='headField'>
-
-                        <div className='fieldFull'>
-                            <label htmlFor="contact_no">College</label>
-
-                            <Select
-                                type="select"
-                                onChange={(e) => { setCollege(e.target.value) }}
-                                placeholder='Select option'
-                                name="college"
-                                value={college}
-                            >
-
-                                <option value='user'>MANIT</option>
-                                <option value='company'>UIT</option>
-
-                            </Select>
+                        <div className='headField'>
+                            <div className='field' >
+                                <label htmlFor="degree">Degree</label>
+                                <Field id="degree" name="degree" placeholder={resume.degree ? resume.degree : ''} />
+                            </div>
+                            <div className='field'>
+                                <label htmlFor="branch">Branch</label>
+                                {/* <Field id="branch" name="branch" placeholder="" value={user.lastName} /> */}
+                                <Field
+                                    id="branch"
+                                    name="branch"
+                                    placeholder="branch"
+                                    type=""
+                                    value={branch}
+                                    disabled
+                                />                        </div>
                         </div>
-                    </div>
-                    <div className='headField'>
-                        <div className='field' >
-                            <label htmlFor="degree">Degree</label>
-                            <Field id="degree" name="degree" placeholder={resume.degree ? resume.degree : ''} />
-                        </div>
-                        <div className='field'>
-                            <label htmlFor="branch">Branch</label>
-                            {/* <Field id="branch" name="branch" placeholder="" value={user.lastName} /> */}
-                            <Select
-                                type="select"
-                                onChange={(e) => { setBranch(e.target.value) }}
-                                placeholder='Select option'
-                                name="branch"
-                                value={branch}
-                            >
-
-                                <option value='user'>CSE</option>
-                                <option value='company'>IT</option>
-
-                            </Select>
-                        </div>
-                    </div>
-                    <div className='headField'>
-                        <div className='field' >
-                            <label htmlFor="admission_year">Admission Year</label>
-                            <Field id="admission_year" name="admission_year" placeholder={resume.admission_year ? resume.admission_year : ''} />
-                        </div>
-                        <div className='field'>
-                            <label htmlFor="year">Passing Year</label>
-                            <Field id="year" name="year" placeholder={resume.year ? resume.year : ''} />
+                        <div className='headField'>
+                            <div className='field' >
+                                <label htmlFor="year">Admission Year</label>
+                                <Field id="year" name="year" placeholder={resume.year ? resume.year : ''} />
+                            </div>
+                            <div className='field'>
+                                <label htmlFor="year">Passing Year</label>
+                                <Field id="year" name="year" placeholder={resume.year ? parseInt(resume.year)+4 : ''} />
+                            </div>
                         </div>
                     </div>
 
 
 
-                    <div style={{ padding: "30px" }}><p>Education</p>
+                    <div style={{ padding: "30px" }}><p style={{ fontSize: '30px', fontWeight: 'bolder' }}>Education</p>
                         <div className="" style={{ padding: "30px" }}>
                             {resume !== null &&
                                 resume !== undefined &&
@@ -223,7 +217,7 @@ function UserProfile() {
                         </div>
                     </div>
 
-                    <div style={{ padding: "30px" }}><p>Work Experience</p>
+                    <div style={{ padding: "30px" }}><p style={{ fontSize: '30px', fontWeight: 'bolder' }}>Work Experience</p>
                         <div className="" style={{ padding: "30px" }}>
                             {resume !== null &&
                                 resume !== undefined &&
@@ -231,12 +225,14 @@ function UserProfile() {
                                     return (
                                         <div>
                                             <div className="question">
-                                                <Text fontSize="20px" fontWeight="bold" >{item.company}</Text>
+                                                <Text fontSize="25px" fontWeight="bold" >{item.company}</Text>
                                                 <Text fontSize="20px" fontWeight="bold" >{item.position}</Text>
-                                                <Text fontSize="20px" fontWeight="bold" >{item.startDate}</Text>
-                                                <Text fontSize="20px" fontWeight="bold" >{item.endDate}</Text>
-                                                <Text fontSize="20px" fontWeight="bold" >{item.description}</Text>
-                                                <AiOutlineDelete
+                                                <div style={{ display: "flex", justifyContent: "space-between", margin: "10px 0" }}>
+                                                    <Text fontSize="15px" fontWeight="bold" >Start Date : {format(new Date(item.startDate), 'yyyy-dd-mm')}</Text>
+                                                    <Text fontSize="15px" fontWeight="bold" >End Date : {format(new Date(item.endDate), 'yyyy-dd-mm')}</Text>
+                                                </div>
+                                                <Text fontSize="12px"  >{item.description}</Text>
+                                                {/* <AiOutlineDelete
                                                     className="text-red-600 cursor-pointer"
                                                     onClick={async () => {
                                                         setWork(
@@ -249,7 +245,7 @@ function UserProfile() {
                                                         setResume(res);
                                                         localStorage.setItem("resume", JSON.stringify(res));
                                                     }}
-                                                />
+                                                /> */}
                                             </div>
                                         </div>
 
@@ -261,7 +257,7 @@ function UserProfile() {
                     </div>
                 </Form>
             </Formik>
-                </div>)
+        </div>)
 
 }
 export default UserProfile;

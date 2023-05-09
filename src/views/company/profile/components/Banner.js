@@ -29,7 +29,7 @@ export default function Banner(props) {
     "white !important",
     "#111C44 !important"
   );
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({});
   const [modal, setModal] = useState(false);
   const [profilePic, setProfilePic] = useState("");
 
@@ -133,7 +133,7 @@ export default function Banner(props) {
       </Modal>
       <Text color={textColorPrimary} fontWeight='bold' fontSize='xl' mt='10px'>
         {/* {name} */}
-        {user.firstName}{" "}{user.lastName}
+        {user.companyName}
       </Text>
       <Text color={textColorSecondary} fontSize='sm'>
         {/* {job} */}
@@ -146,6 +146,7 @@ export default function Banner(props) {
           </Text>
           <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
             {/* Posts */}
+
           </Text>
         </Flex>
         {/* <Flex mx='auto' me='60px' align='center' direction='column'>

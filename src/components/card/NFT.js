@@ -121,9 +121,9 @@ export default function NFT(props) {
               "2xl": "row",
             }}
             mt='25px'>
-            <Text fontWeight='700' fontSize='sm' color={textColorBid}>
+            {/* <Text fontWeight='700' fontSize='sm' color={textColorBid}>
               Current Bid: {currentbid}
-            </Text>
+            </Text> */}
             <Link
               href={download}
               mt={{
@@ -141,7 +141,7 @@ export default function NFT(props) {
                 borderRadius='70px'
                 px='24px'
                 py='5px'>
-                Place Bid
+                View Details
               </Button>
             </Link>
           </Flex>

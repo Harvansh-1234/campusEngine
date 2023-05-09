@@ -14,8 +14,8 @@ import {getCompany} from "../../../service/api";
 export default function() {
     const [students, setStudents] = React.useState([]);
     useEffect(() => {
-        const initial = async () => {
-            const students = await getCompany();
+        const initial = async () => {const token = localStorage.getItem('token');
+            const students = await getCompany(token);
             setStudents(students.data.data);
             console.log(students);
         }

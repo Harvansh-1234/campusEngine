@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const url = "https://campus-engine.onrender.com";
+export const url = "http://localhost:8000";
 //auth
 
 export const signIn = async (data) => {
@@ -32,7 +32,7 @@ console.log(error)
 export const getUserInfo = async (data) => {
     try {
         console.log(data);
-        return await axios.get(`${url}/api/user/getUserInfo`, { headers: { authorization: data } });
+        return await axios.get(`${url}/api/user/getUserInfo/${data}`);
     } catch (error) {
         console.log(error)
     }
@@ -57,7 +57,7 @@ export const updateResume = async (token, data) => {
 export const Upload = async (data, email) => {
     try {
         console.log(data);
-        return await axios.post(`${url}/uploadImage`, { image: data, email: email });
+        return await axios.post(`${url}/uploadImage`, { email: email ,image: data });
     } catch (error) {
         console.log(error);
         console.log("Error while calling signup API: ", error);
@@ -125,7 +125,7 @@ export const getJobDetail = async (token, id) => {
     export const getCompany = async (token, data) => {
         try {
             console.log(data);
-            return await axios.get(`${url}/api/company/getCompany`);
+            return await axios.get(`${url}/api/company/getCompany`,{ headers: { authorization: token } });
         } catch (error) {
             console.log(error)
         }
