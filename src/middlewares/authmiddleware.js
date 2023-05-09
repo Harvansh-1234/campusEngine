@@ -16,7 +16,11 @@ const userValidate = (req, res, next) => {
 
     // validate token
     const token = req.headers.authorization;
+    console.log(token);
+    console.log(process.env.JWT_SECRET_KEY);
+
     const verified = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    console.log(verified);
     if (!verified) {
       return unauthorizedResponse(res, "Access Denied");
     }

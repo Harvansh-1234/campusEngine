@@ -30,6 +30,7 @@ module.exports = (image) =>{
     return new Promise((resolve,reject)=>{
         cloudinary.uploader.upload(image,opts,(err,result)=>{
             if(result && result.secure_url){
+                console.log(result.secure_url)
                 return resolve(result.secure_url)
             }
             else{
