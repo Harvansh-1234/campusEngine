@@ -51,15 +51,18 @@ function SignIn() {
       else if (userdata.data.data.userType === "user")
         window.location.replace(
           // "http://campusengine.netlify.app/#/user/default"
-          "http://localhost:3000/#/company/default"
+          "http://localhost:3000/#/user/default"
 
         );
       else
         window.location.replace(
           // "http://campusengine.netlify.app/#/tnp/default"
-          "http://localhost:3000/#/company/default"
+          "http://localhost:3000/#/admin/default"
 
         );
+    }else{
+      alert("Invalid Credentials");
+      setLoader(false);
     }
   };
 
