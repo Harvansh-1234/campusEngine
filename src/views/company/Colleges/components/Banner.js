@@ -39,7 +39,9 @@ export default function Banner(props) {
     const initial = async () => {
       let token = localStorage.getItem('token');
       // console.log(token);
-      const userData = await getUserInfo(token);
+      let user = localStorage.getItem('user')
+
+      const userData = await getUserInfo(user._id);
       // console.log(userData);
       if (userData.status === 200);
       setUser(userData.data.data);
