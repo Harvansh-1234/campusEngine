@@ -22,8 +22,9 @@ const {
 
 const userInfo = async (req, res) => {
   try {
-    console.log(req.userId);
-    let [err, user] = await getUserById(req.userId);
+    console.log("",req.params.id);
+    let id = req.params.id;
+    let [err, user] = await getUserById(id);
     console.log(user);
     if (err) {
       console.log(`Error in get user by id: ${err.message}`);

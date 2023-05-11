@@ -15,13 +15,13 @@ app.use(
   session({
     secret: "Our little secret.",
     resave: false,
-    
+
     saveUninitialized: false,
   })
 );
 app.use(cors());
 app.use(passport.initialize());
- app.use(passport.session());
+app.use(passport.session());
 
 
 
@@ -54,35 +54,33 @@ app.use(express.static(__dirname + "/public"));
 app.use("/uploads", express.static("uploads"));
 // importing routes
 var upload = multer({ storage: Storage });
-app.post("/uploadImage", upload.single("uploads"), (req, res) => {
+app.post("/uploadImage", upload.single("uploads"), async (req, res) => {
   console.log(req.body);
-  uploadImage(req.body.image)
-    .then((url) => {
-      if (url) {
-        User.findOne({ email: req.body.email }).then((user) => {
-          user.profileImg = url;
-          user.save();
-        });
+  const url = await uploadImage(req.body.image)
 
-        res.send(url);
-      } else {
-        res.send("error in uploading image");
-      }
-      // find user by email and update the image url
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+  if (url) {
+    const user = await User.findOne({ email: req.body.email })
+    console.log(user);
+    user.profileImg = url;
+    await user.save();
+
+
+    return res.status(200).send(url);
+  } else {
+    return res.send("error in uploading image");
+  }
+  // find user by email and update the image url
+
 });
 
 
 // Google auth
 app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile','email'] }));
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-app.get('/auth/google/callback', 
+app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
+  function (req, res) {
     console.log("google auth successfull");
     // Successful authentication, redirect home.
     res.redirect('http://localhost:3000/');
