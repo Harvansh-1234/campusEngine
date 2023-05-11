@@ -15,11 +15,16 @@ function UserProfile() {
     const initial = async () => {
       let token = localStorage.getItem('token');
       // console.log(token);
-      const userData = await getUserInfo(token);
-      // console.log(userData);
-      if (userData.status === 200);
-      setUser(userData.data.data);
-      console.log(user);
+      let users = JSON.parse(localStorage.getItem('user'));
+      let id = users._id;
+      // console.log(token);
+      const userData = await getUserInfo(id);
+       console.log(userData);
+      if (userData.status === 200) {
+
+        setUser(userData.data.data);
+        console.log(user);
+      }
 
     }
     initial();

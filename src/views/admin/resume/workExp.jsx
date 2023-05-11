@@ -254,7 +254,9 @@ function WorkExperience() {
 
                         const updateresume = await updateResume(token, { work_experience: work });
                         console.log(updateresume);
-                    }}>Submit</Button>
+                        window.location.reload();
+                    }
+                    }>Submit</Button>
 
                 </div>
 

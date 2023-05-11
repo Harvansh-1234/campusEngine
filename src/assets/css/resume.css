@@ -14,12 +14,24 @@
 }
 .field{
     padding: 10px;
-    width: 45%;
+    width: 50%;
 }
 .fieldFull{
     padding: 10px;
-    width: 90%;
+    width: 100%;
 }
 .headField{
     display: flex;
+    width: 100%;
+}
+
+.question{
+    background-color: white;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+
 }

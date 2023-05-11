@@ -3,7 +3,7 @@ import { Avatar, Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 import React, { useState, useEffect } from "react";
 import { BiPencil } from "react-icons/bi"
-import { getUserInfo, Upload } from "../../../../service/api";
+import { getUserInfo, Upload } from "service/api";
 // import Modal from "../components/Modal";
 import {
   Modal,
@@ -18,8 +18,6 @@ import {
 
 
 } from '@chakra-ui/react'
-import Lottie from "lottie-react";
-import groovyWalkAnimation from "../../../../assets/img/98195-loader.json";
 
 import { useDisclosure } from '@chakra-ui/react'
 export default function Banner(props) {
@@ -34,23 +32,19 @@ export default function Banner(props) {
   const [user, setUser] = useState("");
   const [modal, setModal] = useState(false);
   const [profilePic, setProfilePic] = useState("");
-  const [loader, setLoader] = useState(false);
+
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
     const initial = async () => {
       let token = localStorage.getItem('token');
-      let users = JSON.parse(localStorage.getItem('user'));
-      let id = users._id;
       // console.log(token);
-      const userData = await getUserInfo(id);
+      const userData = await getUserInfo(token);
       // console.log(userData);
-      if (userData.status === 200) {
-
-        setUser(userData.data.data);
-        setProfilePic(userData.data.data.profileImg);
-        console.log(user);
-      }
+      if (userData.status === 200);
+      setUser(userData.data.data);
+      setProfilePic(userData.data.data.profileImg);
+      console.log(user);
 
     }
     initial();
@@ -69,15 +63,12 @@ export default function Banner(props) {
   }
 
   const uploadImage = async (event) => {
-    setLoader(true);
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
     console.log(base64);
     let upload = await Upload(base64, user.email);
-    console.log("upload", upload)
-    setProfilePic(upload.data);
-    setLoader(false);
-
+    console.log(upload)
+    setProfilePic(upload.profileImg);
     // axios.post("http://localhost:8000/uploadImage",{image:base64}).then((res)=>{
     //   setUrl(res.data);
     //   alert("Image Uploaded Successfully");
@@ -118,7 +109,7 @@ export default function Banner(props) {
           <ModalBody mx='auto' >
             {/* <Lorem count={2} /> */}
             <Avatar
-
+              
               src={profilePic ? profilePic : { Avatar }}
               h='150px'
               w='150px'
@@ -131,14 +122,9 @@ export default function Banner(props) {
 
 
           </ModalBody>
-          {
-            loader &&
 
-            <Lottie animationData={groovyWalkAnimation} loop={true} />
-          }
           <ModalFooter>
-
-            <Button colorScheme='blue' mr={3} onClick={onClose} disabled={loader}>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
             {/* <Button variant='ghost'>Secondary Action</Button> */}
@@ -147,11 +133,11 @@ export default function Banner(props) {
       </Modal>
       <Text color={textColorPrimary} fontWeight='bold' fontSize='xl' mt='10px'>
         {/* {name} */}
-        {user.firstName}{" "}{user.lastName}
+        {user.companyName}
       </Text>
       <Text color={textColorSecondary} fontSize='sm'>
         {/* {job} */}
-        {user.userType == "user" ? "Student" : "Company"}
+        {user.userType === "user" ? "Student" : "Company"}
       </Text>
       <Flex w='max-content' mx='auto' mt='26px'>
         <Flex mx='auto' me='60px' align='center' direction='column'>
@@ -160,6 +146,7 @@ export default function Banner(props) {
           </Text>
           <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
             {/* Posts */}
+            
           </Text>
         </Flex>
         {/* <Flex mx='auto' me='60px' align='center' direction='column'>

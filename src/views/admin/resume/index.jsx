@@ -79,14 +79,23 @@ function UserProfile() {
 
     }, [])
     return (
-        <div className='userDetail' style={{ marginTop: "70px", width: "80%" }} >
-            <Button colorScheme='blue' mx='35%' borderRadius='5px' onClick={() => {
-                setprint(true);
-                openPdf()
-            }}>Print</Button>{print && <div ref={componentRef}>
+        <div className='userDetail' style={{ marginTop: "50px", width: "100%" }} >
+            <div style={{ display: "flex" ,marginLeft:"80%",marginTop:'8%',padding:"10px 10px"}}>
+                <Button colorScheme='blue' ml="15px" borderRadius='5px' onClick={() => {
+                    setprint(true);
+                    openPdf()
+                }}>Print</Button>
+                {print &&
+                    <Button colorScheme='blue' borderRadius='5px' ml="10px" onClick={() => {
+                        setprint(false);
+                    }}>Back</Button>
+                }
+            </div>
+            {print && <div ref={componentRef}>
                 <Printui />
             </div>}
-            {page === 1 && resume && <Formik
+
+            {!print && page === 1 && resume && <Formik
                 initialValues={{
                     firstName: resume.name ? resume.name.first : '',
                     lastName: resume.name ? resume.name.last : '',
@@ -117,7 +126,7 @@ function UserProfile() {
                     // alert(JSON.stringify(values, null, 2));
                 }}
             >
-                <Form style={{ margin: "25px", padding: "25px" }} >
+                <Form style={{ margin: "0 25px", padding: "25px" }} >
                     <div className='headField'>
                         <div className='field' >
                             <label htmlFor="firstName">First Name</label>
@@ -201,12 +210,12 @@ function UserProfile() {
                     </div>
                     <div className='headField'>
                         <div className='field' >
-                            <label htmlFor="admission_year">Admission Year</label>
-                            <Field id="admission_year" name="admission_year" placeholder={resume.admission_year ? resume.admission_year : ''} />
+                            <label htmlFor="year">Admission Year</label>
+                            <Field id="year" name="year" placeholder={resume.year ? resume.year : ''} />
                         </div>
                         <div className='field'>
                             <label htmlFor="year">Passing Year</label>
-                            <Field id="year" name="year" placeholder={resume.year ? resume.year : ''} />
+                            <Field id="year" name="year" placeholder={resume.year ? parseInt(resume.year) + 4 : ''} />
                         </div>
                     </div>
                     {/* <div className='headField'>
@@ -224,7 +233,8 @@ function UserProfile() {
             </Formik>
             }
 
-            {page === 2 &&
+
+            {!print && page === 2 &&
                 <div style={{ padding: "30px" }}><p>Education</p>
                     <div className="" style={{ padding: "30px" }}>
                         {resume !== null &&
@@ -412,10 +422,10 @@ function UserProfile() {
                 </div>
             }
             {
-                page === 3 &&
+                !print && page === 3 &&
                 <WorkExperience />
             }
-        </div >
+        </div>
     )
 }
 
