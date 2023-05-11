@@ -3,6 +3,7 @@ import About from './About'
 import Navbar from './components/Navbar'
 import Home from './Home'
 import Services from './Services'
+import TnpList from './TnpList'
 
 function Landing() {
   return (
@@ -11,6 +12,7 @@ function Landing() {
     <Home/>
     <About/>
     <Services/>
+    <TnpList/>
     </div>
   )
 }
