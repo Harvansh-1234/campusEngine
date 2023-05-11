@@ -13,7 +13,9 @@ export default function Dashboard(props) {
   useEffect(() => {
     const initial = async () => {
       let token = localStorage.getItem('token');
-      let data= await getUserInfo(token);
+      let user = localStorage.getItem('user')
+
+      let data= await getUserInfo(user._id);
       console.log(data.data.data.userType);
       if(data.data.data.userType !== 'user'){
         window.location.href = '/';
