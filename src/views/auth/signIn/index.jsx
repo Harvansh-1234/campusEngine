@@ -2,19 +2,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "assets/css/logIn.css";
 // Chakra imports
-import {
-  
-  Button,
-  Text,
-  Heading,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Button, Text, Heading, useColorModeValue } from "@chakra-ui/react";
 import DefaultAuth from "layouts/auth/Default";
 // import { FcGoogle } from "react-icons/fc";
 // import { MdOutlineRemoveRedEye } from "react-icons/md";
 // import { RiEyeCloseLine } from "react-icons/ri";
 import { Formik } from "formik";
 import { signIn } from "../../../service/api";
+import Lottie from "lottie-react";
+import groovyWalkAnimation from "../../../assets/img/98195-loader.json";
+import { useState } from "react";
 
 function SignIn() {
   // Chakra color mode
@@ -35,22 +32,37 @@ function SignIn() {
   // );
   // const [show, setShow] = React.useState(false);
   // const handleClick = () => setShow(!show);
+  const [loader, setLoader] = useState(false);
 
   const handleSubmit = async (values) => {
+    setLoader(true);
     console.log(values);
     const userdata = await signIn(values);
     console.log(userdata);
-    if(userdata.data.code===200){
+    if (userdata.data.code === 200) {
+      setLoader(false);
       localStorage.setItem("token", userdata.data.data.token);
       localStorage.setItem("user", JSON.stringify(userdata.data.data));
-      if(userdata.data.data.userType==='company')
-      window.location.replace('http://localhost:3000/#/company/default')
-      // window.location.replace('http://campusengine.netlify.app/#/company/default');
-      else if(userdata.data.data.userType==='user')
-      window.location.replace('http://campusengine.netlify.app/#/user/default');
-      else
-      window.location.replace('http://campusengine.netlify.app/#/tnp/default');
+      if (userdata.data.data.userType === "company")
+        window.location.replace(
+          // "http://campusengine.netlify.app/#/company/default"
+          "http://localhost:3000/#/company/default"
+        );
+      else if (userdata.data.data.userType === "user")
+        window.location.replace(
+          // "http://campusengine.netlify.app/#/user/default"
+          "http://localhost:3000/#/user/default"
 
+        );
+      else
+        window.location.replace(
+          // "http://campusengine.netlify.app/#/tnp/default"
+          "http://localhost:3000/#/admin/default"
+
+        );
+    }else{
+      alert("Invalid Credentials");
+      setLoader(false);
     }
   };
 
@@ -112,41 +124,53 @@ function SignIn() {
             }) => (
               <form onSubmit={handleSubmit}>
                 <Text>Email</Text>
-                <input className="loginInput"
+                <input
+                  className="loginInput"
                   type="email"
                   name="email"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
+                  disabled={loader}
                   borderRadius="5px"
                 />
-                <Text className="text">{errors.email && touched.email && errors.email}</Text>
+                <Text className="text">
+                  {errors.email && touched.email && errors.email}
+                </Text>
                 <Text>Password</Text>
-                <input className="loginInput"
+                <input
+                  className="loginInput"
                   type="password"
                   name="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
+                  disabled={loader}
                   border="1px"
                   borderColor="gray.200"
                   borderRadius="5px"
                 />
-                <Text className="text">{errors.password && touched.password && errors.password}</Text>
+                <Text className="text">
+                  {errors.password && touched.password && errors.password}
+                </Text>
                 <br />
-                <Button
-                  fontSize="sm"
-                  variant="brand"
-                  fontWeight="500"
-                  w="40%"
-                  h="50"
-                  ml="0px"
-                  mb="24px"
-                  type="submit"
-                  disabled={!values.email || !values.password}
-                >
-                  Sign In
-                </Button>
+                {loader ? (
+                  <Lottie animationData={groovyWalkAnimation} loop={true} />
+                ) : (
+                  <Button
+                    fontSize="sm"
+                    variant="brand"
+                    fontWeight="500"
+                    w="40%"
+                    h="50"
+                    ml="0px"
+                    mb="24px"
+                    type="submit"
+                    disabled={!values.email || !values.password}
+                  >
+                    Sign In
+                  </Button>
+                )}
               </form>
             )}
           </Formik>
@@ -162,7 +186,7 @@ function SignIn() {
 
           <Text color={textColorDetails} fontWeight="400" fontSize="14px">
             Not registered yet?
-            <NavLink to="/auth/sign-up/default" style={{zIndex: '5'}}>
+            <NavLink to="/auth/sign-up/default" style={{ zIndex: "5" }}>
               <Text color={textColorBrand} as="span" ms="5px" fontWeight="500">
                 Create an Account
               </Text>

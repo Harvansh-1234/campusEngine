@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from 'react'
+import { updateSkills } from '../../../../service/api';
 
-function Submit({answered}) {
+function Submit({title ,answered}) {
   const [marks, setMarks] = useState();
   console.log();
 useEffect(() => {
-  let x=Math.floor(Math.random()*answered.length);
+  const token = localStorage.getItem('token');
+  const initial = async () => {
+  // let x=Math.floor(Math.random()*answered.length);
+  let x =9;
+  if(x>=3 && x<=5){
+      const updateuser = await updateSkills(token, { skill:{name:title,level:"beginner",approval:false} });
+      console.log(updateuser);
+
+  }else if(x>=6 && x<=8){
+    const updateuser = await updateSkills(token, { skill:{name:title,level:"intermediate",approval:false} });
+    console.log(updateuser);
+  }else if(x>=9 && x<=10){
+    const updateuser = await updateSkills(token, { skill:{name:title,level:"advanced",approval:false} });
+    console.log(updateuser);
+  }
 setMarks(x);
+  }
+  initial();
 }, []);
   return (
     <div>
