@@ -265,6 +265,11 @@ const updateSkills =async(req,res)=>{
     }
     if (user.length === 0) return notFoundResponse(res, "User not found");
     let skills = user[0].skills;
+      for(let i=0 ; i<skills.length ; i++){
+        if(skills[i].name === req.body.skill.name){
+          return badRequestResponse(res, "Skill already exists");
+        }
+      }
     skills.push(req.body.skill);
     let [err1, user1] = await updateUserById(req.userId, { skills: skills });
     if (err1) {
