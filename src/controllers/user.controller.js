@@ -256,6 +256,28 @@ const OffCampusJobPost = async (req, res) => {
   }
 };
 
+const updateSkills =async(req,res)=>{
+  try{
+    let [err, user] = await getUserById(req.userId);
+    if (err) {
+      console.log(`Error in get user by id: ${err.message}`);
+      return serverErrorResponse(res, err.message);
+    }
+    if (user.length === 0) return notFoundResponse(res, "User not found");
+    let skills = user[0].skills;
+    skills.push(req.body.skill);
+    let [err1, user1] = await updateUserById(req.userId, { skills: skills });
+    if (err1) {
+      console.log(`Error in update user by id: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+    return successResponse(res, user1, "Skills updated");
+  }catch(err){
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+}
+
 module.exports = {
   userInfo,
   updateUserInfo,
@@ -270,4 +292,5 @@ module.exports = {
   getstudents,
   applyJob,
   OffCampusJobPost,
+  updateSkills
 };

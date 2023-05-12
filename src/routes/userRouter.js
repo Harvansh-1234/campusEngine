@@ -13,6 +13,7 @@ const {
   getstudents,
   applyJob,
   OffCampusJobPost,
+  updateSkills
 } = require("../controllers/user.controller");
 const {
   userValidate,
@@ -33,6 +34,7 @@ router.get("/getAllEligibleJobs", userValidate, getAllEligibleJobs);
 router.get("/getstudents", getstudents);
 router.post("/applyJob", userValidate, applyJob);
 router.get("/getAllOffCampusJobs", userValidate, OffCampusJobPost);
+router.post("/updateSkills", userValidate, updateSkills);
 
 
 module.exports = router;
