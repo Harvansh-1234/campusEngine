@@ -57,7 +57,7 @@ const listCompanyJobs = async (req, res) => {
   try {
     // get job post
     let [err1, jobPost1] = await getJobByQueryRepo({
-      jobId: req.userId,
+      _id: req.userId,
     });
     if (err1) {
       console.log(`Error in get job post: ${err1.message}`);
@@ -79,6 +79,7 @@ const listCompanyJobs = async (req, res) => {
 const listJobApplications = async (req, res) => {
   try {
     // get all applications for a job post
+    console.log("dflkjdklf", req.userId)
     let [err1, jobPost1] = await getApplicationByQueryRepo({
       jobId: req.body.jobId,
     });
@@ -88,7 +89,7 @@ const listJobApplications = async (req, res) => {
     }
     let userArr = new Array();
     for (let i = 0; i < jobPost1.length; i++) {
-      let [err2, user] = await getUserById(jobPost1[i].userId);
+      let [err2, user] = await getUserById(jobPost1[i].studentId);
       if (err2) {
         console.log(`Error in get user by id: ${err2.message}`);
         return serverErrorResponse(res, err2.message);
