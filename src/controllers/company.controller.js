@@ -9,6 +9,7 @@ const { createOffCampusJobPostRepo } = require("../repository/quiz.repo");
 const { serverErrorResponse, successResponse } = require("../utils/response");
 const { createJobPostRepo } = require("../repository/jobs.repo");
 const { getUserById, getUserByQuery } = require("../repository/user.repo");
+const {createCollegeInsight,getJobInsight} = require("../repository/collegeinsight");
 
 const createJobPost = async (req, res) => {
   try {
@@ -56,7 +57,7 @@ const listCompanyJobs = async (req, res) => {
   try {
     // get job post
     let [err1, jobPost1] = await getJobByQueryRepo({
-      jobId: req.userId,
+      _id: req.userId,
     });
     if (err1) {
       console.log(`Error in get job post: ${err1.message}`);
@@ -78,6 +79,7 @@ const listCompanyJobs = async (req, res) => {
 const listJobApplications = async (req, res) => {
   try {
     // get all applications for a job post
+    console.log("dflkjdklf", req.userId)
     let [err1, jobPost1] = await getApplicationByQueryRepo({
       jobId: req.body.jobId,
     });
@@ -87,13 +89,16 @@ const listJobApplications = async (req, res) => {
     }
     let userArr = new Array();
     for (let i = 0; i < jobPost1.length; i++) {
-      let [err2, user] = await getUserById(jobPost1[i].userId);
+      let [err2, user] = await getUserById(jobPost1[i].studentId);
       if (err2) {
         console.log(`Error in get user by id: ${err2.message}`);
         return serverErrorResponse(res, err2.message);
       }
-      userArr.push(user);
+      userArr.push(user[0]);
+
     }
+
+    console.log(userArr);
     return successResponse(res, userArr, "Job post fetched");
   } catch (err) {
     return serverErrorResponse(res, err.message);
@@ -117,11 +122,47 @@ const getAllCompanies = async (req, res) => {
     return serverErrorResponse(res, err.message);
   }
 };
+// college insight
+const createInsight = async(req,res)=>{
+  try {
+    let[err1,insight] = await createCollegeInsight(req.body);
+    if (err1) {
+      console.log(`Error in creating college insight: ${err1.message}`);
+      return serverErrorResponse(res, err1.message);
+    }
+    return successResponse(res, insight, "college insight created");
+  } catch (error) {
+    return serverErrorResponse(res, err.message);
+  }
+};
+const getInsight = async (req, res) => {
+  try {
+    
+    let [err1, getinsigh] = await getJobInsight(req.body.collegeId);
+    if (err1) {
+      console.log(`Error in get college Insight: ${err1.message}`);
 
+      return serverErrorResponse(res, err1.message);
+    }
+    if (getinsigh.length === 0)
+      return notFoundResponse(res, "college insight not found");
+
+    return successResponse(res, getinsigh, "college insight fetched");
+  } catch (err) {
+    let errObj = {
+      message: err.message,
+      status: 500,
+    };
+
+    return serverErrorResponse(res, errObj);
+  }
+};
 module.exports = {
   createJobPost,
   getJobPost,
   listCompanyJobs,
   listJobApplications,
   getAllCompanies,
+  createInsight,
+  getInsight,
 };

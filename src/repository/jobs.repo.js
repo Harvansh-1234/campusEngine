@@ -19,7 +19,7 @@ const createJobPostRepo = async (data) => {
 // get job post by query
 const getJobByQueryRepo = async (query) => {
   try {
-    let applications = await Job.find(query);
+    let applications = await Application.find(query);
     // console.log(`here is the list of jobs i am ${applications}`);
     return [null, applications];
   } catch (err) {
