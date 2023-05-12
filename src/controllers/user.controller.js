@@ -278,6 +278,17 @@ const updateSkills =async(req,res)=>{
   }
 }
 
+const filterSkills = async (req, res) => {
+  try {
+    const { skills } = req.body;
+    console.log(skills);
+    let users = await User.find({ "skills.name": { $in: skills } });
+    return successResponse(res, users, "Users fetched");
+  } catch (err) {
+    console.log(err);
+    return serverErrorResponse(res, err.message);
+  }
+};
 module.exports = {
   userInfo,
   updateUserInfo,
@@ -292,5 +303,6 @@ module.exports = {
   getstudents,
   applyJob,
   OffCampusJobPost,
-  updateSkills
+  updateSkills,
+  filterSkills,
 };
