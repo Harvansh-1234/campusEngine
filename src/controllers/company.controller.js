@@ -92,8 +92,11 @@ const listJobApplications = async (req, res) => {
         console.log(`Error in get user by id: ${err2.message}`);
         return serverErrorResponse(res, err2.message);
       }
-      userArr.push(user);
+      userArr.push(user[0]);
+
     }
+
+    console.log(userArr);
     return successResponse(res, userArr, "Job post fetched");
   } catch (err) {
     return serverErrorResponse(res, err.message);
