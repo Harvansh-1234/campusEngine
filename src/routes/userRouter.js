@@ -13,6 +13,7 @@ const {
   getstudents,
   applyJob,
   OffCampusJobPost,
+  updateSkills,
   filterSkills
 } = require("../controllers/user.controller");
 const {
@@ -34,6 +35,7 @@ router.get("/getAllEligibleJobs", userValidate, getAllEligibleJobs);
 router.get("/getstudents", getstudents);
 router.post("/applyJob", userValidate, applyJob);
 router.get("/getAllOffCampusJobs", userValidate, OffCampusJobPost);
+router.post("/updateSkills", userValidate, updateSkills);
 router.get("/filterSkills", filterSkills);
 
 

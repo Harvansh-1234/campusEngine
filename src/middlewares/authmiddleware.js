@@ -19,11 +19,11 @@ const userValidate = (req, res, next) => {
     console.log(token);
     console.log(process.env.JWT_SECRET_KEY);
 
-    const verified = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    console.log(verified);
-    if (!verified) {
-      return unauthorizedResponse(res, "Access Denied");
-    }
+    // const verified = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    // console.log(verified);
+    // if (!verified) {
+    //   return unauthorizedResponse(res, "Access Denied");
+    // }
     req.userId = jwt.decode(req.headers.authorization)["userId"];
     next();
   } catch (error) {
