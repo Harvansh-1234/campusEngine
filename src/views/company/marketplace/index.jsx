@@ -20,7 +20,7 @@
 
 */
 
-import React from "react";
+import React, { useState ,useEffect} from "react";
 
 // Chakra imports
 import {
@@ -38,6 +38,7 @@ import {
 import Banner from "views/company/marketplace/components/Banner";
 import TableTopCreators from "views/company/marketplace/components/TableTopCreators";
 import HistoryItem from "views/company/marketplace/components/HistoryItem";
+import {createInsight, getInsight} from "../../../service/api"
 import NFT from "components/card/NFT";
 import Card from "components/card/Card.js";
 
@@ -66,6 +67,16 @@ export default function Marketplace() {
   // Chakra Color Mode
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
+  
+  useEffect(()=>{
+    const ini = async()=>{
+      const id = "645cb97ebcd21a56cf440241";
+       const res = await getInsight(id);
+       console.log(res);
+
+    }
+    ini();
+  },[])
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       {/* Main Fields */}

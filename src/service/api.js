@@ -1,6 +1,6 @@
 import axios from 'axios';
-// export const url = "http://localhost:8000";
- export const url = "https://campus-engine.onrender.com";
+export const url = "http://localhost:8000";
+//  export const url = "https://campus-engine.onrender.com";
 //auth
 
 export const signIn = async (data) => {
@@ -95,6 +95,24 @@ export const createJob = async (token, data) => {
 
     } catch (error) {
         console.log(error)
+    }
+}
+// create college Insight
+export const createInsight = async (data) => {
+    try {
+        console.log(data);
+        return await axios.post(`${url}/api/company/createInsight`, data);
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const getInsight = async(id)=>{
+    try {
+        console.log(id);
+        return await axios.post(`${url}/api/company/findInsight`, { collegeId: id });
+    } catch (error) {
+        console.log(error)
+
     }
 }
 export const listCompanyJob = async (token) => {

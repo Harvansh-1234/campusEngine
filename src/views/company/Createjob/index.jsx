@@ -87,8 +87,6 @@ function CreateJob() {
                     jobDeadline: '',
                     
                     jobPostedOn: new Date(),
-
-
                 }}
                 onSubmit={async (values) => {
                     console.log(values);

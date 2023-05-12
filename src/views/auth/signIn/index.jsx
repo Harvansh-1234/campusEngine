@@ -44,7 +44,8 @@ function SignIn() {
       localStorage.setItem("token", userdata.data.data.token);
       localStorage.setItem("user", JSON.stringify(userdata.data.data));
       if(userdata.data.data.userType==='company')
-      window.location.replace('http://campusengine.netlify.app/#/company/default');
+      window.location.replace('http://localhost:3000/#/company/default')
+      // window.location.replace('http://campusengine.netlify.app/#/company/default');
       else if(userdata.data.data.userType==='user')
       window.location.replace('http://campusengine.netlify.app/#/user/default');
       else
