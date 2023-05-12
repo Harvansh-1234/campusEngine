@@ -10,6 +10,7 @@ function QuizMain() {
   const [checkSubmit, setCheckSubmit] = useState(false);
   const [data, setData] = useState();
   const [answered, setAnswered] = useState([]);
+  const [title ,setTitle] = useState();
   useEffect(() => {
     const initial = async () => {
       // var currenturl=window.location.search;
@@ -17,6 +18,7 @@ function QuizMain() {
       // var title=currenturlsearch.get('title');
       let token = localStorage.getItem('token');
       let title = localStorage.getItem('quizName');
+      setTitle(title);
       let quizData= await getQuiz(token,title);
       console.log(quizData.data.data);
       setData(quizData.data.data[0].quizQuestions);
@@ -60,7 +62,7 @@ function QuizMain() {
           }}>Submit</button>
         </div>
       </div>:
-      <Submit answered={answered}/>
+      <Submit title={title} answered={answered}/>
       }
       
     </div>

@@ -1,0 +1,152 @@
+.outer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  z-index: 1;
+ padding: 0px;
+}
+
+.textlabel{
+  width: 100%;
+  text-align: center;
+
+}
+
+.Badgetext{
+  margin:auto;
+  margin-top: 5px;
+  padding: 0px 10px;
+  font-weight: 700;
+  font-size: 1em;
+}
+
+.leveltext{
+  margin:auto;
+  margin-top: 1px;
+  padding: 0px 8px;
+  font-size: small;
+}
+.leveltext2{
+ 
+  font-size: 10px;
+  z-index: 20 !important;
+}
+
+.Inhex {
+  margin-top: 30px;
+  margin-right: 10px;
+  border-radius: 5px;
+  width: 104px;
+  height: 60px;
+  background-color: #c5dce1;
+  border-color: #c5dce1;
+  position: relative;
+  display: inline-block;
+}
+.Inhex:before {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-bottom: 30px solid;
+  border-color: inherit;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
+  position: absolute;
+  top: -25px;
+  border-radius: 0px;
+
+}
+.Inhex:after {
+  content: "";
+  width: 0;
+  position: absolute;
+  bottom: -25px;
+  border-top: 32px solid;
+  border-color: inherit;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
+  border-radius: 0px;
+
+}
+
+/* ================================== */
+
+.hex {
+  margin-top: 30px;
+  margin-right: 10px;
+  border-radius: 5px;
+  width: 104px;
+  height: 60px;
+  background-color: #ffb89f;
+  border-color: #ffb89f;
+  position: relative;
+  display: inline-block;
+}
+.hex:before {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-radius: 5px;
+
+  border-bottom: 30px solid;
+  border-color: inherit;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
+  position: absolute;
+  top: -28px;
+}
+.hex:after {
+  content: "";
+  width: 0;
+  position: absolute;
+  bottom: -30px;
+  border-radius: 8px;
+
+  border-top: 32px solid;
+  border-color: inherit;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
+}
+
+/* ================================== */
+
+.Avhex {
+  margin-top: 30px;
+  margin-right: 10px;
+  width: 104px;
+  height: 60px;
+  background-color: #f0c53a;
+  border-color: #f0c53a;
+  position: relative;
+  border-radius: 5px;
+
+  display: inline-block;
+}
+.Avhex:before {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-bottom: 30px solid;
+  border-color: inherit;
+  border-left: 52px solid transparent;
+  border-radius: 5px;
+
+  border-right: 52px solid transparent;
+  position: absolute;
+  top: -28px;
+}
+.Avhex:after {
+  content: "";
+  width: 0;
+  position: absolute;
+  bottom: -30px;
+  border-top: 32px solid;
+  border-color: inherit;
+  border-left: 52px solid transparent;
+  border-right: 52px solid transparent;
+  border-radius: 5px;
+
+}

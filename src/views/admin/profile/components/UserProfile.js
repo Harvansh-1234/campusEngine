@@ -4,7 +4,7 @@ import 'assets/css/userProfile.css';
 import { useEffect, useState } from 'react';
 import { getUserInfo } from '../../../../service/api'
 
-
+import '../../../../assets/css/badge.css'
 
 
 function UserProfile() {
@@ -19,7 +19,7 @@ function UserProfile() {
       let id = users._id;
       // console.log(token);
       const userData = await getUserInfo(id);
-       console.log(userData);
+      console.log(userData);
       if (userData.status === 200) {
 
         setUser(userData.data.data);
@@ -38,11 +38,11 @@ function UserProfile() {
           firstName: '',
           lastName: '',
           email: '',
-          contact:'',
-          degree:'',
-          branch:'',
-          skills:'',
-          
+          contact: '',
+          degree: '',
+          branch: '',
+          skills: '',
+
         }}
         onSubmit={async (values) => {
           // await new Promise((r) => setTimeout(r, 500));
@@ -57,7 +57,7 @@ function UserProfile() {
             </div>
             <div className='field'>
               <label htmlFor="lastName">Last Name</label>
-              <Field id="lastName" name="lastName" placeholder="" value={user.lastName}  disabled />
+              <Field id="lastName" name="lastName" placeholder="" value={user.lastName} disabled />
             </div>
           </div>
           <div className='headField'>
@@ -70,7 +70,7 @@ function UserProfile() {
                 placeholder=""
                 type="email"
                 value={user.email}
-                disabled 
+                disabled
               />
             </div>
             <div className='field'>
@@ -81,7 +81,7 @@ function UserProfile() {
                 name="contactNo"
                 placeholder=""
                 type="contactNo"
-                disabled 
+                disabled
                 value={user.contactNo}
               />
             </div>
@@ -89,14 +89,50 @@ function UserProfile() {
           <div className='headField'>
             <div className='field'>
               <label htmlFor="email">Skills</label>
-              {/* {user.skills && user.skills.map((skill) => {
-                return (
-                  <div className='skill'>
-                    <p>{skill}</p>
-                  </div>
-                )
-              })
-              } */}
+              <div className='outer'>
+
+                {user && user.skills && user.skills.map((skill) => {
+                  if (skill.level === "beginner") {
+
+                    return (
+                      <div className='hex'>
+                        <div className="textlabel">
+                          <p className='Badgetext'>{skill.name}</p>
+                          <p className='leveltext2'>Beginner</p>
+                          <p className='leveltext'>★★★</p>
+                        </div>
+                      </div>
+                    )
+                  } else if (skill.level === "intermediate") {
+
+                    return (
+                      <div className='Inhex'>
+                        <div className="textlabel">
+                          <p className='Badgetext'>{skill.name}</p>
+                          <p className='leveltext2'>Intermediate</p>
+
+                          <p className='leveltext'>★★★★★</p>
+
+                        </div>
+                      </div>
+                    )
+                  } else if (skill.level === "advanced") {
+
+                    return (
+                      <div className='Avhex'>
+                        <div className="textlabel">
+                          <p className='Badgetext'>{skill.name}</p>
+                          <p className='leveltext2'>Advanced</p>
+
+                          <p className='leveltext'>★★★★★★★</p>
+
+                        </div>
+                      </div>
+                    )
+                  }
+                })
+                }
+              </div>
             </div>
           </div>
         </Form>

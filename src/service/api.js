@@ -1,6 +1,6 @@
 import axios from 'axios';
-// export const url = "http://localhost:8000";
-export const url = "https://campus-engine.onrender.com";
+export const url = "http://localhost:8000";
+// export const url = "https://campus-engine.onrender.com";
 
 //auth
 
@@ -79,6 +79,14 @@ export const updateUser = async (token, data) => {
     try {
         console.log(data);
         return await axios.post(`${url}/api/user/updateUserInfo`, data, { headers: { authorization: token } });
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const updateSkills = async (token, data) => {
+    try {
+        console.log(data);
+        return await axios.post(`${url}/api/user/updateSkills`, data, { headers: { authorization: token } });
     } catch (error) {
         console.log(error)
     }
