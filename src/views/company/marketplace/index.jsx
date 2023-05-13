@@ -25,7 +25,7 @@ import React, { useState ,useEffect} from "react";
 // Chakra imports
 import {
   Box,
-  Button,
+  // Button,
   Flex,
   Grid,
   Link,
@@ -38,36 +38,45 @@ import {
 import Banner from "views/company/marketplace/components/Banner";
 import TableTopCreators from "views/company/marketplace/components/TableTopCreators";
 import HistoryItem from "views/company/marketplace/components/HistoryItem";
-import {createInsight, getInsight} from "../../../service/api"
+import {getInsight} from "../../../service/api"
 import NFT from "components/card/NFT";
 import Card from "components/card/Card.js";
 
 // Assets
-import Nft1 from "assets/img/nfts/images.png";
+// import Nft1 from "assets/img/nfts/images.png";
 import Nft2 from "assets/img/nfts/Nft2.png";
-import Nft3 from "assets/img/nfts/download.jpg";
-import Nft4 from "assets/img/nfts/cyber.jpg";
+// import Nft3 from "assets/img/nfts/download.jpg";
+// import Nft4 from "assets/img/nfts/cyber.jpg";
 import Nft5 from "assets/img/nfts/blockchain.jpg";
-import Nft6 from "assets/img/nfts/cpp.jpg";
+// import Nft6 from "assets/img/nfts/cpp.jpg";
 
 import Bajaj from "assets/img/nfts/bajaj.png";
-import tcs from "assets/img/nfts/tcs.jpg";
-import wipro from "assets/img/nfts/wipro.png";
-import accpng from "assets/img/nfts/accpng.png";
-import hcl from "assets/img/nfts/hcl.png";
+// import tcs from "assets/img/nfts/tcs.jpg";
+// import wipro from "assets/img/nfts/wipro.png";
+// import accpng from "assets/img/nfts/accpng.png";
+// import hcl from "assets/img/nfts/hcl.png";
 
 import Avatar1 from "assets/img/avatars/avatar1.png";
 import Avatar2 from "assets/img/avatars/avatar2.png";
 import Avatar3 from "assets/img/avatars/avatar3.png";
 import Avatar4 from "assets/img/avatars/avatar4.png";
+import { SearchBar } from "components/navbar/searchBar/SearchBar";
 import tableDataTopCreators from "views/company/marketplace/variables/tableDataTopCreators.json";
 import { tableColumnsTopCreators } from "views/company/marketplace/variables/tableColumnsTopCreators";
 
-export default function Marketplace() {
+export default function Marketplace(props) {
+  const { secondary } = props;
   // Chakra Color Mode
+
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const [data,setData] = useState("");
+  let menuBg = useColorModeValue('white', 'navy.800');
+
+  const shadow = useColorModeValue(
+		'14px 17px 40px 4px rgba(112, 144, 176, 0.18)',
+		'14px 17px 40px 4px rgba(112, 144, 176, 0.06)'
+	);
   useEffect(()=>{
     const ini = async()=>{
       const id = "645cb97ebcd21a56cf440241";
@@ -78,8 +87,19 @@ export default function Marketplace() {
     ini();
   },[])
   return (
+    <>
+    <Flex w={{ sm: '100%', md: 'auto' }}
+			alignItems="center"
+			flexDirection="row"
+			bg={menuBg}
+			flexWrap={secondary ? { base: 'wrap', md: 'nowrap' } : 'unset'}
+			p="10px"
+			borderRadius="30px"
+			boxShadow={shadow}>
+        <SearchBar mb={secondary ? { base: '10px', md: 'unset' } : 'unset'} me="10px" borderRadius="30px" />
+      </Flex>
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
-      {console.log(data.data?data.data.data.recruiters[0].companyName:"")};
+      {/* {console.log(data.data?data.data.data.recruiters[0].companyName:"")}; */}
       {/* Main Fields */}
       <Grid
         mb='20px'
@@ -233,5 +253,6 @@ export default function Marketplace() {
       </Grid>
       {/* Delete Product */}
     </Box>
+    </>
   );
 }
