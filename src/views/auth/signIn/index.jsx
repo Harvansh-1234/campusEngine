@@ -57,7 +57,7 @@ function SignIn() {
       else
         window.location.replace(
           // "http://campusengine.netlify.app/#/tnp/default"
-          "http://localhost:3000/#/admin/default"
+          "http://localhost:3000/#/tnp/default"
 
         );
     }else{

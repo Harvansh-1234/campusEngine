@@ -14,7 +14,7 @@ import Profile from "views/company/profile";
 import CreateJob from "views/company/Createjob";
 import JobList from "views/company/JobList";
 import JobDetail from "views/company/JobDetail";
-import addInsight from "views/company/addInsight";
+// import addInsight from "views/company/addInsight";
 import CollegeInsights from "views/company/marketplace";
 const companyRoutes = [
     {
@@ -58,14 +58,14 @@ const companyRoutes = [
         component: JobDetail,
         hide:true,
     },
-    {
-        name: "Add Insight",
-        layout: "/company",
-        path: "/addInsight",
-        icon: <Icon as={MdList} width='20px' height='20px' color='inherit' />,
-        component: addInsight,
-        hide:false,
-    },
+    // {
+    //     name: "Add Insight",
+    //     layout: "/company",
+    //     path: "/addInsight",
+    //     icon: <Icon as={MdList} width='20px' height='20px' color='inherit' />,
+    //     component: addInsight,
+    //     hide:false,
+    // }
     {
         name: "College Insights",
         layout: "/company",
