@@ -25,7 +25,7 @@ import React, { useState ,useEffect} from "react";
 // Chakra imports
 import {
   Box,
-  Button,
+  // Button,
   Flex,
   Grid,
   Link,
@@ -38,47 +38,68 @@ import {
 import Banner from "views/company/marketplace/components/Banner";
 import TableTopCreators from "views/company/marketplace/components/TableTopCreators";
 import HistoryItem from "views/company/marketplace/components/HistoryItem";
-import {createInsight, getInsight} from "../../../service/api"
+import {getInsight} from "../../../service/api"
 import NFT from "components/card/NFT";
 import Card from "components/card/Card.js";
 
 // Assets
-import Nft1 from "assets/img/nfts/images.png";
+// import Nft1 from "assets/img/nfts/images.png";
 import Nft2 from "assets/img/nfts/Nft2.png";
-import Nft3 from "assets/img/nfts/download.jpg";
-import Nft4 from "assets/img/nfts/cyber.jpg";
+// import Nft3 from "assets/img/nfts/download.jpg";
+// import Nft4 from "assets/img/nfts/cyber.jpg";
 import Nft5 from "assets/img/nfts/blockchain.jpg";
-import Nft6 from "assets/img/nfts/cpp.jpg";
+// import Nft6 from "assets/img/nfts/cpp.jpg";
 
 import Bajaj from "assets/img/nfts/bajaj.png";
-import tcs from "assets/img/nfts/tcs.jpg";
-import wipro from "assets/img/nfts/wipro.png";
-import accpng from "assets/img/nfts/accpng.png";
-import hcl from "assets/img/nfts/hcl.png";
+// import tcs from "assets/img/nfts/tcs.jpg";
+// import wipro from "assets/img/nfts/wipro.png";
+// import accpng from "assets/img/nfts/accpng.png";
+// import hcl from "assets/img/nfts/hcl.png";
 
 import Avatar1 from "assets/img/avatars/avatar1.png";
 import Avatar2 from "assets/img/avatars/avatar2.png";
 import Avatar3 from "assets/img/avatars/avatar3.png";
 import Avatar4 from "assets/img/avatars/avatar4.png";
+import { SearchBar } from "components/navbar/searchBar/SearchBar";
 import tableDataTopCreators from "views/company/marketplace/variables/tableDataTopCreators.json";
 import { tableColumnsTopCreators } from "views/company/marketplace/variables/tableColumnsTopCreators";
 
-export default function Marketplace() {
+export default function Marketplace(props) {
+  const { secondary } = props;
   // Chakra Color Mode
+
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorBrand = useColorModeValue("brand.500", "white");
-  
+  const [data,setData] = useState("");
+  let menuBg = useColorModeValue('white', 'navy.800');
+
+  const shadow = useColorModeValue(
+		'14px 17px 40px 4px rgba(112, 144, 176, 0.18)',
+		'14px 17px 40px 4px rgba(112, 144, 176, 0.06)'
+	);
   useEffect(()=>{
     const ini = async()=>{
       const id = "645cb97ebcd21a56cf440241";
        const res = await getInsight(id);
        console.log(res);
-
+      setData(res);
     }
     ini();
   },[])
   return (
+    <>
+    <Flex w={{ sm: '100%', md: 'auto' }}
+			alignItems="center"
+			flexDirection="row"
+			bg={menuBg}
+			flexWrap={secondary ? { base: 'wrap', md: 'nowrap' } : 'unset'}
+			p="10px"
+			borderRadius="30px"
+			boxShadow={shadow}>
+        <SearchBar mb={secondary ? { base: '10px', md: 'unset' } : 'unset'} me="10px" borderRadius="30px" />
+      </Flex>
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
+      {/* {console.log(data.data?data.data.data.recruiters[0].companyName:"")}; */}
       {/* Main Fields */}
       <Grid
         mb='20px'
@@ -131,9 +152,11 @@ export default function Marketplace() {
               </Flex>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap='20px'>
-              <NFT
-                name='Data Science'
-                author='By Esthera Jackson'
+              {data.data?data.data.data.ourCourses.map((value)=>{
+                return (
+                  <NFT
+                name={value.courseName}
+                author={value.instructorName}
                 bidders={[
                   Avatar1,
                   Avatar2,
@@ -144,44 +167,14 @@ export default function Marketplace() {
                   Avatar1,
                   Avatar1,
                 ]}
-                image={Nft1}
+                image={value.courseImgUrl?value.courseImgUrl:Nft2}
                 // currentbid='0.91 ETH'
                 download='#'
               />
-              <NFT
-                name='Machine Learning'
-                author='By Nick Wilson'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft2}
-                // currentbid='0.91 ETH'
-                download='#'
-              />
-              <NFT
-                name='AI'
-                author='By Will Smith'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft3}
-                // currentbid='0.91 ETH'
-                download='#'
-              />
+                )
+              }):"No Courses to Display"}
+              
+              
             </SimpleGrid>
             <Text
               mt='45px'
@@ -196,9 +189,11 @@ export default function Marketplace() {
               columns={{ base: 1, md: 3 }}
               gap='20px'
               mb={{ base: "20px", xl: "0px" }}>
-              <NFT
-                name='Cyber Security'
-                author='By Peter Will'
+              {data.data?data.data.data.recentlyAdded.map((value)=>{
+                return(
+                  <NFT
+                name={value.courseName}
+                author={value.instructorName}
                 bidders={[
                   Avatar1,
                   Avatar2,
@@ -209,44 +204,13 @@ export default function Marketplace() {
                   Avatar1,
                   Avatar1,
                 ]}
-                image={Nft4}
-                currentbid='0.91 ETH'
-                download='#'
-              />
-              <NFT
-                name='Blockchain'
-                author='By Mark Benjamin'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft5}
+                image={value.courseImgUrl?value.courseImgUrl:Nft5}
                 // currentbid='0.91 ETH'
                 download='#'
               />
-              <NFT
-                name='C++'
-                author='By Manny Gates'
-                bidders={[
-                  Avatar1,
-                  Avatar2,
-                  Avatar3,
-                  Avatar4,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                  Avatar1,
-                ]}
-                image={Nft6}
-                currentbid='0.91 ETH'
-                download='#'
-              />
+                )
+              }):"No Recently Added Courses Yet"}
+              
             </SimpleGrid>
           </Flex>
         </Flex>
@@ -269,49 +233,26 @@ export default function Marketplace() {
               <Text color={textColor} fontSize='xl' fontWeight='600'>
                 Recruiters
               </Text>
-              <Button variant='action'>See all</Button>
+              {/* <Button variant='action'>See all</Button> */}
             </Flex>
-
-            <HistoryItem
-              name='Bajaj Finserv'
-              author='By Mark Benjamin'
+            {data.data?data.data.data.recruiters.map((value)=> {
+              return(
+                <HistoryItem
+              name={value.companyName}
+              author={value.interviewerName}
               date='30s ago'
-              image={Bajaj}
+              image={value.companyLogo?value.companyLogo:Bajaj}
               price='0.91 ETH'
             />
-            <HistoryItem
-              name='TCS'
-              author='By Esthera Jackson'
-              date='58s ago'
-              image={tcs}
-              price='0.91 ETH'
-            />
+              )
+              
+            }):"No Recruiters yet"}
             
-            <HistoryItem
-              name='Wipro'
-              author='By Peter Will'
-              date='1m ago'
-              image={wipro}
-              price='0.91 ETH'
-            />
-            <HistoryItem
-              name='Accenture'
-              author='By Will Smith'
-              date='2m ago'
-              image={accpng}
-              price='0.91 ETH'
-            />
-            <HistoryItem
-              name='HCL'
-              author='By Manny Gates'
-              date='3m ago'
-              image={hcl}
-              price='0.91 ETH'
-            />
           </Card>
         </Flex>
       </Grid>
       {/* Delete Product */}
     </Box>
+    </>
   );
 }

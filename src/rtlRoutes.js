@@ -15,6 +15,7 @@ import StudentList from "views/rtl/studentList";
 import Company from "views/rtl/company";
 import JobApproval from "views/rtl/jobApproval";
 import Approvedjobs from "views/rtl/approvedJobs";
+import Addinsights from "views/rtl/addInsight"
 const rtlRoutes = [
 
   {
@@ -63,6 +64,14 @@ const rtlRoutes = [
     path: "/approvedjobs",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: Approvedjobs,
+    hide: false,
+  },
+  {
+    name: "Add College Insights",
+    layout: "/tnp",
+    path: "/addInsight",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component: Addinsights,
     hide: false,
   },
 ];
