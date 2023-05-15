@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik, Field, Form } from 'formik';
-import 'assets/css/resume.css';
+ import '../../../assets/css/resume.css';
 import { useEffect, useState } from 'react';
 import { getUserInfo, getResume } from '../../../service/api'
 // import { Select } from '@chakra-ui/react'
