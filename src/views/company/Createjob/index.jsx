@@ -13,7 +13,7 @@ import {
     AiOutlineDelete,
 
 } from "react-icons/ai";
-import 'assets/css/quiz.css'
+// import 'assets/css/quiz.css'
 import {
     Modal,
     ModalOverlay,

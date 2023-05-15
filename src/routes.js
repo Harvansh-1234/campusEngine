@@ -13,6 +13,7 @@ import Profile from "views/admin/profile";
 import Question from "views/admin/quiz/QuizMain"
 import Resume from "views/admin/resume"
 import OnCampus from "views/admin/onCampus";
+import AppliedJobs from "views/admin/appliedJobs";
 import OffCampus from "views/admin/offCampus";
 
 const routes = [
@@ -64,6 +65,14 @@ const routes = [
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Question,
     hide:true,
+  },
+  {
+    name: "Applied Jobs",
+    layout: "/user",
+    path: "/appliedJobs",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: AppliedJobs,
+    hide:false,
   },
   {
     name: "On Campus Jobs",

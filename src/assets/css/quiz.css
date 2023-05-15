@@ -18,6 +18,7 @@
 .question{
     background-color: white;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    height: 100%;
     width: 60%;
     margin: 0 auto;
     padding: 20px;

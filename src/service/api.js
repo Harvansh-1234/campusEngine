@@ -179,10 +179,10 @@ export const getJobDetail = async (token, id) => {
             console.log(error)
         }
     }
-    export const listJobApplicants = async (data) => {
+    export const listJobApplicants = async (token, data) => {
         try {
             console.log(data);
-            return await axios.post(`${url}/api/company/listJobApplicants`,data);
+            return await axios.post(`${url}/api/company/jobApplicantsList`,data, { headers: { authorization: token } });
         } catch (error) {
             console.log(error)
         }
