@@ -19,7 +19,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-// import { createInsight } from "service/api";
+import { createInsight } from "service/api";
 function AddInsight() {
   const [recentlyTemplate, setRecentlyTemplate] = useState("");
   const [courseImgUrl, setCourseImgUrl] = useState(null);
@@ -188,7 +188,7 @@ function AddInsight() {
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent w="100%" style={{ width: "200%" }}>
-                  <ModalHeader>Education Details</ModalHeader>
+                  <ModalHeader>Course Details</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody mx="auto">
                     {/* <Lorem count={2} /> */}
@@ -344,7 +344,7 @@ function AddInsight() {
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent w="100%" style={{ width: "200%" }}>
-                  <ModalHeader>Education Details</ModalHeader>
+                  <ModalHeader>Recent Course Details</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody mx="auto">
                     {/* <Lorem count={2} /> */}
@@ -500,7 +500,7 @@ function AddInsight() {
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent w="100%" style={{ width: "200%" }}>
-                  <ModalHeader>Education Details</ModalHeader>
+                  <ModalHeader>Top Students Details</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody mx="auto">
                     {/* <Lorem count={2} /> */}
@@ -762,8 +762,23 @@ function AddInsight() {
               </Modal>
             )}
           </div>
-
-          <Button colorScheme="blue" mx="45%" borderRadius="5px" type="submit">
+          <Button
+            colorScheme="blue"
+            mx="45%"
+            borderRadius="5px"
+            type="button"
+            onClick={async () => {
+              let data = {
+                collegeLogo:collegeLogo,
+                ourCourses:edu,
+                recentlyAdded:recent,
+                topStudents:stu,
+                recruiters:recruit
+              }
+              const uploaddata = await createInsight(data);
+              console.log(uploaddata);
+            }}
+          >
             Submit
           </Button>
         </Form>
