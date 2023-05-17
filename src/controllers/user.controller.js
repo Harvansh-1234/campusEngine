@@ -22,7 +22,7 @@ const {
 
 const userInfo = async (req, res) => {
   try {
-    console.log("",req.params.id);
+    console.log("user id",req.params.id);
     let id = req.params.id;
     let [err, user] = await getUserById(id);
     console.log(user);
@@ -216,6 +216,8 @@ const getAllEligibleJobs = async (req, res) => {
     };
     console.log(query);
     let [err, jobs] = await getJobByQueryRepo(query);
+
+
     console.log(jobs);
     if (err) {
       console.log(`Error in get jobs: ${err.message}`);
