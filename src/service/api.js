@@ -65,6 +65,15 @@ export const Upload = async (data, email) => {
         console.log("Error while calling signup API: ", error);
     }
 };
+export const UploadCollegeProfile = async(data)=>{
+    try {
+        console.log(data);
+        return await axios.post(`${url}/uploadCollegeProfile`, { image: data });
+    } catch (error) {
+        console.log(error);
+        console.log("Error while Uploading the Picture ", error);
+    }
+}
 
 export const getAllEligibleJobs = async(token) => {
     try {
