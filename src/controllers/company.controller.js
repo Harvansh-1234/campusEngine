@@ -40,6 +40,8 @@ const getJobPost = async (req, res) => {
     if (jobPost1.length === 0)
       return notFoundResponse(res, "Job post not found");
 
+      console.log(jobPost1)
+
     return successResponse(res, jobPost1, "Job post fetched");
   } catch (err) {
     let errObj = {
@@ -85,15 +87,22 @@ const listJobApplications = async (req, res) => {
       console.log(`Error in get job post: ${err1.message}`);
       return serverErrorResponse(res, err1.message);
     }
+    console.log("jobPost1",jobPost1)
     let userArr = new Array();
     for (let i = 0; i < jobPost1.length; i++) {
-      let [err2, user] = await getUserById(jobPost1[i].userId);
+      let [err2, user] = await getUserById(jobPost1[i].studentId);
       if (err2) {
         console.log(`Error in get user by id: ${err2.message}`);
         return serverErrorResponse(res, err2.message);
       }
-      userArr.push(user);
+      userArr.push(user[0]);
     }
+
+   
+
+
+
+    console.log(userArr);
     return successResponse(res, userArr, "Job post fetched");
   } catch (err) {
     return serverErrorResponse(res, err.message);

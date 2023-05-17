@@ -19,7 +19,7 @@ router.post("/updateCompanyInfo", companyValidate, updateUserInfo);
 router.post("/createJob", companyValidate, createJobPost);
 router.get("/listCompanyJob", companyValidate, listCompanyJobs);
 router.post("/getJobInfo", companyValidate, getJobPost);
-router.post("/listJobApplicants", companyValidate, listJobApplications);
+router.post("/jobApplicantsList", companyValidate, listJobApplications);
 
 // tnp routes
 

@@ -42,12 +42,12 @@ const companyValidate = (req, res, next) => {
 
     console.log(data);
 
-    // validate token
-    const token = req.headers.authorization;
-    const verified = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    if (!verified) {
-      return unauthorizedResponse(res, "Access Denied");
-    }
+    // // validate token
+    // const token = req.headers.authorization;
+    // const verified = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    // if (!verified) {
+    //   return unauthorizedResponse(res, "Access Denied");
+    // }
     req.userId = jwt.decode(req.headers.authorization)["userId"];
     next();
   } catch (error) {
