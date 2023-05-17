@@ -16,7 +16,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-// import { createInsight } from "service/api";
+import { createInsight } from "service/api";
 function AddInsight() {
   const [recentlyTemplate, setRecentlyTemplate] = useState("");
   const [courseImgUrl, setCourseImgUrl] = useState(null);
@@ -34,10 +34,10 @@ function AddInsight() {
   const [stu, setStu] = useState([]);
   const [resume, setResume] = useState({});
   const [recruiter, setRecruiter] = useState({
-    companyLogo:"",
-    companyName:"",
-    interviewerName:"",
-  })
+    companyLogo: "",
+    companyName: "",
+    interviewerName: "",
+  });
   const [topStudent, setTopStudent] = useState({
     studentName: "",
     studentCgpa: "",
@@ -105,7 +105,7 @@ function AddInsight() {
     console.log(recentlyTemplate);
     setBlock(false);
   };
-    const uploadRecruiter = async (event) => {
+  const uploadRecruiter = async (event) => {
     setBlock(true);
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
@@ -185,7 +185,7 @@ function AddInsight() {
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent w="100%" style={{ width: "200%" }}>
-                  <ModalHeader>Education Details</ModalHeader>
+                  <ModalHeader>Course Details</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody mx="auto">
                     {/* <Lorem count={2} /> */}
@@ -329,7 +329,7 @@ function AddInsight() {
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent w="100%" style={{ width: "200%" }}>
-                  <ModalHeader>Education Details</ModalHeader>
+                  <ModalHeader>Recent Course Details</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody mx="auto">
                     {/* <Lorem count={2} /> */}
@@ -473,7 +473,7 @@ function AddInsight() {
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent w="100%" style={{ width: "200%" }}>
-                  <ModalHeader>Education Details</ModalHeader>
+                  <ModalHeader>Top Students Details</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody mx="auto">
                     {/* <Lorem count={2} /> */}
@@ -651,7 +651,9 @@ function AddInsight() {
                           <Form className="">
                             <div className="headField">
                               <div className="field">
-                                <label htmlFor="companyName">Company Name</label>
+                                <label htmlFor="companyName">
+                                  Company Name
+                                </label>
                                 <Field
                                   id="companyName"
                                   name="companyName"
@@ -706,8 +708,23 @@ function AddInsight() {
               </Modal>
             )}
           </div>
-
-          <Button colorScheme="blue" mx="45%" borderRadius="5px" type="submit">
+          <Button
+            colorScheme="blue"
+            mx="45%"
+            borderRadius="5px"
+            type="button"
+            onClick={async () => {
+              let data = {
+                collegeLogo:collegeLogo,
+                ourCourses:edu,
+                recentlyAdded:recent,
+                topStudents:stu,
+                recruiters:recruit
+              }
+              const uploaddata = await createInsight(data);
+              console.log(uploaddata);
+            }}
+          >
             Submit
           </Button>
         </Form>
