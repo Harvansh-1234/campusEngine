@@ -4,6 +4,9 @@ import { Button } from "@chakra-ui/react";
 import { UploadCollegeProfile } from "service/api";
 import { AiOutlineDelete } from "react-icons/ai";
 import { Avatar, Box, Flex, useColorModeValue } from "@chakra-ui/react";
+import "assets/css/resume.css";
+import "assets/css/logIn.css";
+import "assets/css/quiz.css";
 
 import {
   Modal,
@@ -34,10 +37,10 @@ function AddInsight() {
   const [stu, setStu] = useState([]);
   const [resume, setResume] = useState({});
   const [recruiter, setRecruiter] = useState({
-    companyLogo:"",
-    companyName:"",
-    interviewerName:"",
-  })
+    companyLogo: "",
+    companyName: "",
+    interviewerName: "",
+  });
   const [topStudent, setTopStudent] = useState({
     studentName: "",
     studentCgpa: "",
@@ -105,7 +108,7 @@ function AddInsight() {
     console.log(recentlyTemplate);
     setBlock(false);
   };
-    const uploadRecruiter = async (event) => {
+  const uploadRecruiter = async (event) => {
     setBlock(true);
     const file = event.target.files[0];
     const base64 = await convertBase64(file);
@@ -217,17 +220,24 @@ function AddInsight() {
                     >
                       {({ values }) => {
                         return (
-                          <Form className="">
-                            <div className="headField">
-                              <div className="field">
-                                <label htmlFor="courseName">Course Name</label>
+                          <Form
+                            style={{ display: "flex", width: "100%",position:'relative' }}
+                            className=""
+                          >
+                            <div>
+                              <div style={{ width: "33%", padding: "10px" }}>
+                                <label htmlFor="courseName">Course Name:</label>
                                 <Field
+                                  style={{
+                                    border: "solid",
+                                    borderRadius: "6px",
+                                  }}
                                   id="courseName"
                                   name="courseName"
                                   placeholder=""
                                 />
                               </div>
-                              <div className="field">
+                              <div style={{ width: "33%", padding: "10px" }}>
                                 <label htmlFor="courseImgUrl">
                                   Course Template
                                 </label>
@@ -240,25 +250,29 @@ function AddInsight() {
                                   onChange={uploadCourse}
                                 />
                               </div>
-                              <div className="field">
+                              <div style={{ width: "33%", padding: "10px" }}>
                                 <label htmlFor="instructorName">
                                   Course Instructor
                                 </label>
                                 <Field
+                                  style={{
+                                    border: "solid",
+                                    borderRadius: "6px",
+                                  }}
                                   id="instructorName"
                                   name="instructorName"
                                   placeholder=""
                                 />
                               </div>
                             </div>
-                            <Button
-                              colorScheme="blue"
-                              mr={3}
-                              disabled={block}
-                              type="submit"
-                            >
-                              Add
-                            </Button>
+                            <Button style={{position:'absolute',bottom:'-62px'}}
+                      colorScheme="blue"
+                      mr={3}
+                      disabled={block}
+                      type="submit"
+                    >
+                      Add
+                    </Button>
                           </Form>
                         );
                       }}
@@ -266,6 +280,7 @@ function AddInsight() {
                   </ModalBody>
 
                   <ModalFooter>
+                  
                     <Button colorScheme="blue" mr={3} onClick={onClose}>
                       Close
                     </Button>
@@ -364,19 +379,26 @@ function AddInsight() {
                     >
                       {({ values }) => {
                         return (
-                          <Form className="">
-                            <div className="headField">
-                              <div className="field">
+                          <Form
+                            style={{ display: "flex", width: "100%",position:'relative' }}
+                            className=""
+                          >
+                            <div>
+                              <div style={{ width: "33%", padding: "10px" }}>
                                 <label htmlFor="recentCourse">
                                   Recently Course Name
                                 </label>
                                 <Field
+                                  style={{
+                                    border: "solid",
+                                    borderRadius: "6px",
+                                  }}
                                   id="recentCourse"
                                   name="recentCourse"
                                   placeholder=""
                                 />
                               </div>
-                              <div className="field">
+                              <div style={{ width: "33%", padding: "10px" }}>
                                 <label htmlFor="recentImgUrl">
                                   Recent Course Template
                                 </label>
@@ -389,25 +411,29 @@ function AddInsight() {
                                   onChange={recentCourse}
                                 />
                               </div>
-                              <div className="field">
+                              <div style={{ width: "33%", padding: "10px" }}>
                                 <label htmlFor="recentName">
                                   Recent Course Instructor
                                 </label>
                                 <Field
+                                  style={{
+                                    border: "solid",
+                                    borderRadius: "6px",
+                                  }}
                                   id="recentName"
                                   name="recentName"
                                   placeholder=""
                                 />
                               </div>
                             </div>
-                            <Button
-                              colorScheme="blue"
-                              mr={3}
-                              disabled={block}
-                              type="submit"
-                            >
-                              Add
-                            </Button>
+                            <Button style={{position:'absolute',bottom:'-62px'}}
+                      colorScheme="blue"
+                      mr={3}
+                      disabled={block}
+                      type="submit"
+                    >
+                      Add
+                    </Button>
                           </Form>
                         );
                       }}
@@ -415,6 +441,7 @@ function AddInsight() {
                   </ModalBody>
 
                   <ModalFooter>
+                    
                     <Button colorScheme="blue" mr={3} onClick={onClose}>
                       Close
                     </Button>
@@ -510,42 +537,59 @@ function AddInsight() {
                     >
                       {({ values }) => {
                         return (
-                          <Form className="">
-                            <div className="headField">
-                              <div className="field">
+                          <Form style={{ display: "flex", width: "100%",position:'relative' }} className="">
+                            <div >
+                              <div style={{ width: "33%", padding: "10px" }}>
                                 <label htmlFor="studentName">
                                   Student Name
                                 </label>
                                 <Field
+                                  style={{
+                                    border: "solid",
+                                    borderRadius: "6px",
+                                  }}
                                   id="studentName"
                                   name="studentName"
                                   placeholder=""
                                 />
                               </div>
-                              <div className="field">
+                              <div style={{ width: "33%", padding: "10px" }}>
                                 <label htmlFor="studentCgpa">
                                   Student CGPA
                                 </label>
                                 <Field
+                                  style={{
+                                    border: "solid",
+                                    borderRadius: "6px",
+                                  }}
                                   id="studentCgpa"
                                   name="studentCgpa"
                                   placeholder=""
                                 />
                               </div>
-                              <div className="field">
+                              <div style={{ width: "33%", padding: "10px" }}>
                                 <label htmlFor="studentRating">
                                   Student Rating
                                 </label>
                                 <Field
+                                  style={{
+                                    border: "solid",
+                                    borderRadius: "6px",
+                                  }}
                                   id="studentRating"
                                   name="studentRating"
                                   placeholder=""
                                 />
                               </div>
                             </div>
-                            <Button colorScheme="blue" mr={3} type="submit">
-                              Add
-                            </Button>
+                            <Button style={{position:'absolute',bottom:'-62px'}}
+                      colorScheme="blue"
+                      mr={3}
+                      disabled={block}
+                      type="submit"
+                    >
+                      Add
+                    </Button>
                           </Form>
                         );
                       }}
@@ -553,6 +597,7 @@ function AddInsight() {
                   </ModalBody>
 
                   <ModalFooter>
+                  
                     <Button colorScheme="blue" mr={3} onClick={onClose}>
                       Close
                     </Button>
@@ -648,17 +693,23 @@ function AddInsight() {
                     >
                       {({ values }) => {
                         return (
-                          <Form className="">
-                            <div className="headField">
-                              <div className="field">
-                                <label htmlFor="companyName">Company Name</label>
+                          <Form style={{ display: "flex", width: "100%",position:'relative' }} className="">
+                            <div >
+                              <div style={{ width: "33%", padding: "10px" }}>
+                                <label htmlFor="companyName">
+                                  Company Name
+                                </label>
                                 <Field
+                                  style={{
+                                    border: "solid",
+                                    borderRadius: "6px",
+                                  }}
                                   id="companyName"
                                   name="companyName"
                                   placeholder=""
                                 />
                               </div>
-                              <div className="field">
+                              <div style={{ width: "33%", padding: "10px" }}>
                                 <label htmlFor="companyLogo">
                                   Company Logo
                                 </label>
@@ -671,25 +722,29 @@ function AddInsight() {
                                   onChange={uploadRecruiter}
                                 />
                               </div>
-                              <div className="field">
+                              <div style={{ width: "33%", padding: "10px" }}>
                                 <label htmlFor="interviewerName">
                                   Interviewer Name
                                 </label>
                                 <Field
+                                  style={{
+                                    border: "solid",
+                                    borderRadius: "6px",
+                                  }}
                                   id="interviewerName"
                                   name="interviewerName"
                                   placeholder=""
                                 />
                               </div>
                             </div>
-                            <Button
-                              colorScheme="blue"
-                              mr={3}
-                              disabled={block}
-                              type="submit"
-                            >
-                              Add
-                            </Button>
+                            <Button style={{position:'absolute',bottom:'-62px'}}
+                      colorScheme="blue"
+                      mr={3}
+                      disabled={block}
+                      type="submit"
+                    >
+                      Add
+                    </Button>
                           </Form>
                         );
                       }}
@@ -697,6 +752,7 @@ function AddInsight() {
                   </ModalBody>
 
                   <ModalFooter>
+                  
                     <Button colorScheme="blue" mr={3} onClick={onClose}>
                       Close
                     </Button>
