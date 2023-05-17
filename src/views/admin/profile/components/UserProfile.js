@@ -86,8 +86,7 @@ function UserProfile() {
               />
             </div>
           </div>
-          <div className='headField'>
-            <div className='field'>
+          <div className='skills'>
               <label htmlFor="email">Skills</label>
               <div className='outer'>
 
@@ -134,7 +133,7 @@ function UserProfile() {
                 }
               </div>
             </div>
-          </div>
+         
         </Form>
       </Formik>
     </div>

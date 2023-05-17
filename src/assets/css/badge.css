@@ -1,3 +1,11 @@
+.skills{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 15px;
+}
+
+
 .outer {
   display: flex;
   flex-wrap: wrap;
