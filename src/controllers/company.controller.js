@@ -132,7 +132,7 @@ const createInsight = async(req,res)=>{
     }
     return successResponse(res, insight, "college insight created");
   } catch (error) {
-    return serverErrorResponse(res, err.message);
+    return serverErrorResponse(res, error.message);
   }
 };
 const getInsight = async (req, res) => {
