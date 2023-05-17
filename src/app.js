@@ -73,7 +73,24 @@ app.post("/uploadImage", upload.single("uploads"), async (req, res) => {
 
 });
 
+app.post("/uploadCollegeProfile",upload.single("uploads"), async (req, res) => {
+  console.log(req.body);
+  const url = await uploadImage(req.body.image)
 
+  if (url) {
+    // const user = await User.findOne({ email: req.body.email })
+    // console.log(user);
+    // user.profileImg = url;
+    // await user.save();
+
+
+    return res.status(200).send(url);
+  } else {
+    return res.send("error in uploading image");
+  }
+  // find user by email and update the image url
+
+})
 // Google auth
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
