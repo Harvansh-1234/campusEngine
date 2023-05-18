@@ -41,6 +41,8 @@ const getJobPost = async (req, res) => {
     if (jobPost1.length === 0)
       return notFoundResponse(res, "Job post not found");
 
+      console.log(jobPost1)
+
     return successResponse(res, jobPost1, "Job post fetched");
   } catch (err) {
     let errObj = {
@@ -89,6 +91,7 @@ const listJobApplications = async (req, res) => {
       console.log(`Error in get job post: ${err1.message}`);
       return serverErrorResponse(res, err1.message);
     }
+    console.log("jobPost1",jobPost1)
     let userArr = new Array();
     for (let i = 0; i < jobPost1.length; i++) {
       let [err2, user] = await getUserById(jobPost1[i].studentId);
@@ -134,7 +137,7 @@ const createInsight = async(req,res)=>{
     }
     return successResponse(res, insight, "college insight created");
   } catch (error) {
-    return serverErrorResponse(res, err.message);
+    return serverErrorResponse(res, error.message);
   }
 };
 const getInsight = async (req, res) => {
