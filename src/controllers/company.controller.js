@@ -6,7 +6,7 @@ const {
   getApplicationByQueryRepo,
 } = require("../repository/jobs.repo");
 const { createOffCampusJobPostRepo } = require("../repository/quiz.repo");
-const { serverErrorResponse, successResponse } = require("../utils/response");
+const { serverErrorResponse, successResponse, notFoundResponse } = require("../utils/response");
 const { createJobPostRepo } = require("../repository/jobs.repo");
 const { getUserById, getUserByQuery } = require("../repository/user.repo");
 const {createCollegeInsight,getJobInsight} = require("../repository/collegeinsight");
@@ -56,8 +56,9 @@ const getJobPost = async (req, res) => {
 const listCompanyJobs = async (req, res) => {
   try {
     // get job post
-    let [err1, jobPost1] = await getJobByQueryRepo({
-      _id: req.userId,
+    console.log(req.userId);
+    let [err1, jobPost1] = await getJobInfo({
+      jobCreator: req.userId,
     });
     if (err1) {
       console.log(`Error in get job post: ${err1.message}`);
@@ -71,7 +72,8 @@ const listCompanyJobs = async (req, res) => {
       message: err.message,
       status: 500,
     };
-    return serverErrorResponse(res, errObj);
+    console.log(errObj);
+    return serverErrorResponse(res, errObj.message);
   }
 };
 

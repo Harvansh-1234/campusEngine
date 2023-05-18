@@ -8,7 +8,7 @@ const {
   createInsight,
   getInsight,
 } = require("../controllers/company.controller");
-const { getAllJobs, updateJobPost } = require("../controllers/tnp.controller");
+const { getAllJobs, updateJobPost, getJobByQueryRepo, getJobsByQuery } = require("../controllers/tnp.controller");
 const { userInfo, updateUserInfo } = require("../controllers/user.controller");
 const {
   companyValidate,
@@ -30,6 +30,8 @@ router.get("/jobApplicantslist",companyValidate, listJobApplications);
 router.post("/getAllJobs", commonValidate, getAllJobs);
 router.post("/updateJobStatus", commonValidate, updateJobPost);
 router.get("/getCompany", commonValidate, getAllCompanies);
+router.post("/tnpPendingJobs", commonValidate, getJobsByQuery);
+
 
 //college insights routes
 

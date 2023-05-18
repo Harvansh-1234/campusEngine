@@ -18,6 +18,7 @@ const {
   getJobByQueryRepo,
   createApplicationRepo,
   getAllOffCampusJobs,
+  getJobInfo,
 } = require("../repository/jobs.repo");
 
 const userInfo = async (req, res) => {
@@ -223,7 +224,21 @@ const getAllEligibleJobs = async (req, res) => {
       console.log(`Error in get jobs: ${err.message}`);
       return serverErrorResponse(res, err.message);
     }
-    return successResponse(res, jobs, "Jobs fetched");
+
+    let toReturn  = [];
+    for(let i = 0; i < jobs.length; i++){
+        let [err0, jobDetails] = await getJobInfo({_id: jobs[i].jobId});
+        if(err0){
+          return serverErrorResponse(res, err0.message);
+        }
+
+        toReturn.push({
+          ...jobs[i]._doc,
+          ...jobDetails[0]._doc
+        })
+
+    }
+    return successResponse(res, toReturn, "Jobs fetched");
   } catch (err) {
     console.log(err);
     return serverErrorResponse(res, err.message);
